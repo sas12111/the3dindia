@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "the3dindia/src_code/package.json",
+      "use": "@vercel/next"
+    }
+  ]
+}
