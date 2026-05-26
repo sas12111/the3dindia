@@ -1,0 +1,19 @@
+[
+  {
+    "id": "1778567261855",
+    "name": "Shashank kumar",
+    "email": "svsas005@gmail.com",
+    "mobile": "7533064955",
+    "password": "$2b$10$Y9yhdQeRI8ETyGQGYwCRF.IDyoYf/eXhvlbbdvJ7AjjhyT8OsuS7S",
+    "createdAt": "2026-05-12T06:27:41.855Z"
+  },
+  {
+    "id": "1779162701392",
+    "name": "Shashank k",
+    "email": "kshashank674@gmail.com",
+    "mobile": "7992444628",
+    "password": "$2b$10$pQ47JKOh/3cSeAEg7src8uCc0osMPY.hX9/eDkh3rNjx5ROlWCKaS",
+    "isVerified": true,
+    "createdAt": "2026-05-19T03:51:41.394Z"
+  }
+]

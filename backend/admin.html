@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The3DIndia — Admin Panel</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f4f8; color: #1e293b; font-size: 14px; }
+
+    /* ── Header ── */
+    .header {
+      background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #ea580c 100%);
+      color: #fff;
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 12px rgba(0,0,0,.2);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .header-brand { display: flex; align-items: center; gap: .75rem; }
+    .header-brand .logo { width: 32px; height: 32px; background: rgba(255,255,255,.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    .header-brand h1 { font-size: 1rem; font-weight: 700; letter-spacing: -.01em; }
+    .header-brand p  { font-size: .75rem; opacity: .75; }
+    .header-right { display: flex; align-items: center; gap: .5rem; }
+    .header-pill { background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25); color: #fff; padding: .3rem .75rem; border-radius: 9999px; font-size: .75rem; }
+
+    /* ── Tabs ── */
+    .tabs {
+      background: #fff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 0 2rem;
+      display: flex;
+      gap: 0;
+      box-shadow: 0 1px 4px rgba(0,0,0,.04);
+    }
+    .tab-btn {
+      padding: .9rem 1.4rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: .875rem;
+      font-weight: 500;
+      color: #64748b;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -1px;
+      transition: color .2s, border-color .2s;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .tab-btn.active { color: #2563eb; border-bottom-color: #2563eb; font-weight: 600; }
+    .tab-btn:hover:not(.active) { color: #334155; background: #f8fafc; }
+    .tab-count { background: #e2e8f0; color: #475569; padding: .1rem .45rem; border-radius: 9999px; font-size: .7rem; font-weight: 700; }
+    .tab-btn.active .tab-count { background: #dbeafe; color: #1d4ed8; }
+
+    /* ── Layout ── */
+    .container { max-width: 1280px; margin: 1.75rem auto; padding: 0 1.5rem; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Stats ── */
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .stat-card {
+      background: #fff;
+      padding: 1.25rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+      border: 1px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .stat-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .stat-icon.blue   { background: #dbeafe; }
+    .stat-icon.green  { background: #dcfce7; }
+    .stat-icon.orange { background: #ffedd5; }
+    .stat-icon.purple { background: #ede9fe; }
+    .stat-number { font-size: 1.6rem; font-weight: 800; color: #0f172a; line-height: 1; }
+    .stat-label  { font-size: .75rem; color: #64748b; margin-top: .2rem; }
+
+    /* ── Card / Table wrapper ── */
+    .card { background: #fff; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,.06); border: 1px solid #f1f5f9; overflow: hidden; margin-bottom: 1.5rem; }
+    .card-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #f1f5f9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+    }
+    .card-header-left { display: flex; align-items: center; gap: .75rem; }
+    .card-header h2 { font-size: .95rem; font-weight: 700; color: #0f172a; }
+    .card-header p  { font-size: .8rem; color: #94a3b8; margin-top: .1rem; }
+
+    /* ── Proper Table ── */
+    .data-table { width: 100%; border-collapse: collapse; }
+    .data-table thead tr { background: #f8fafc; border-bottom: 2px solid #e2e8f0; }
+    .data-table thead th {
+      padding: .75rem 1rem;
+      text-align: left;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #64748b;
+      white-space: nowrap;
+    }
+    .data-table thead th:first-child { padding-left: 1.5rem; }
+    .data-table thead th:last-child  { padding-right: 1.5rem; text-align: right; }
+    .data-table tbody tr {
+      border-bottom: 1px solid #f1f5f9;
+      transition: background .12s;
+    }
+    .data-table tbody tr:last-child { border-bottom: none; }
+    .data-table tbody tr:hover { background: #f8fafc; }
+    .data-table tbody td {
+      padding: .9rem 1rem;
+      vertical-align: middle;
+      font-size: .875rem;
+      color: #334155;
+    }
+    .data-table tbody td:first-child { padding-left: 1.5rem; }
+    .data-table tbody td:last-child  { padding-right: 1.5rem; text-align: right; }
+
+    /* ── Table cell components ── */
+    .cell-media { display: flex; align-items: center; gap: .85rem; }
+    .thumb {
+      width: 52px;
+      height: 52px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #e2e8f0;
+      flex-shrink: 0;
+      border: 1px solid #e2e8f0;
+    }
+    .thumb-placeholder {
+      width: 52px;
+      height: 52px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .cell-title { font-weight: 600; color: #0f172a; font-size: .875rem; margin-bottom: .15rem; }
+    .cell-sub   { font-size: .75rem; color: #94a3b8; }
+    .cell-desc  { max-width: 280px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #64748b; font-size: .8rem; }
+
+    /* ── Badges ── */
+    .badge { display: inline-flex; align-items: center; gap: .25rem; padding: .2rem .6rem; border-radius: 9999px; font-size: .72rem; font-weight: 600; white-space: nowrap; }
+    .badge-green  { background: #dcfce7; color: #15803d; }
+    .badge-gray   { background: #f1f5f9; color: #64748b; }
+    .badge-blue   { background: #dbeafe; color: #1d4ed8; }
+    .badge-orange { background: #ffedd5; color: #c2410c; }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+    /* ── Feature pills ── */
+    .pill-list { display: flex; flex-wrap: wrap; gap: .3rem; max-width: 200px; }
+    .pill { background: #f1f5f9; color: #475569; padding: .15rem .5rem; border-radius: 4px; font-size: .7rem; }
+
+    /* ── Action buttons ── */
+    .btn { display: inline-flex; align-items: center; gap: .35rem; padding: .45rem .9rem; border-radius: 7px; border: none; cursor: pointer; font-size: .8rem; font-weight: 600; transition: all .15s; white-space: nowrap; }
+    .btn-primary { background: #2563eb; color: #fff; }
+    .btn-primary:hover { background: #1d4ed8; box-shadow: 0 2px 8px rgba(37,99,235,.3); }
+    .btn-success { background: #10b981; color: #fff; }
+    .btn-success:hover { background: #059669; }
+    .btn-danger  { background: #fff; color: #ef4444; border: 1px solid #fecaca; }
+    .btn-danger:hover  { background: #fef2f2; border-color: #ef4444; }
+    .btn-edit    { background: #fff; color: #f59e0b; border: 1px solid #fde68a; }
+    .btn-edit:hover    { background: #fffbeb; border-color: #f59e0b; }
+    .btn-ghost   { background: #f8fafc; color: #475569; border: 1px solid #e2e8f0; }
+    .btn-ghost:hover   { background: #f1f5f9; }
+    .btn-actions { display: flex; gap: .4rem; justify-content: flex-end; }
+
+    /* ── Order badge ── */
+    .order-badge { width: 28px; height: 28px; border-radius: 6px; background: #f1f5f9; color: #475569; display: inline-flex; align-items: center; justify-content: center; font-size: .8rem; font-weight: 700; }
+
+    /* ── Form ── */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 1.5rem; }
+    .form-full  { grid-column: 1 / -1; }
+    .form-group { display: flex; flex-direction: column; gap: .35rem; }
+    .form-group label { font-size: .8rem; font-weight: 600; color: #374151; }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: .55rem .85rem;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: .875rem;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      font-family: inherit;
+      background: #fff;
+      color: #1e293b;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-group small { color: #94a3b8; font-size: .75rem; }
+    .form-actions { padding: 1rem 1.5rem; border-top: 1px solid #f1f5f9; display: flex; gap: .75rem; justify-content: flex-end; background: #fafafa; }
+
+    /* ── Submissions ── */
+    .sub-card { border: 1px solid #f1f5f9; border-radius: 10px; margin: 1rem 1.5rem; overflow: hidden; }
+    .sub-card-header { background: #f8fafc; padding: .85rem 1.25rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; }
+    .sub-name { font-weight: 700; font-size: .95rem; color: #0f172a; }
+    .sub-date { font-size: .75rem; color: #94a3b8; }
+    .sub-body { padding: 1rem 1.25rem; }
+    .sub-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin-bottom: 1rem; }
+    .sub-meta-item label { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #94a3b8; display: block; margin-bottom: .2rem; }
+    .sub-meta-item span  { font-size: .85rem; color: #334155; }
+    .sub-message { background: #f8fafc; border-left: 3px solid #2563eb; padding: .75rem 1rem; border-radius: 0 8px 8px 0; font-size: .85rem; color: #374151; line-height: 1.6; }
+    .sub-files { margin-top: .85rem; }
+    .sub-files label { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #94a3b8; display: block; margin-bottom: .5rem; }
+    .file-row { display: flex; justify-content: space-between; align-items: center; padding: .5rem .75rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 7px; margin-bottom: .4rem; }
+    .file-info { font-size: .8rem; color: #1e40af; display: flex; align-items: center; gap: .4rem; }
+
+    /* ── Modal ── */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,23,42,.55); z-index: 100; align-items: center; justify-content: center; padding: 1rem; backdrop-filter: blur(2px); }
+    .modal-overlay.open { display: flex; }
+    .modal { background: #fff; border-radius: 14px; width: 100%; max-width: 660px; max-height: 92vh; overflow-y: auto; box-shadow: 0 24px 64px rgba(0,0,0,.25); }
+    .modal-header { padding: 1.1rem 1.5rem; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: #fff; z-index: 1; }
+    .modal-header h3 { font-size: 1rem; font-weight: 700; color: #0f172a; }
+    .modal-close { background: #f1f5f9; border: none; width: 28px; height: 28px; border-radius: 6px; cursor: pointer; color: #64748b; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: background .15s; }
+    .modal-close:hover { background: #e2e8f0; color: #1e293b; }
+
+    /* ── Image preview ── */
+    .img-preview { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-top: .5rem; display: none; border: 1px solid #e2e8f0; }
+    .img-preview.show { display: block; }
+
+    /* ── Upload zone ── */
+    .upload-zone { border: 2px dashed #e2e8f0; border-radius: 8px; padding: 1rem; text-align: center; cursor: pointer; transition: border-color .2s; }
+    .upload-zone:hover { border-color: #2563eb; background: #f0f7ff; }
+    .upload-zone input { display: none; }
+
+    /* ── Toast ── */
+    #toast {
+      position: fixed; bottom: 1.5rem; right: 1.5rem;
+      background: #0f172a; color: #fff;
+      padding: .75rem 1.1rem; border-radius: 10px;
+      font-size: .85rem; box-shadow: 0 8px 24px rgba(0,0,0,.25);
+      transform: translateY(80px); opacity: 0;
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1), opacity .3s;
+      z-index: 300; display: flex; align-items: center; gap: .6rem;
+      min-width: 220px;
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+    #toast.success::before { content: '✓'; width: 20px; height: 20px; background: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 700; flex-shrink: 0; }
+    #toast.error::before   { content: '✕'; width: 20px; height: 20px; background: #ef4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 700; flex-shrink: 0; }
+
+    .loading { text-align: center; padding: 3rem; color: #94a3b8; font-size: .9rem; }
+    .empty   { text-align: center; padding: 4rem 2rem; color: #94a3b8; }
+    .empty-icon { font-size: 2.5rem; margin-bottom: .75rem; }
+    .empty p { font-size: .9rem; }
+
+    /* ── Divider ── */
+    .section-divider { height: 1px; background: #f1f5f9; margin: 0 1.5rem; }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-brand">
+    <div class="logo">🖨</div>
+    <div>
+      <h1>The3DIndia</h1>
+      <p>Admin Panel</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="header-pill" id="server-status">● Live</span>
+  </div>
+</div>
+
+<!-- Tabs -->
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('services')">
+    🛠 Services <span class="tab-count" id="tc-services">—</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab('portfolio')">
+    🖼 Portfolio <span class="tab-count" id="tc-portfolio">—</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab('products')">
+    🛒 Products <span class="tab-count" id="tc-products">—</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab('users')">
+    👥 Users <span class="tab-count" id="tc-users">—</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab('orders')">
+    📦 Orders <span class="tab-count" id="tc-orders">—</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab('submissions')">
+    📬 Submissions <span class="tab-count" id="tc-submissions">—</span>
+  </button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ SERVICES TAB -->
+<div id="tab-services" class="tab-panel active">
+  <div class="container">
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-icon blue">🛠</div>
+        <div><div class="stat-number" id="svc-total">—</div><div class="stat-label">Total Services</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green">✅</div>
+        <div><div class="stat-number" id="svc-active">—</div><div class="stat-label">Active</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon orange">🚫</div>
+        <div><div class="stat-number" id="svc-hidden">—</div><div class="stat-label">Hidden</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-left">
+          <div>
+            <h2>Services</h2>
+            <p>Manage what appears on the Services page</p>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="openAddModal()">+ Add Service</button>
+      </div>
+      <div id="services-list"><div class="loading">Loading services…</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ PORTFOLIO TAB -->
+<div id="tab-portfolio" class="tab-panel">
+  <div class="container">
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-icon blue">🖼</div>
+        <div><div class="stat-number" id="pf-total">—</div><div class="stat-label">Total Projects</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green">✅</div>
+        <div><div class="stat-number" id="pf-active">—</div><div class="stat-label">Active</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon orange">🚫</div>
+        <div><div class="stat-number" id="pf-hidden">—</div><div class="stat-label">Hidden</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-left">
+          <div>
+            <h2>Portfolio Projects</h2>
+            <p>Manage what appears on the Portfolio page</p>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="openAddProjectModal()">+ Add Project</button>
+      </div>
+      <div id="portfolio-list"><div class="loading">Loading projects…</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ PRODUCTS TAB -->
+<div id="tab-products" class="tab-panel">
+  <div class="container">
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-icon blue">🛒</div>
+        <div><div class="stat-number" id="prod-total">—</div><div class="stat-label">Total Products</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green">✅</div>
+        <div><div class="stat-number" id="prod-active">—</div><div class="stat-label">Active</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon orange">🚫</div>
+        <div><div class="stat-number" id="prod-hidden">—</div><div class="stat-label">Hidden</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-left">
+          <div>
+            <h2>Products</h2>
+            <p>Manage what appears on the Products page</p>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="openAddProductModal()">+ Add Product</button>
+      </div>
+      <div id="products-list"><div class="loading">Loading products…</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ USERS TAB -->
+<div id="tab-users" class="tab-panel">
+  <div class="container">
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-icon blue">👥</div>
+        <div><div class="stat-number" id="usr-total">—</div><div class="stat-label">Total Users</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green">✅</div>
+        <div><div class="stat-number" id="usr-active">—</div><div class="stat-label">Active</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon purple">📅</div>
+        <div><div class="stat-number" id="usr-joined">—</div><div class="stat-label">Joined This Month</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-left">
+          <div>
+            <h2>Registered Users</h2>
+            <p>Manage user accounts and view registration details</p>
+          </div>
+        </div>
+        <button class="btn btn-ghost" onclick="loadUsers()">↻ Refresh</button>
+      </div>
+      <div id="users-list"><div class="loading">Loading users…</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ ORDERS TAB -->
+<div id="tab-orders" class="tab-panel">
+  <div class="container">
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-icon blue">📦</div>
+        <div><div class="stat-number" id="ord-total">—</div><div class="stat-label">Total Orders</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green">✅</div>
+        <div><div class="stat-number" id="ord-completed">—</div><div class="stat-label">Completed</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon orange">⏳</div>
+        <div><div class="stat-number" id="ord-pending">—</div><div class="stat-label">Pending</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon purple">💰</div>
+        <div><div class="stat-number" id="ord-revenue">₹0</div><div class="stat-label">Total Revenue</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-left">
+          <div>
+            <h2>All Orders</h2>
+            <p>Manage customer orders and update status</p>
+          </div>
+        </div>
+        <button class="btn btn-ghost" onclick="loadOrders()">↻ Refresh</button>
+      </div>
+      <div id="orders-list"><div class="loading">Loading orders…</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ SUBMISSIONS TAB -->
+<div id="tab-submissions" class="tab-panel">
+  <div class="container">
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-icon blue">📬</div>
+        <div><div class="stat-number" id="sub-total">—</div><div class="stat-label">Total Submissions</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green">📅</div>
+        <div><div class="stat-number" id="sub-today">—</div><div class="stat-label">Today</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon purple">📎</div>
+        <div><div class="stat-number" id="sub-files">—</div><div class="stat-label">Total Files</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-left">
+          <div>
+            <h2>Contact Submissions</h2>
+            <p>Enquiries from the contact form</p>
+          </div>
+        </div>
+        <button class="btn btn-ghost" onclick="loadSubmissions()">↻ Refresh</button>
+      </div>
+      <div id="submissions-list"><div class="loading">Loading…</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════ SERVICE MODAL -->
+<div class="modal-overlay" id="svc-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-title">Add Service</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <form id="svc-form" onsubmit="submitService(event)">
+      <input type="hidden" id="svc-id" />
+      <div class="form-grid">
+        <div class="form-group form-full">
+          <label>Title *</label>
+          <input type="text" id="svc-title" placeholder="e.g. 3D Printing Services" required />
+        </div>
+        <div class="form-group form-full">
+          <label>Description *</label>
+          <textarea id="svc-desc" rows="3" placeholder="Short description shown on the services page" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Icon</label>
+          <select id="svc-icon">
+            <option value="Printer">🖨 Printer</option>
+            <option value="Pencil">✏️ Pencil</option>
+            <option value="Lightbulb">💡 Lightbulb</option>
+            <option value="Building">🏢 Building</option>
+            <option value="Gift">🎁 Gift</option>
+            <option value="Package">📦 Package</option>
+            <option value="Wrench">🔧 Wrench</option>
+            <option value="Cpu">💻 CPU</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Display Order</label>
+          <input type="number" id="svc-order" min="1" value="1" />
+        </div>
+        <div class="form-group form-full">
+          <label>Features <small>(one per line)</small></label>
+          <textarea id="svc-features" rows="6" placeholder="FDM Printing (PLA, ABS, PETG)&#10;SLA/Resin Printing&#10;Multi-material printing"></textarea>
+        </div>
+        <div class="form-group form-full">
+          <label>Image URL <small>(or upload below)</small></label>
+          <input type="text" id="svc-image" placeholder="/images/3d-printer.jpg" oninput="previewImg(this.value)" />
+          <img id="img-preview" class="img-preview" alt="preview" />
+        </div>
+        <div class="form-group form-full">
+          <label>Upload Image</label>
+          <div class="upload-zone" onclick="document.getElementById('svc-img-file').click()">
+            <input type="file" id="svc-img-file" accept="image/*" onchange="uploadImage(this)" />
+            <div>📁 Click to upload image <small style="display:block;color:#94a3b8;margin-top:.25rem">Max 10 MB · JPG, PNG, WebP</small></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Status</label>
+          <select id="svc-active">
+            <option value="true">✅ Active (visible)</option>
+            <option value="false">🚫 Hidden</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="modal-submit-btn">Save Service</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════ PROJECT MODAL -->
+<div class="modal-overlay" id="pf-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="pf-modal-title">Add Project</h3>
+      <button class="modal-close" onclick="closeProjectModal()">✕</button>
+    </div>
+    <form id="pf-form" onsubmit="submitProject(event)">
+      <input type="hidden" id="pf-id" />
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Title *</label>
+          <input type="text" id="pf-title" placeholder="e.g. Engineering Prototypes" required />
+        </div>
+        <div class="form-group">
+          <label>Category *</label>
+          <input type="text" id="pf-category" placeholder="e.g. Industrial" required list="pf-cat-list" />
+          <datalist id="pf-cat-list">
+            <option value="Industrial" /><option value="Gifts" /><option value="Design" />
+            <option value="Prototyping" /><option value="Manufacturing" />
+          </datalist>
+        </div>
+        <div class="form-group form-full">
+          <label>Short Description *</label>
+          <input type="text" id="pf-desc" placeholder="One-line summary shown on the card" required />
+        </div>
+        <div class="form-group form-full">
+          <label>Full Description</label>
+          <textarea id="pf-fulldesc" rows="5" placeholder="Detailed project overview shown in the popup modal"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Client</label>
+          <input type="text" id="pf-client" placeholder="e.g. AutoTech Industries" />
+        </div>
+        <div class="form-group">
+          <label>Duration</label>
+          <input type="text" id="pf-duration" placeholder="e.g. 3 weeks" />
+        </div>
+        <div class="form-group form-full">
+          <label>Materials <small>(comma separated)</small></label>
+          <input type="text" id="pf-materials" placeholder="ABS, PETG, Nylon" />
+        </div>
+        <div class="form-group form-full">
+          <label>Tags <small>(comma separated)</small></label>
+          <input type="text" id="pf-tags" placeholder="Automotive, Precision, FDM" />
+        </div>
+        <div class="form-group form-full">
+          <label>Image URL <small>(or upload below)</small></label>
+          <input type="text" id="pf-image" placeholder="/images/prototyping.jpg" oninput="previewPfImg(this.value)" />
+          <img id="pf-img-preview" class="img-preview" alt="preview" />
+        </div>
+        <div class="form-group form-full">
+          <label>Upload Image</label>
+          <div class="upload-zone" onclick="document.getElementById('pf-img-file').click()">
+            <input type="file" id="pf-img-file" accept="image/*" onchange="uploadPortfolioImage(this)" />
+            <div>📁 Click to upload image <small style="display:block;color:#94a3b8;margin-top:.25rem">Max 10 MB · JPG, PNG, WebP</small></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Status</label>
+          <select id="pf-active">
+            <option value="true">✅ Active (visible)</option>
+            <option value="false">🚫 Hidden</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeProjectModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="pf-submit-btn">Save Project</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<!-- ════════════════════════════════════════════════════ PRODUCT MODAL -->
+<div class="modal-overlay" id="prod-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="prod-modal-title">Add Product</h3>
+      <button class="modal-close" onclick="closeProductModal()">✕</button>
+    </div>
+    <form id="prod-form" onsubmit="submitProduct(event)">
+      <input type="hidden" id="prod-id" />
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Name *</label>
+          <input type="text" id="prod-name" placeholder="e.g. Custom Name Keychain" required />
+        </div>
+        <div class="form-group">
+          <label>Category *</label>
+          <input type="text" id="prod-category" placeholder="e.g. Gifts" required list="prod-cat-list" />
+          <datalist id="prod-cat-list">
+            <option value="Figurines" /><option value="Home Decor" /><option value="Industrial" />
+            <option value="Architectural" /><option value="Gifts" /><option value="Educational" />
+          </datalist>
+        </div>
+        <div class="form-group">
+          <label>Price (₹) *</label>
+          <input type="number" id="prod-price" placeholder="e.g. 499" min="0" required />
+        </div>
+        <div class="form-group">
+          <label>Badge <small>(optional)</small></label>
+          <input type="text" id="prod-badge" placeholder="e.g. Best Seller, New, Premium" list="prod-badge-list" />
+          <datalist id="prod-badge-list">
+            <option value="Best Seller" /><option value="New" /><option value="Premium" />
+          </datalist>
+        </div>
+        <div class="form-group form-full">
+          <label>Short Description *</label>
+          <input type="text" id="prod-desc" placeholder="One-line summary shown on the card" required />
+        </div>
+        <div class="form-group form-full">
+          <label>Full Description</label>
+          <textarea id="prod-fulldesc" rows="4" placeholder="Detailed product info shown in the popup modal"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Material</label>
+          <input type="text" id="prod-material" placeholder="e.g. PLA, Resin, PETG" />
+        </div>
+        <div class="form-group">
+          <label>Dimensions</label>
+          <input type="text" id="prod-dimensions" placeholder="e.g. 6cm × 2cm × 0.4cm" />
+        </div>
+        <div class="form-group">
+          <label>Print Time</label>
+          <input type="text" id="prod-printtime" placeholder="e.g. 45 minutes" />
+        </div>
+        <div class="form-group">
+          <label>Rating <small>(0–5)</small></label>
+          <input type="number" id="prod-rating" placeholder="4.8" min="0" max="5" step="0.1" />
+        </div>
+        <div class="form-group form-full">
+          <label>Tags <small>(comma separated)</small></label>
+          <input type="text" id="prod-tags" placeholder="Personalized, Gift, PLA" />
+        </div>
+        <div class="form-group form-full">
+          <label>Image URL <small>(or upload below)</small></label>
+          <input type="text" id="prod-image" placeholder="/images/custom-gifts.jpg" oninput="previewProdImg(this.value)" />
+          <img id="prod-img-preview" class="img-preview" alt="preview" />
+        </div>
+        <div class="form-group form-full">
+          <label>Upload Image</label>
+          <div class="upload-zone" onclick="document.getElementById('prod-img-file').click()">
+            <input type="file" id="prod-img-file" accept="image/*" onchange="uploadProductImage(this)" />
+            <div>📁 Click to upload image <small style="display:block;color:#94a3b8;margin-top:.25rem">Max 10 MB · JPG, PNG, WebP</small></div>
+          </div>
+        </div>
+        <div class="form-group form-full">
+          <label>Product Views Upload (front/back/left/right)</label>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+            <input type="file" id="view-front" accept="image/*" style="flex:1" />
+            <input type="file" id="view-back" accept="image/*" style="flex:1" />
+            <input type="file" id="view-left" accept="image/*" style="flex:1" />
+            <input type="file" id="view-right" accept="image/*" style="flex:1" />
+          </div>
+          <small style="color:#94a3b8;display:block;margin-top:.35rem">Select files for each view and click Upload Views</small>
+          <div style="margin-top:.6rem"><button type="button" class="btn btn-ghost" onclick="uploadProductViews()">Upload Views</button></div>
+          <input type="hidden" id="prod-images" />
+        </div>
+        <div class="form-group">
+          <label>Status</label>
+          <select id="prod-active">
+            <option value="true">✅ Active (visible)</option>
+            <option value="false">🚫 Hidden</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeProductModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="prod-submit-btn">Save Product</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+const API = 'http://localhost:5000';
+
+// ── Tab switching ─────────────────────────────────────────────────────────
+function switchTab(name) {
+  const tabs = ['services','portfolio','products','users','orders','submissions'];
+  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', tabs[i] === name));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  if (name === 'services')    loadServices();
+  if (name === 'portfolio')   loadPortfolio();
+  if (name === 'products')    loadProducts();
+  if (name === 'users')       loadUsers();
+  if (name === 'orders')      loadOrders();
+  if (name === 'submissions') loadSubmissions();
+}
+
+// ── Toast ─────────────────────────────────────────────────────────────────
+function toast(msg, type = 'success') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'show ' + type;
+  setTimeout(() => el.className = '', 3200);
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────
+function imgSrc(url, prefix) {
+  if (!url) return '';
+  return url.startsWith(prefix) ? API + url : url;
+}
+
+// ══════════════════════════════════════════════════════════════ SERVICES ══
+
+async function loadServices() {
+  try {
+    const res  = await fetch(`${API}/api/services?admin=true`);
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error);
+    renderServices(data.services);
+  } catch(e) {
+    document.getElementById('services-list').innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><p>${e.message}</p></div>`;
+  }
+}
+
+function renderServices(services) {
+  const active = services.filter(s => s.active !== false).length;
+  document.getElementById('svc-total').textContent  = services.length;
+  document.getElementById('svc-active').textContent = active;
+  document.getElementById('svc-hidden').textContent = services.length - active;
+  document.getElementById('tc-services').textContent = services.length;
+
+  if (!services.length) {
+    document.getElementById('services-list').innerHTML = '<div class="empty"><div class="empty-icon">🛠</div><p>No services yet. Click "+ Add Service" to create one.</p></div>';
+    return;
+  }
+
+  const iconMap = { Printer:'🖨', Pencil:'✏️', Lightbulb:'💡', Building:'🏢', Gift:'🎁', Package:'📦', Wrench:'🔧', Cpu:'💻' };
+
+  document.getElementById('services-list').innerHTML = `
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Service</th>
+          <th>Description</th>
+          <th>Features</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${services.map(s => `
+          <tr>
+            <td><span class="order-badge">${s.order || '—'}</span></td>
+            <td>
+              <div class="cell-media">
+                ${s.image
+                  ? `<img class="thumb" src="${imgSrc(s.image,'/service-images')}" onerror="this.style.display='none'" alt="" />`
+                  : `<div class="thumb-placeholder">${iconMap[s.icon] || '📦'}</div>`}
+                <div>
+                  <div class="cell-title">${s.title}</div>
+                  <div class="cell-sub">Icon: ${s.icon || 'Package'}</div>
+                </div>
+              </div>
+            </td>
+            <td><div class="cell-desc">${s.description}</div></td>
+            <td>
+              <div class="pill-list">
+                ${(s.features||[]).slice(0,3).map(f => `<span class="pill">${f}</span>`).join('')}
+                ${(s.features||[]).length > 3 ? `<span class="pill">+${s.features.length-3}</span>` : ''}
+              </div>
+            </td>
+            <td>
+              <span class="badge ${s.active !== false ? 'badge-green' : 'badge-gray'}">
+                <span class="badge-dot"></span>
+                ${s.active !== false ? 'Active' : 'Hidden'}
+              </span>
+            </td>
+            <td>
+              <div class="btn-actions">
+                <button class="btn btn-edit" onclick="openEditModal(${JSON.stringify(s).replace(/"/g,'&quot;')})">✏️ Edit</button>
+                <button class="btn btn-danger" onclick="deleteService('${s.id}','${s.title.replace(/'/g,"\\'")}')">🗑 Delete</button>
+              </div>
+            </td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>`;
+}
+
+function openAddModal() {
+  document.getElementById('modal-title').textContent = 'Add Service';
+  document.getElementById('modal-submit-btn').textContent = 'Add Service';
+  document.getElementById('svc-form').reset();
+  document.getElementById('svc-id').value = '';
+  document.getElementById('img-preview').classList.remove('show');
+  document.getElementById('svc-modal').classList.add('open');
+}
+
+function openEditModal(s) {
+  document.getElementById('modal-title').textContent = 'Edit Service';
+  document.getElementById('modal-submit-btn').textContent = 'Save Changes';
+  document.getElementById('svc-id').value    = s.id;
+  document.getElementById('svc-title').value = s.title;
+  document.getElementById('svc-desc').value  = s.description;
+  document.getElementById('svc-icon').value  = s.icon || 'Package';
+  document.getElementById('svc-order').value = s.order || 1;
+  document.getElementById('svc-features').value = (s.features||[]).join('\n');
+  document.getElementById('svc-image').value = s.image || '';
+  document.getElementById('svc-active').value = String(s.active !== false);
+  previewImg(s.image || '');
+  document.getElementById('svc-modal').classList.add('open');
+}
+
+function closeModal() { document.getElementById('svc-modal').classList.remove('open'); }
+
+function previewImg(url) {
+  const el = document.getElementById('img-preview');
+  if (url) { el.src = imgSrc(url,'/service-images'); el.classList.add('show'); }
+  else el.classList.remove('show');
+}
+
+async function uploadImage(input) {
+  const file = input.files[0]; if (!file) return;
+  const fd = new FormData(); fd.append('image', file);
+  try {
+    const res  = await fetch(`${API}/api/services/upload-image`, { method:'POST', body:fd });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error);
+    document.getElementById('svc-image').value = data.url;
+    previewImg(data.url);
+    toast('Image uploaded ✓');
+  } catch(e) { toast('Upload failed: ' + e.message, 'error'); }
+}
+
+async function submitService(e) {
+  e.preventDefault();
+  const id = document.getElementById('svc-id').value;
+  const payload = {
+    title:       document.getElementById('svc-title').value.trim(),
+    description: document.getElementById('svc-desc').value.trim(),
+    icon:        document.getElementById('svc-icon').value,
+    order:       Number(document.getElementById('svc-order').value),
+    features:    document.getElementById('svc-features').value,
+    image:       document.getElementById('svc-image').value.trim(),
+    active:      document.getElementById('svc-active').value,
+  };
+  try {
+    const res  = await fetch(id ? `${API}/api/services/${id}` : `${API}/api/services`,
+      { method: id ? 'PUT' : 'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error);
+    toast(id ? 'Service updated ✓' : 'Service added ✓');
+    closeModal(); loadServices();
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+}
+
+async function deleteService(id, title) {
+  if (!confirm(`Delete "${title}"?\nThis cannot be undone.`)) return;
+  try {
+    const res  = await fetch(`${API}/api/services/${id}`, { method:'DELETE' });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error);
+    toast('Service deleted');
+    loadServices();
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+}
+
+// ══════════════════════════════════════════════════════════════ PORTFOLIO ══
+
+async function loadPortfolio() {
+  try {
+    const res  = await fetch(`${API}/api/portfolio?admin=true`);
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error);
+    renderPortfolio(data.projects);
+  } catch(e) {
+    document.getElementById('portfolio-list').innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><p>${e.message}</p></div>`;
+  }
+}
+
+function renderPortfolio(projects) {
+  const active = projects.filter(p => p.active !== false).length;
+  document.getElementById('pf-total').textContent  = projects.length;
+  document.getElementById('pf-active').textContent = active;
+  document.getElementById('pf-hidden').textContent = projects.length - active;
+  document.getElementById('tc-portfolio').textContent = projects.length;
+
+  if (!projects.length) {
+    document.getElementById('portfolio-list').innerHTML = '<div class="empty"><div class="empty-icon">🖼</div><p>No projects yet. Click "+ Add Project" to create one.</p></div>';
+    return;
+  }
+
+  const catColors = {
+    Industrial:'badge-blue', Gifts:'badge-orange', Design:'badge-purple',
+    Prototyping:'badge-green', Manufacturing:'badge-gray'
+  };
+
+  document.getElementById('portfolio-list').innerHTML = `
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Project</th>
+          <th>Category</th>
+          <th>Client</th>
+          <th>Duration</th>
+          <th>Materials</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${projects.map(p => `
+          <tr>
+            <td>
+              <div class="cell-media">
+                ${p.image
+                  ? `<img class="thumb" src="${imgSrc(p.image,'/portfolio-images')}" onerror="this.style.display='none'" alt="" />`
+                  : `<div class="thumb-placeholder">🖼</div>`}
+                <div>
+                  <div class="cell-title">${p.title}</div>
+                  <div class="cell-sub" style="max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.description}</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="badge ${catColors[p.category] || 'badge-gray'}">
+                ${p.category}
+              </span>
+            </td>
+            <td><span style="font-size:.8rem;color:#475569">${p.client || '—'}</span></td>
+            <td><span style="font-size:.8rem;color:#475569">${p.duration || '—'}</span></td>
+            <td>
+              <div class="pill-list">
+                ${(p.materials||[]).slice(0,2).map(m => `<span class="pill">${m}</span>`).join('')}
+                ${(p.materials||[]).length > 2 ? `<span class="pill">+${p.materials.length-2}</span>` : ''}
+              </div>
+            </td>
+            <td>
+              <span class="badge ${p.active !== false ? 'badge-green' : 'badge-gray'}">
+                <span class="badge-dot"></span>
+                ${p.active !== false ? 'Active' : 'Hidden'}
+              </span>
+            </td>
+            <td>
+              <div class="btn-actions">
+                <button class="btn btn-edit" onclick="openEditProjectModal(${JSON.stringify(p).replace(/"/g,'&quot;')})">✏️ Edit</button>
+                <button class="btn btn-danger" onclick="deleteProject('${p.id}','${p.title.replace(/'/g,"\\'")}')">🗑 Delete</button>
+              </div>
+            </td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>`;
+}
+
+function openAddProjectModal() {
+  document.getElementById('pf-modal-title').textContent = 'Add Project';
+  document.getElementById('pf-submit-btn').textContent  = 'Add Project';
+  document.getElementById('pf-form').reset();
+  document.getElementById('pf-id').value = '';
+  document.getElementById('pf-img-preview').classList.remove('show');
+  document.getElementById('pf-modal').classList.add('open');
+}
+
+function openEditProjectModal(p) {
+  document.getElementById('pf-modal-title').textContent = 'Edit Project';
+  document.getElementById('pf-submit-btn').textContent  = 'Save Changes';
+  document.getElementById('pf-id').value        = p.id;
+  document.getElementById('pf-title').value     = p.title;
+  document.getElementById('pf-category').value  = p.category;
+  document.getElementById('pf-desc').value      = p.description;
+  document.getElementById('pf-fulldesc').value  = p.fullDescription || '';
+  document.getElementById('pf-client').value    = p.client || '';
+  document.getElementById('pf-duration').value  = p.duration || '';
+  document.getElementById('pf-materials').value = (p.materials||[]).join(', ');
+  document.getElementById('pf-tags').value      = (p.tags||[]).join(', ');
+  document.getElementById('pf-image').value     = p.image || '';
+  document.getElementById('pf-active').value    = String(p.active !== false);
+  previewPfImg(p.image || '');
+  document.getElementById('pf-modal').classList.add('open');
+}
+
+function closeProjectModal() { document.getElementById('pf-modal').classList.remove('open'); }
+
+function previewPfImg(url) {
+  const el = document.getElementById('pf-img-preview');
+  if (url) { el.src = imgSrc(url,'/portfolio-images'); el.classList.add('show'); }
+  else el.classList.remove('show');
+}
+
+async function uploadPortfolioImage(input) {
+  const file = input.files[0]; if (!file) return;
+  const fd = new FormData(); fd.append('image', file);
+  try {
+    const res  = await fetch(`${API}/api/portfolio/upload-image`, { method:'POST', body:fd });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error);
+    document.getElementById('pf-image').value = data.url;
+    previewPfImg(data.url);
+    toast('Image uploaded ✓');
+  } catch(e) { toast('Upload failed: ' + e.message, 'error'); }
+}
+
+async function submitProject(e) {
+  e.preventDefault();
+  const id = document.getElementById('pf-id').value;
+  const payload = {
+    title:           document.getElementById('pf-title').value.trim(),
+    category:        document.getElementById('pf-category').value.trim(),
+    description:     document.getElementById('pf-desc').value.trim(),
+    fullDescription: document.getElementById('pf-fulldesc').value.trim(),
+    client:          document.getElementById('pf-client').value.trim(),
+    duration:        document.getElementById('pf-duration').value.trim(),
+    materials:       document.getElementById('pf-materials').value,
+    tags:            document.getElementById('pf-tags').value,
+    image:           document.getElementById('pf-image').value.trim(),
+    active:          document.getElementById('pf-active').value,
+  };
+  try {
+    const res  = await fetch(id ? `${API}/api/portfolio/${id}` : `${API}/api/portfolio`,
+      { method: id ? 'PUT' : 'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error);
+    toast(id ? 'Project updated ✓' : 'Project added ✓');
+    closeProjectModal(); loadPortfolio();
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+}
+
+async function deleteProject(id, title) {
+  if (!confirm(`Delete "${title}"?\nThis cannot be undone.`)) return;
+  try {
+    const res  = await fetch(`${API}/api/portfolio/${id}`, { method:'DELETE' });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error);
+    toast('Project deleted');
+    loadPortfolio();
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+}
+
+// ══════════════════════════════════════════════════════════ SUBMISSIONS ══
+
+async function loadSubmissions() {
+  try {
+    const res  = await fetch(`${API}/api/submissions`);
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error);
+    renderSubmissions(data.submissions);
+  } catch(e) {
+    document.getElementById('submissions-list').innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><p>${e.message}</p></div>`;
+  }
+}
+
+function renderSubmissions(list) {
+  const today = new Date().toDateString();
+  document.getElementById('sub-total').textContent = list.length;
+  document.getElementById('sub-today').textContent = list.filter(s => new Date(s.timestamp).toDateString() === today).length;
+  document.getElementById('sub-files').textContent = list.reduce((n,s) => n + (s.files?.length||0), 0);
+  document.getElementById('tc-submissions').textContent = list.length;
+
+  if (!list.length) {
+    document.getElementById('submissions-list').innerHTML = '<div class="empty"><div class="empty-icon">📬</div><p>No submissions yet.</p></div>';
+    return;
+  }
+
+  document.getElementById('submissions-list').innerHTML = '<div style="padding:.75rem 1.5rem">' + list.map(s => `
+    <div class="sub-card">
+      <div class="sub-card-header">
+        <div>
+          <div class="sub-name">${s.name}</div>
+          <div style="font-size:.75rem;color:#94a3b8;margin-top:.1rem">${s.service}</div>
+        </div>
+        <div class="sub-date">${new Date(s.timestamp).toLocaleString()}</div>
+      </div>
+      <div class="sub-body">
+        <div class="sub-meta">
+          <div class="sub-meta-item"><label>Email</label><span>${s.email}</span></div>
+          <div class="sub-meta-item"><label>Mobile</label><span>${s.mobile}</span></div>
+          <div class="sub-meta-item"><label>Service</label><span>${s.service}</span></div>
+        </div>
+        <div class="sub-message">${s.message}</div>
+        ${s.files?.length ? `
+          <div class="sub-files">
+            <label>Attachments (${s.files.length})</label>
+            ${s.files.map(f => `
+              <div class="file-row">
+                <div class="file-info">📎 ${f.originalName} <span style="color:#94a3b8">(${(f.size/1024/1024).toFixed(2)} MB)</span></div>
+                <a href="${API}/api/download/${f.date||new Date(s.timestamp).toISOString().split('T')[0]}/${f.filename}"
+                   class="btn btn-success" style="font-size:.75rem;padding:.35rem .75rem" download="${f.originalName}">⬇ Download</a>
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+      </div>
+    </div>
+  `).join('') + '</div>';
+}
+
+// ══════════════════════════════════════════════════════════════ PRODUCTS ══
+
+async function loadProducts() {
+  try {
+    const res  = await fetch(`${API}/api/products?admin=true`);
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error);
+    renderProducts(data.products);
+  } catch(e) {
+    document.getElementById('products-list').innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><p>${e.message}</p></div>`;
+  }
+}
+
+function renderProducts(products) {
+  const active = products.filter(p => p.active !== false).length;
+  document.getElementById('prod-total').textContent  = products.length;
+  document.getElementById('prod-active').textContent = active;
+  document.getElementById('prod-hidden').textContent = products.length - active;
+  document.getElementById('tc-products').textContent = products.length;
+
+  if (!products.length) {
+    document.getElementById('products-list').innerHTML = '<div class="empty"><div class="empty-icon">🛒</div><p>No products yet. Click "+ Add Product" to create one.</p></div>';
+    return;
+  }
+
+  const catColors = {
+    Figurines:'badge-purple', 'Home Decor':'badge-green', Industrial:'badge-blue',
+    Architectural:'badge-orange', Gifts:'badge-orange', Educational:'badge-blue'
+  };
+
+  const badgeColors = { 'Best Seller':'badge-orange', 'New':'badge-green', 'Premium':'badge-blue' };
+
+  const stars = (r) => '★'.repeat(Math.floor(r)) + '☆'.repeat(5 - Math.floor(r));
+
+  document.getElementById('products-list').innerHTML = `
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Rating</th>
+          <th>Specs</th>
+          <th>Badge</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${products.map(p => `
+          <tr>
+            <td>
+              <div class="cell-media">
+                ${p.image
+                  ? `<img class="thumb" src="${imgSrc(p.image,'/product-images')}" onerror="this.style.display='none'" alt="" />`
+                  : `<div class="thumb-placeholder">🛒</div>`}
+                <div>
+                  <div class="cell-title">${p.name}</div>
+                  <div class="cell-sub" style="max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.description}</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="badge ${catColors[p.category] || 'badge-gray'}">${p.category}</span></td>
+            <td><span style="font-weight:700;color:#2563eb">₹${Number(p.price).toLocaleString()}</span></td>
+            <td>
+              <div style="font-size:.8rem;color:#f59e0b;letter-spacing:.05em">${stars(p.rating)}</div>
+              <div style="font-size:.72rem;color:#94a3b8">${p.rating} (${p.reviews})</div>
+            </td>
+            <td>
+              <div class="pill-list">
+                ${p.material ? `<span class="pill">${p.material}</span>` : ''}
+                ${p.printTime ? `<span class="pill">⏱ ${p.printTime}</span>` : ''}
+              </div>
+            </td>
+            <td>${p.badge ? `<span class="badge ${badgeColors[p.badge] || 'badge-gray'}">${p.badge}</span>` : '<span style="color:#cbd5e1">—</span>'}</td>
+            <td>
+              <span class="badge ${p.active !== false ? 'badge-green' : 'badge-gray'}">
+                <span class="badge-dot"></span>
+                ${p.active !== false ? 'Active' : 'Hidden'}
+              </span>
+            </td>
+            <td>
+              <div class="btn-actions">
+                <button class="btn btn-edit" onclick="openEditProductModal(${JSON.stringify(p).replace(/"/g,'&quot;')})">✏️ Edit</button>
+                <button class="btn btn-danger" onclick="deleteProduct('${p.id}','${p.name.replace(/'/g,"\\'")}')">🗑 Delete</button>
+              </div>
+            </td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>`;
+}
+
+function openAddProductModal() {
+  document.getElementById('prod-modal-title').textContent = 'Add Product';
+  document.getElementById('prod-submit-btn').textContent  = 'Add Product';
+  document.getElementById('prod-form').reset();
+  document.getElementById('prod-id').value = '';
+  document.getElementById('prod-img-preview').classList.remove('show');
+  document.getElementById('prod-modal').classList.add('open');
+}
+
+function openEditProductModal(p) {
+  document.getElementById('prod-modal-title').textContent = 'Edit Product';
+  document.getElementById('prod-submit-btn').textContent  = 'Save Changes';
+  document.getElementById('prod-id').value         = p.id;
+  document.getElementById('prod-name').value       = p.name;
+  document.getElementById('prod-category').value   = p.category;
+  document.getElementById('prod-price').value      = p.price;
+  document.getElementById('prod-badge').value      = p.badge || '';
+  document.getElementById('prod-desc').value       = p.description;
+  document.getElementById('prod-fulldesc').value   = p.fullDesc || '';
+  document.getElementById('prod-material').value   = p.material || '';
+  document.getElementById('prod-dimensions').value = p.dimensions || '';
+  document.getElementById('prod-printtime').value  = p.printTime || '';
+  document.getElementById('prod-rating').value     = p.rating || '';
+  document.getElementById('prod-tags').value       = (p.tags||[]).join(', ');
+  document.getElementById('prod-image').value      = p.image || '';
+  document.getElementById('prod-active').value     = String(p.active !== false);
+  previewProdImg(p.image || '');
+  document.getElementById('prod-modal').classList.add('open');
+}
+
+function closeProductModal() { document.getElementById('prod-modal').classList.remove('open'); }
+
+function previewProdImg(url) {
+  const el = document.getElementById('prod-img-preview');
+  if (url) { el.src = imgSrc(url,'/product-images'); el.classList.add('show'); }
+  else el.classList.remove('show');
+}
+
+async function uploadProductImage(input) {
+  const file = input.files[0]; if (!file) return;
+  const fd = new FormData(); fd.append('image', file);
+  try {
+    const res  = await fetch(`${API}/api/products/upload-image`, { method:'POST', body:fd });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error);
+    document.getElementById('prod-image').value = data.url;
+    previewProdImg(data.url);
+    toast('Image uploaded ✓');
+  } catch(e) { toast('Upload failed: ' + e.message, 'error'); }
+}
+
+async function uploadProductViews() {
+  const filesMap = {
+    front: document.getElementById('view-front').files[0],
+    back:  document.getElementById('view-back').files[0],
+    left:  document.getElementById('view-left').files[0],
+    right: document.getElementById('view-right').files[0],
+  };
+  const fd = new FormData();
+  let has = false;
+  Object.keys(filesMap).forEach(k => { if (filesMap[k]) { fd.append(k, filesMap[k]); has = true; } });
+  if (!has) { toast('No view files selected', 'error'); return; }
+  try {
+    const res = await fetch(`${API}/api/products/upload-images`, { method: 'POST', body: fd });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error);
+    // store mapping as JSON string in hidden input
+    document.getElementById('prod-images').value = JSON.stringify(data.images || {});
+    toast('Views uploaded ✓');
+  } catch (e) { toast('Upload failed: ' + e.message, 'error'); }
+}
+
+async function submitProduct(e) {
+  e.preventDefault();
+  const id = document.getElementById('prod-id').value;
+  const payload = {
+    name:        document.getElementById('prod-name').value.trim(),
+    category:    document.getElementById('prod-category').value.trim(),
+    price:       document.getElementById('prod-price').value,
+    badge:       document.getElementById('prod-badge').value.trim(),
+    description: document.getElementById('prod-desc').value.trim(),
+    fullDesc:    document.getElementById('prod-fulldesc').value.trim(),
+    material:    document.getElementById('prod-material').value.trim(),
+    dimensions:  document.getElementById('prod-dimensions').value.trim(),
+    printTime:   document.getElementById('prod-printtime').value.trim(),
+    rating:      document.getElementById('prod-rating').value,
+    tags:        document.getElementById('prod-tags').value,
+    image:       document.getElementById('prod-image').value.trim(),
+    images:      (document.getElementById('prod-images').value || '') || undefined,
+    active:      document.getElementById('prod-active').value,
+  };
+  try {
+    const res  = await fetch(id ? `${API}/api/products/${id}` : `${API}/api/products`,
+      { method: id ? 'PUT' : 'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error);
+    toast(id ? 'Product updated ✓' : 'Product added ✓');
+    closeProductModal(); loadProducts();
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+}
+
+async function deleteProduct(id, name) {
+  if (!confirm(`Delete "${name}"?\nThis cannot be undone.`)) return;
+  try {
+    const res  = await fetch(`${API}/api/products/${id}`, { method:'DELETE' });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error);
+    toast('Product deleted');
+    loadProducts();
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════ USERS ══
+
+// Reuse API constant declared above.
+
+// ── Tab switching ─────────────────────────────────────────────────────────
+function switchTab(name) {
+  const tabs = ['services','portfolio','products','users','orders','submissions'];
+  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', tabs[i] === name));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  if (name === 'services')    loadServices();
+  if (name === 'portfolio')   loadPortfolio();
+  if (name === 'products')    loadProducts();
+  if (name === 'users')       loadUsers();
+  if (name === 'orders')      loadOrders();
+  if (name === 'submissions') loadSubmissions();
+}
+
+// ── Toast ─────────────────────────────────────────────────────────────────
+function toast(msg, type = 'success') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'show ' + type;
+  setTimeout(() => el.className = '', 3200);
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────
+function imgSrc(url, prefix) {
+  if (!url) return '';
+  return url.startsWith(prefix) ? API + url : url;
+}
+
+async function loadUsers() {
+  try {
+    const [usersRes, ordersRes] = await Promise.all([
+      fetch(`${API}/api/admin/users`),
+      fetch(`${API}/api/admin/orders`),
+    ]);
+
+    const usersData = await usersRes.json();
+    const ordersData = await ordersRes.json();
+    if (!usersData.success) throw new Error(usersData.error);
+    if (!ordersData.success) throw new Error(ordersData.error);
+    renderUsers(usersData.users, ordersData.orders || []);
+  } catch(e) {
+    document.getElementById('users-list').innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><p>${e.message}</p></div>`;
+  }
+}
+
+function getUserAddress(user, latestOrder) {
+  if (typeof user.address === 'string' && user.address.trim()) return user.address.trim();
+
+  if (user.address && typeof user.address === 'object') {
+    const parts = [user.address.address, user.address.city, user.address.state, user.address.pincode].filter(Boolean);
+    if (parts.length) return parts.join(', ');
+  }
+
+  if (Array.isArray(user.addresses) && user.addresses.length) {
+    const defaultAddress = user.addresses.find(a => a.isDefault) || user.addresses[0];
+    if (defaultAddress) {
+      const parts = [defaultAddress.address, defaultAddress.city, defaultAddress.state, defaultAddress.pincode].filter(Boolean);
+      if (parts.length) return parts.join(', ');
+    }
+  }
+
+  const orderAddress = latestOrder?.shippingAddress || latestOrder?.deliveryAddress || latestOrder?.address;
+  if (typeof orderAddress === 'string' && orderAddress.trim()) return orderAddress.trim();
+  if (orderAddress && typeof orderAddress === 'object') {
+    const parts = [orderAddress.address, orderAddress.city, orderAddress.state, orderAddress.pincode].filter(Boolean);
+    if (parts.length) return parts.join(', ');
+  }
+
+  return '—';
+}
+
+function renderUsers(users, orders = []) {
+  const thisMonth = new Date().getMonth();
+  const thisYear = new Date().getFullYear();
+  const active = users.filter(u => u.createdAt).length;
+  const joinedThisMonth = users.filter(u => {
+    const createdAt = new Date(u.createdAt);
+    return createdAt.getMonth() === thisMonth && createdAt.getFullYear() === thisYear;
+  }).length;
+
+  document.getElementById('usr-total').textContent  = users.length;
+  document.getElementById('usr-active').textContent = active;
+  document.getElementById('usr-joined').textContent = joinedThisMonth;
+  document.getElementById('tc-users').textContent = users.length;
+
+  const ordersByUserId = new Map();
+  const latestOrderByUserId = new Map();
+  orders.forEach(order => {
+    if (!order.userId) return;
+    ordersByUserId.set(order.userId, (ordersByUserId.get(order.userId) || 0) + 1);
+    const prev = latestOrderByUserId.get(order.userId);
+    if (!prev || new Date(order.createdAt).getTime() > new Date(prev.createdAt).getTime()) {
+      latestOrderByUserId.set(order.userId, order);
+    }
+  });
+
+  if (!users.length) {
+    document.getElementById('users-list').innerHTML = '<div class="empty"><div class="empty-icon">👥</div><p>No users yet.</p></div>';
+    return;
+  }
+
+  document.getElementById('users-list').innerHTML = `
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>Address</th>
+          <th>Joined</th>
+          <th>Orders</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${users.map(u => {
+          const userOrders = ordersByUserId.get(u.id) || 0;
+          const latestOrder = latestOrderByUserId.get(u.id);
+          const address = getUserAddress(u, latestOrder);
+          return `
+          <tr>
+            <td>
+              <div class="cell-media">
+                <div class="thumb-placeholder" style="background:#e0e7ff;color:#3730a3">👤</div>
+                <div>
+                  <div class="cell-title">${u.name}</div>
+                  <div class="cell-sub">ID: ${u.id.slice(-8)}</div>
+                </div>
+              </div>
+            </td>
+            <td><span style="font-size:.8rem;color:#475569">${u.email}</span></td>
+            <td><span style="font-size:.8rem;color:#475569">${u.mobile || '—'}</span></td>
+            <td><span style="font-size:.8rem;color:#475569">${address}</span></td>
+            <td>
+              <div style="font-size:.8rem;color:#1e293b">${new Date(u.createdAt).toLocaleDateString()}</div>
+              <div style="font-size:.72rem;color:#94a3b8">${new Date(u.createdAt).toLocaleTimeString()}</div>
+            </td>
+            <td>
+              <span class="badge badge-blue" style="font-size:.75rem">${userOrders}</span>
+            </td>
+            <td>
+              <div class="btn-actions">
+                <button class="btn btn-ghost" onclick="viewUserDetails(${JSON.stringify(u).replace(/"/g,'&quot;')})">👁 View</button>
+                <button class="btn btn-danger" onclick="deleteUser('${u.id}','${u.name.replace(/'/g,"\\'")}')">🗑 Delete</button>
+              </div>
+            </td>
+          </tr>
+        `;
+        }).join('')}
+      </tbody>
+    </table>`;
+}
+
+function viewUserDetails(u) {
+  const ordersCount = 0;
+  const totalSpent = 0;
+  alert(`User Details:\n\nName: ${u.name}\nEmail: ${u.email}\nMobile: ${u.mobile || 'Not provided'}\nJoined: ${new Date(u.createdAt).toLocaleString()}\nTotal Orders: ${ordersCount}\nTotal Spent: ₹${totalSpent}`);
+}
+
+async function deleteUser(id, name) {
+  if (!confirm(`Delete user "${name}"?\nThis cannot be undone.`)) return;
+  try {
+    const res  = await fetch(`${API}/api/admin/users/${id}`, { method:'DELETE' });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error);
+    toast('User deleted');
+    loadUsers();
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════ ORDERS ══
+
+async function loadOrders() {
+  try {
+    const res  = await fetch(`${API}/api/admin/orders`);
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error);
+    renderOrders(data.orders);
+  } catch(e) {
+    document.getElementById('orders-list').innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><p>${e.message}</p></div>`;
+  }
+}
+
+function renderOrders(orders) {
+  const completed = orders.filter(o => o.status === 'Completed').length;
+  const pending = orders.filter(o => o.status === 'Pending').length;
+  const totalRevenue = orders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
+
+  document.getElementById('ord-total').textContent  = orders.length;
+  document.getElementById('ord-completed').textContent = completed;
+  document.getElementById('ord-pending').textContent = pending;
+  document.getElementById('ord-revenue').textContent = '₹' + totalRevenue.toLocaleString();
+  document.getElementById('tc-orders').textContent = orders.length;
+
+  if (!orders.length) {
+    document.getElementById('orders-list').innerHTML = '<div class="empty"><div class="empty-icon">📦</div><p>No orders yet.</p></div>';
+    return;
+  }
+
+  const statusColors = {
+    'Pending': 'badge-orange',
+    'Confirmed': 'badge-blue',
+    'In Production': 'badge-blue',
+    'Shipped': 'badge-blue',
+    'Delivered': 'badge-green'
+  };
+
+  const formatOrderAddress = (order) => {
+    const addr = order.shippingAddress || order.deliveryAddress || order.address;
+    if (!addr) return '—';
+    if (typeof addr === 'string') return addr || '—';
+    const parts = [addr.address, addr.city, addr.state, addr.pincode].filter(Boolean);
+    return parts.length ? parts.join(', ') : '—';
+  };
+
+  document.getElementById('orders-list').innerHTML = `
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Order</th>
+          <th>Customer</th>
+          <th>Product</th>
+          <th>Address</th>
+          <th>Date</th>
+          <th>Total</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${orders.map(o => `
+          <tr>
+            <td>
+              <div class="cell-media">
+                <div class="thumb-placeholder" style="background:#f1f5f9">📦</div>
+                <div>
+                  <div class="cell-title">#${o.id.slice(-8)}</div>
+                  <div class="cell-sub">${new Date(o.createdAt).toLocaleDateString()}</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="cell-title">${o.userName}</div>
+              <div class="cell-sub">${o.userEmail}</div>
+            </td>
+            <td>
+              <div class="cell-title">${o.productName}</div>
+              <div class="cell-sub">${o.category}</div>
+            </td>
+            <td><span style="font-size:.8rem;color:#475569">${formatOrderAddress(o)}</span></td>
+            <td>
+              <div style="font-size:.8rem;color:#1e293b">${new Date(o.createdAt).toLocaleDateString()}</div>
+              <div style="font-size:.72rem;color:#94a3b8">${new Date(o.createdAt).toLocaleTimeString()}</div>
+            </td>
+            <td><span style="font-weight:700;color:#2563eb">₹${Number(o.total).toLocaleString()}</span></td>
+            <td>
+              <select class="order-status-select" data-order-id="${o.id}" style="padding:.25rem .5rem;border:1px solid #e2e8f0;border-radius:6px;font-size:.8rem;background:#fff">
+                <option value="Pending" ${o.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                <option value="Confirmed" ${o.status === 'Confirmed' ? 'selected' : ''}>Confirmed</option>
+                <option value="In Production" ${o.status === 'In Production' ? 'selected' : ''}>In Production</option>
+                <option value="Shipped" ${o.status === 'Shipped' ? 'selected' : ''}>Shipped</option>
+                <option value="Delivered" ${o.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+              </select>
+            </td>
+            <td>
+              <div class="btn-actions">
+                <button class="btn btn-ghost" onclick="viewOrderDetails(${JSON.stringify(o).replace(/"/g,'&quot;')})">👁 View</button>
+              </div>
+            </td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>`;
+
+  // Add event listeners for status changes
+  setTimeout(() => {
+    document.querySelectorAll('.order-status-select').forEach(select => {
+      select.addEventListener('change', async (e) => {
+        const orderId = e.target.dataset.orderId;
+        const newStatus = e.target.value;
+        try {
+          const res  = await fetch(`${API}/api/admin/orders/${orderId}/status`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: newStatus })
+          });
+          const data = await res.json();
+          if (data.success) {
+            toast(`Order #${orderId.slice(-8)} updated to ${newStatus}`);
+            loadOrders();
+          } else {
+            toast('Failed to update status', 'error');
+            loadOrders(); // Reload to restore original value
+          }
+        } catch(err) {
+          toast('Error updating status', 'error');
+          loadOrders();
+        }
+      });
+    });
+  }, 100);
+}
+
+function viewOrderDetails(o) {
+  const address = (() => {
+    const addr = o.shippingAddress || o.deliveryAddress || o.address;
+    if (!addr) return 'Not provided';
+    if (typeof addr === 'string') return addr;
+    const parts = [addr.name, addr.mobile, addr.address, addr.city, addr.state, addr.pincode].filter(Boolean);
+    return parts.length ? parts.join(', ') : 'Not provided';
+  })();
+  alert(`Order Details:\n\nOrder ID: #${o.id.slice(-8)}\nCustomer: ${o.userName} (${o.userEmail})\nProduct: ${o.productName}\nCategory: ${o.category}\nDelivery Address: ${address}\nPrice: ₹${o.price}\nQuantity: ${o.quantity}\nTotal: ₹${o.total}\nStatus: ${o.status}\nNote: ${o.note || 'None'}\nCreated: ${new Date(o.createdAt).toLocaleString()}`);
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────
+loadServices();
+</script>
+</body>
+</html>
