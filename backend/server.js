@@ -1026,9 +1026,13 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📊 Admin Dashboard: http://localhost:${PORT}/admin`);
-  console.log(`🔗 API Health Check: http://localhost:${PORT}/api/health`);
-  console.log(`📁 Uploads directory: ${uploadsDir}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+    console.log(`📊 Admin Dashboard: http://localhost:${PORT}/admin`);
+    console.log(`🔗 API Health Check: http://localhost:${PORT}/api/health`);
+    console.log(`📁 Uploads directory: ${uploadsDir}`);
+  });
+}
+
+module.exports = app;

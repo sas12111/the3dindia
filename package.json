@@ -58,7 +58,8 @@
             "@vitejs/plugin-react-swc": "^3.7.0",
             "tailwindcss": "4.1.12",
             "typescript": "^6.0.3",
-            "vite": "^7.3.3"
+                  "vite": "^7.3.3",
+                  "serverless-http": "^2.8.0"
       },
       "scripts": {
             "dev": "vite",
