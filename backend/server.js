@@ -201,6 +201,11 @@ app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'admin.html'));
 });
 
+// Also support the API-prefixed path used by the Vercel rewrite
+app.get('/api/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'admin.html'));
+});
+
 // Download file endpoint
 app.get('/api/download/:date/:filename', (req, res) => {
   try {
