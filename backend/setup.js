@@ -52,8 +52,8 @@ console.log('\n🎉 Setup complete!');
 console.log('\n📋 Next steps:');
 console.log('1. Edit .env file with your Gmail credentials');
 console.log('2. Run: npm start');
-console.log('3. Open: http://localhost:5000/admin');
-console.log('4. Test contact form at: http://localhost:5173/contact');
+console.log(`3. Open: http://localhost:${process.env.PORT || 5000}/admin`);
+console.log('4. Test contact form at: http://localhost:5173/contact (Vite dev server)');
 
 console.log('\n📧 Gmail Setup Instructions:');
 console.log('1. Enable 2-Factor Authentication on Gmail');
