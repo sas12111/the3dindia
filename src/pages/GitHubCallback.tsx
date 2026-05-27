@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { apiUrl } from '../utils/api';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 
@@ -24,7 +25,7 @@ export function GitHubCallback() {
         sessionStorage.removeItem('github_oauth_state');
 
         // Exchange code for token on backend
-        const tokenResponse = await fetch('http://localhost:5000/api/auth/github/token', {
+        const tokenResponse = await fetch(apiUrl('/api/auth/github/token'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ code }),
@@ -66,7 +67,7 @@ export function GitHubCallback() {
         }
 
         // Send to backend for login/register
-        const loginResponse = await fetch('http://localhost:5000/api/auth/github', {
+        const loginResponse = await fetch(apiUrl('/api/auth/github'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

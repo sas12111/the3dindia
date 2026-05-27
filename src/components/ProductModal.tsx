@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { apiUrl } from '../utils/api';
 import { X, Layers, Ruler, Clock, ShoppingCart, Star, CheckCircle, Plus, Minus, Tag } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -71,7 +72,7 @@ export default function ProductModal({ product, onClose }: Props) {
     setNaturalSize({w:0,h:0});
   }, [product?.id]);
 
-  const API = (window as any).REACT_APP_API_URL || 'http://localhost:5000';
+  const API = (window as any).REACT_APP_API_URL || '';
 
   if (!product) return null;
 
@@ -208,7 +209,7 @@ export default function ProductModal({ product, onClose }: Props) {
                         try {
                           const savedAddresses = JSON.parse(localStorage.getItem('addresses') || '[]');
                           const selectedAddress = savedAddresses.find((addr: any) => addr.isDefault) || savedAddresses[0] || null;
-                          const res  = await fetch(`${API}/api/orders`, {
+                          const res  = await fetch(apiUrl('/api/orders'), {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
                             body: JSON.stringify({

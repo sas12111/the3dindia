@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { apiUrl } from '../utils/api';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Loader2, CheckCircle, MapPin, CreditCard, Banknote, Shield } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
@@ -35,7 +36,7 @@ interface AddressFormData {
   isDefault: boolean;
 }
 
-const API = 'http://localhost:5000';
+// API base available via `apiUrl` when needed
 
 export function Checkout() {
   const { user, token } = useAuth();

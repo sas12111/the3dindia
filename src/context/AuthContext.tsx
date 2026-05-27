@@ -1,6 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-
-const API = 'http://localhost:5000';
+import { API, apiUrl } from '../utils/api';
 
 interface User {
   id: string;
@@ -29,7 +28,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const stored = localStorage.getItem('token');
     if (!stored) { setLoading(false); return; }
-    fetch(`${API}/api/auth/me`, { headers: { Authorization: `Bearer ${stored}` } })
+    fetch(apiUrl('/api/auth/me'), { headers: { Authorization: `Bearer ${stored}` } })
       .then(r => r.json())
       .then(data => { if (data.success) { setUser(data.user); setToken(stored); } else { localStorage.removeItem('token'); } })
       .catch(() => localStorage.removeItem('token'))
@@ -37,7 +36,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = async (email: string, password: string) => {
-    const res  = await fetch(`${API}/api/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password }) });
+    const res  = await fetch(apiUrl('/api/auth/login'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password }) });
     const data = await res.json();
     if (!data.success) throw new Error(data.error);
     localStorage.setItem('token', data.token);
@@ -46,7 +45,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const register = async (name: string, email: string, password: string, mobile: string): Promise<{ requiresVerification: boolean; email: string }> => {
-    const res  = await fetch(`${API}/api/auth/register`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, email, password, mobile }) });
+    const res  = await fetch(apiUrl('/api/auth/register'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, email, password, mobile }) });
     const data = await res.json();
     if (!data.success) throw new Error(data.error);
     // Registration now requires OTP verification — do NOT log in yet

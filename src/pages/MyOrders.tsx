@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { apiUrl } from '../utils/api';
 import { Link } from 'react-router-dom';
 import {
   ShoppingBag, Package, Clock, CheckCircle, XCircle, Truck,
@@ -7,7 +8,6 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
-const API = 'http://localhost:5000';
 
 interface Order {
   id: string;
@@ -103,7 +103,7 @@ export function MyOrders() {
 
   const fetchOrders = () => {
     setLoading(true);
-    fetch(`${API}/api/orders`, { headers: { Authorization: `Bearer ${token}` } })
+    fetch(apiUrl('/api/orders'), { headers: { Authorization: `Bearer ${token}` } })
       .then(r => r.json())
       .then(data => { if (data.success) setOrders(data.orders); else setError(data.error); })
       .catch(() => setError('Could not load orders'))
@@ -116,7 +116,7 @@ export function MyOrders() {
     if (!confirm('Cancel this order? This cannot be undone.')) return;
     setCancelling(id);
     try {
-      const res  = await fetch(`${API}/api/orders/${id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
+      const res  = await fetch(apiUrl(`/api/orders/${id}`), { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
       const data = await res.json();
       if (data.success) fetchOrders();
       else alert(data.error);

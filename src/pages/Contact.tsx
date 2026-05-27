@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiUrl } from '../utils/api';
 import { Mail, Phone, MapPin, MessageCircle, Send, Clock, Upload, X, FileText, Image, Box } from 'lucide-react';
 
 export function Contact() {
@@ -143,7 +144,7 @@ export function Contact() {
       });
 
       // Send to backend API
-      const response = await fetch('http://localhost:5000/api/contact', {
+      const response = await fetch(apiUrl('/api/contact'), {
         method: 'POST',
         body: formDataToSend,
       });

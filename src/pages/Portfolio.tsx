@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { apiUrl } from '../utils/api';
 import { Filter, X, Tag, Clock, User, Layers, Loader2 } from 'lucide-react';
 
 interface Project {
@@ -173,7 +174,7 @@ export function Portfolio() {
   const [selectedProject, setSelectedProject]   = useState<Project | null>(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/portfolio')
+    fetch(apiUrl('/api/portfolio'))
       .then(r => r.json())
       .then(data => {
         if (data.success) setProjects(data.projects);

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { apiUrl } from '../utils/api';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { AuthLayout } from '../components/AuthLayout';
@@ -109,7 +110,7 @@ export function Login() {
                 headers: { Authorization: `Bearer ${response.access_token}` },
               });
               const userInfo = await userResponse.json();
-              const googleResponse = await fetch('http://localhost:5000/api/auth/google', {
+              const googleResponse = await fetch(apiUrl('/api/auth/google'), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

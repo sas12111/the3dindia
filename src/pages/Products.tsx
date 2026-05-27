@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
+import { apiUrl } from '../utils/api';
 import { Link, useNavigate } from 'react-router-dom';
 import { Filter, X, Tag, Layers, ShoppingCart, Star, Ruler, Clock, Loader2, CheckCircle, Plus, Minus } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
-const API = 'http://localhost:5000';
 
 interface Product {
   id: string;
@@ -34,7 +34,7 @@ export function Products() {
   const [selectedProduct, setSelectedProduct]   = useState<Product | null>(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/products')
+    fetch(apiUrl('/api/products'))
       .then(r => r.json())
       .then(data => {
         if (data.success) setProducts(data.products);

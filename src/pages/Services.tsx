@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { apiUrl } from '../utils/api';
 // Read env from common locations without referencing `process` directly
 import { Link } from 'react-router-dom';
 import {
@@ -30,16 +31,13 @@ interface Service {
 }
 
 export function Services() {
-  const API_BASE =
-    (globalThis as any)?.process?.env?.REACT_APP_API_URL ||
-    (typeof import.meta !== 'undefined' ? (import.meta as any).env?.VITE_API_URL : undefined) ||
-    'http://localhost:5000';
+  const API_BASE = apiUrl('');
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading]   = useState(true);
   const [error, setError]       = useState('');
 
   useEffect(() => {
-    fetch(`${API_BASE}/api/services`)
+    fetch(apiUrl('/api/services'))
       .then(r => r.json())
       .then(data => {
         if (data.success) setServices(data.services);
@@ -81,10 +79,10 @@ export function Services() {
               {services.map((service, index) => {
                 const IconComponent = ICON_MAP[service.icon] || Package;
                 const defaultImage = '/images/3d-printer.jpg';
-                const imageUrl = service.image
+                  const imageUrl = service.image
                   ? (service.image.startsWith('http')
-                      ? service.image
-                      : `${API_BASE}${service.image.startsWith('/') ? service.image : '/' + service.image}`)
+                    ? service.image
+                    : `${API_BASE}${service.image.startsWith('/') ? service.image : '/' + service.image}`)
                   : defaultImage;
                 return (
                   <div

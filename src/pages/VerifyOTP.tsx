@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { apiUrl } from '../utils/api';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Loader2, MailCheck, ArrowLeft, RefreshCw } from 'lucide-react';
 
-const API = 'http://localhost:5000';
+// API base via `apiUrl`
 const OTP_LENGTH = 6;
 const RESEND_COOLDOWN = 60; // seconds
 
@@ -80,7 +81,7 @@ export function VerifyOTP() {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch(`${API}/api/auth/verify-otp`, {
+      const res = await fetch(apiUrl('/api/auth/verify-otp'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, otp }),
@@ -110,7 +111,7 @@ export function VerifyOTP() {
     setResending(true);
     setError('');
     try {
-      const res = await fetch(`${API}/api/auth/resend-otp`, {
+      const res = await fetch(apiUrl('/api/auth/resend-otp'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),

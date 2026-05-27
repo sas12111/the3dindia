@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { apiUrl } from '../utils/api';
 import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingBag, Trash2, Plus, Minus, Loader2, CheckCircle, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
@@ -15,7 +16,7 @@ interface CartItem {
   variant?: string;
 }
 
-const API = 'http://localhost:5000';
+// API base provided by `apiUrl` helper when needed
 
 export function Cart() {
   const { user, token } = useAuth();
