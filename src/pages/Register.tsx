@@ -81,7 +81,7 @@ function PasswordStrength({ password }: { password: string }) {
       break;
     case 3:
       label = 'Good';
-      color = 'bg-blue-500';
+      color = 'bg-[#f78e00]';
       break;
     case 4:
       label = 'Strong';
@@ -322,7 +322,7 @@ export function Register() {
               checked={terms}
               onChange={(e) => setTerms(e.target.checked)}
               disabled={loading}
-              className="mt-0.5 w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500/30 cursor-pointer flex-shrink-0 disabled:opacity-50"
+              className="mt-0.5 w-4 h-4 rounded border-gray-300 text-[#f78e00] focus:ring-[#f78e00]/30 cursor-pointer flex-shrink-0 disabled:opacity-50"
             />
             <span className="text-xs text-gray-600 leading-relaxed">
               I agree to the{' '}
@@ -330,7 +330,7 @@ export function Register() {
                 href="/terms"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-700 hover:underline transition-colors"
+                className="text-[#f78e00] hover:text-[#e07e00] hover:underline transition-colors"
               >
                 Terms of Service
               </a>
@@ -339,7 +339,7 @@ export function Register() {
                 href="/privacy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-700 hover:underline transition-colors"
+                className="text-[#f78e00] hover:text-[#e07e00] hover:underline transition-colors"
               >
                 Privacy Policy
               </a>
@@ -367,7 +367,7 @@ export function Register() {
         Already have an account?{' '}
         <Link
           to="/login"
-          className="font-medium text-blue-600 hover:text-blue-700 hover:underline transition-colors"
+          className="font-medium text-[#f78e00] hover:text-[#e07e00] hover:underline transition-colors"
         >
           Sign in
         </Link>

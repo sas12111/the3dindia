@@ -25,7 +25,7 @@ interface Order {
 
 const STATUS_CFG: Record<string, { color: string; bg: string; border: string; dot: string }> = {
   Pending:         { color: '#92400e', bg: '#fffbeb', border: '#fde68a', dot: '#f59e0b' },
-  Confirmed:       { color: '#1e40af', bg: '#eff6ff', border: '#bfdbfe', dot: '#3b82f6' },
+  Confirmed:       { color: '#f98f00', bg: '#fff7ed', border: '#ffedd5', dot: '#f98f00' },
   'In Production': { color: '#5b21b6', bg: '#f5f3ff', border: '#ddd6fe', dot: '#8b5cf6' },
   Shipped:         { color: '#0e7490', bg: '#ecfeff', border: '#a5f3fc', dot: '#06b6d4' },
   Delivered:       { color: '#14532d', bg: '#f0fdf4', border: '#bbf7d0', dot: '#22c55e' },
@@ -68,7 +68,7 @@ function OrderTimeline({ status }: { status: string }) {
             <div key={step} className="flex items-center flex-1 last:flex-none">
               <div className="flex flex-col items-center gap-1">
                 <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-all
-                  ${done ? 'bg-blue-600' : active ? 'bg-blue-600 ring-4 ring-blue-100' : 'bg-gray-200'}`}>
+                  ${done ? 'bg-[#f78e00]' : active ? 'bg-[#f78e00] ring-4 ring-[#fff3e0]' : 'bg-gray-200'}`}>
                   {done
                     ? <CheckCircle size={12} className="text-white" />
                     : active
@@ -76,12 +76,12 @@ function OrderTimeline({ status }: { status: string }) {
                       : <span className="w-2 h-2 bg-gray-400 rounded-full" />}
                 </div>
                 <span className={`text-[10px] font-medium whitespace-nowrap hidden sm:block
-                  ${done || active ? 'text-blue-600' : 'text-gray-400'}`}>
+                  ${done || active ? 'text-[#f78e00]' : 'text-gray-400'}`}>
                   {step}
                 </span>
               </div>
               {i < STEPS.length - 1 && (
-                <div className={`h-0.5 flex-1 mx-1 mb-4 transition-all ${done ? 'bg-blue-600' : 'bg-gray-200'}`} />
+                <div className={`h-0.5 flex-1 mx-1 mb-4 transition-all ${done ? 'bg-[#f78e00]' : 'bg-gray-200'}`} />
               )}
             </div>
           );
@@ -137,7 +137,7 @@ export function MyOrders() {
 
       {/* ── Top banner ── */}
       <div className="relative overflow-hidden"
-        style={{ background: 'linear-gradient(135deg, #1d4ed8 0%, #2563eb 60%, #ea580c 100%)' }}>
+      style={{ background: 'linear-gradient(135deg, #f98f00 0%, #f98f00 60%, #ea580c 100%)' }}>
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <svg className="absolute inset-0 w-full h-full opacity-5" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -153,13 +153,13 @@ export function MyOrders() {
         <div className="container01 mx-auto px-4 py-10 relative z-10">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-white/15 backdrop-blur-sm flex items-center justify-center border border-white/20">
+                <div className="w-14 h-14 rounded-2xl bg-white/15 backdrop-blur-sm flex items-center justify-center border border-white/20">
                 <span className="text-2xl font-bold text-white">{user?.name?.charAt(0).toUpperCase()}</span>
               </div>
               <div>
-                <p className="text-blue-200 text-sm font-medium">Welcome back</p>
+                <p className="text-white/60 text-sm font-medium">Welcome back</p>
                 <h1 className="text-2xl font-bold text-white">{user?.name}</h1>
-                <p className="text-blue-200 text-xs mt-0.5">{user?.email}</p>
+                <p className="text-white/60 text-xs mt-0.5">{user?.email}</p>
               </div>
             </div>
             <Link to="/products"
@@ -178,7 +178,7 @@ export function MyOrders() {
             ].map(s => (
               <div key={s.label} className="rounded-xl px-4 py-3 backdrop-blur-sm"
                 style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.18)' }}>
-                <div className="flex items-center gap-2 text-blue-200 mb-1">
+                <div className="flex items-center gap-2 text-white/60 mb-1">
                   {s.icon}
                   <span className="text-xs">{s.label}</span>
                 </div>
@@ -200,7 +200,7 @@ export function MyOrders() {
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-lg flex-shrink-0"
-                  style={{ background: 'linear-gradient(135deg, #2563eb, #ea580c)' }}>
+                  style={{ background: 'linear-gradient(135deg, #f98f00, #ea580c)' }}>
                   {user?.name?.charAt(0).toUpperCase()}
                 </div>
                 <div className="min-w-0">
@@ -236,7 +236,7 @@ export function MyOrders() {
                   return (
                     <button key={opt} onClick={() => setFilter(opt)}
                       className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all ${
-                        filter === opt ? 'bg-blue-50 text-blue-700 font-semibold' : 'text-gray-600 hover:bg-gray-50'
+                        filter === opt ? 'bg-[#fff8f0] text-[#e07e00] font-semibold' : 'text-gray-600 hover:bg-gray-50'
                       }`}>
                       <div className="flex items-center gap-2">
                         {cfg && <span className="w-2 h-2 rounded-full" style={{ background: cfg.dot }} />}
@@ -244,7 +244,7 @@ export function MyOrders() {
                         {opt}
                       </div>
                       <span className={`text-xs px-1.5 py-0.5 rounded-full font-medium ${
-                        filter === opt ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-500'
+                        filter === opt ? 'bg-[#fff3e0] text-[#e07e00]' : 'bg-gray-100 text-gray-500'
                       }`}>{count}</span>
                     </button>
                   );
@@ -274,7 +274,7 @@ export function MyOrders() {
             {/* Loading */}
             {loading && (
               <div className="flex flex-col items-center justify-center py-24 gap-3">
-                <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
+                <Loader2 className="w-8 h-8 text-[#f78e00] animate-spin" />
                 <p className="text-gray-400 text-sm">Loading your orders…</p>
               </div>
             )}
@@ -302,7 +302,7 @@ export function MyOrders() {
                 </p>
                 {filter === 'All' && (
                   <Link to="/products"
-                    className="inline-flex items-center gap-2 px-6 py-2.5 bg-blue-600 text-white text-sm font-semibold rounded-xl hover:bg-blue-700 transition-colors">
+                    className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#f78e00] text-white text-sm font-semibold rounded-xl hover:bg-[#e07e00] transition-colors">
                     Browse Products <ArrowRight size={14} />
                   </Link>
                 )}
@@ -359,7 +359,7 @@ export function MyOrders() {
                                   </button>
                                 )}
                                 <button onClick={() => setExpandedId(isExpanded ? null : order.id)}
-                                  className="text-xs text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1 transition-colors">
+                                  className="text-xs text-[#f78e00] hover:text-[#c96e00] font-medium flex items-center gap-1 transition-colors">
                                   {isExpanded ? 'Less' : 'Details'}
                                   <ChevronDown size={12} className={`transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                                 </button>
@@ -386,7 +386,7 @@ export function MyOrders() {
                             </div>
                             <div>
                               <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Order Total</p>
-                              <p className="font-bold text-blue-600">₹{order.total.toLocaleString()}</p>
+                              <p className="font-bold text-[#f78e00]">₹{order.total.toLocaleString()}</p>
                             </div>
                           </div>
                           {order.note && (

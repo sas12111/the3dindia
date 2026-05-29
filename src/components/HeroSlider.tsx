@@ -60,7 +60,7 @@ function NextArrow(props: any) {
       onClick={onClick}
       className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110"
     >
-      <ChevronRight className="w-6 h-6 text-blue-600" />
+      <ChevronRight className="w-6 h-6 text-[#f78e00]" />
     </button>
   );
 }
@@ -72,7 +72,7 @@ function PrevArrow(props: any) {
       onClick={onClick}
       className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110"
     >
-      <ChevronLeft className="w-6 h-6 text-blue-600" />
+      <ChevronLeft className="w-6 h-6 text-[#f78e00]" />
     </button>
   );
 }
@@ -100,25 +100,25 @@ export function HeroSlider() {
       <Slider {...settings}>
         {slides.map((slide) => (
           <div key={slide.id}>
-            <div className="relative bg-gradient-to-br from-cyan-50 to-blue-100 overflow-hidden">
+            <div className="relative bg-gradient-to-br from-cyan-50 to-[#fff3e0] overflow-hidden">
               <div className="container01 mx-auto px-4 py-20 lg:py-32">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                   <div className="space-y-8">
                     <h1 className="text-5xl lg:text-6xl text-gray-900 leading-tight">
-                      {slide.title} <span className="text-blue-600">{slide.highlight}</span>
+                      {slide.title} <span className="text-[#f78e00]">{slide.highlight}</span>
                     </h1>
                     <p className="text-xl text-gray-600">{slide.description}</p>
                     <div className="flex flex-col sm:flex-row gap-4">
                       <Link
                         to="/contact"
-                        className="px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 group"
+                        className="px-8 py-4 bg-[#f78e00] text-white rounded-lg hover:bg-[#e07e00] transition-colors flex items-center justify-center gap-2 group"
                       >
                         Get a Quote
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </Link>
                       <Link
                         to="/contact"
-                        className="px-8 py-4 bg-white text-blue-600 border-2 border-blue-600 rounded-lg hover:bg-blue-50 transition-colors flex items-center justify-center gap-2"
+                        className="px-8 py-4 bg-white text-[#f78e00] border-2 border-[#f78e00] rounded-lg hover:bg-[#fff8f0] transition-colors flex items-center justify-center gap-2"
                       >
                         <Upload className="w-5 h-5" />
                         Upload Your Design
@@ -137,7 +137,7 @@ export function HeroSlider() {
                     </div>
                   </div>
                   <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-orange-500/20 rounded-2xl transform rotate-3"></div>
+                    <div className="absolute inset-0 bg-gradient-to-tr from-[#f78e00]/20 to-orange-500/20 rounded-2xl transform rotate-3"></div>
                     <img
                       src={slide.image}
                       alt={slide.title}

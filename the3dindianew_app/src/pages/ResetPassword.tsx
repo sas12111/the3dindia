@@ -77,7 +77,7 @@ export function ResetPassword() {
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-3">Password Reset!</h2>
           <p className="text-gray-600 mb-6">Your password has been successfully updated. You can now sign in with your new password.</p>
-          <Link to="/login" className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg font-semibold text-white text-sm transition-all duration-200" style={{ background: 'linear-gradient(135deg, #2563eb, #1d4ed8)' }}>
+          <Link to="/login" className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg font-semibold text-white text-sm transition-all duration-200" style={{ background: 'linear-gradient(135deg, #f98f00, #ea580c)' }}>
             Sign In Now <ArrowRight size={14} />
           </Link>
         </div>
@@ -114,7 +114,7 @@ export function ResetPassword() {
             </div>
             {confirmPassword && password !== confirmPassword && <p className="mt-1 text-xs text-red-500">Passwords do not match</p>}
           </div>
-          <button type="submit" disabled={loading} className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg font-semibold text-white text-sm transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg shadow-blue-600/20 hover:shadow-xl hover:shadow-blue-600/30 hover:-translate-y-0.5 active:translate-y-0" style={{ background: loading ? '#93c5fd' : 'linear-gradient(135deg, #2563eb, #1d4ed8)' }}>
+          <button type="submit" disabled={loading} className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg font-semibold text-white text-sm transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg shadow-blue-600/20 hover:shadow-xl hover:shadow-blue-600/30 hover:-translate-y-0.5 active:translate-y-0" style={{ background: loading ? '#f98f00' : 'linear-gradient(135deg, #f98f00, #ea580c)' }}>
             {loading ? <><Loader2 size={16} className="animate-spin" /> Resetting password…</> : <>Reset Password <ArrowRight size={14} /></>}
           </button>
         </form>

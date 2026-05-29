@@ -38,7 +38,7 @@ export function Contact() {
   const getFileIcon = (fileName: string) => {
     const extension = fileName.toLowerCase().substring(fileName.lastIndexOf('.'));
     if (['.stl', '.obj', '.step', '.stp', '.3mf', '.iges', '.igs'].includes(extension)) {
-      return <Box className="w-5 h-5 text-blue-600" />;
+      return <Box className="w-5 h-5 text-[#f78e00]" />;
     } else if (['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(extension)) {
       return <Image className="w-5 h-5 text-green-600" />;
     } else if (extension === '.pdf') {
@@ -167,7 +167,7 @@ export function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
+                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f78e00] focus:border-transparent outline-none transition-all"
                   placeholder="Your name"
                 />
               </div>
@@ -182,7 +182,7 @@ export function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
+                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f78e00] focus:border-transparent outline-none transition-all"
                   placeholder="your@email.com"
                 />
               </div>
@@ -197,7 +197,7 @@ export function Contact() {
                   value={formData.mobile}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
+                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f78e00] focus:border-transparent outline-none transition-all"
                   placeholder="+91 XXXXX XXXXX"
                 />
               </div>
@@ -212,7 +212,7 @@ export function Contact() {
                   onChange={handleChange}
                   required
                   rows={4}
-                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all resize-none"
+                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#f78e00] focus:border-transparent outline-none transition-all resize-none"
                   placeholder="Tell us about your project..."
                 />
               </div>
@@ -225,7 +225,7 @@ export function Contact() {
                 <div
                   className={`relative border-2 border-dashed rounded-lg p-6 transition-colors ${
                     dragActive 
-                      ? 'border-blue-500 bg-blue-50' 
+                      ? 'border-[#f78e00] bg-[#fff8f0]' 
                       : 'border-gray-300 hover:border-gray-400'
                   }`}
                   onDragEnter={handleDrag}
@@ -237,7 +237,7 @@ export function Contact() {
                     <Upload className="w-8 h-8 text-gray-400 mx-auto mb-3" />
                     <p className="text-gray-600 mb-2">
                       Drag & drop your files here, or{' '}
-                      <label className="text-blue-600 hover:text-blue-700 cursor-pointer underline">
+                      <label className="text-[#f78e00] hover:text-[#e07e00] cursor-pointer underline">
                         browse
                         <input
                           type="file"
@@ -287,7 +287,7 @@ export function Contact() {
               </div>
               <button
                 type="submit"
-                className="w-full px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+                className="w-full px-8 py-4 bg-[#f78e00] text-white rounded-lg hover:bg-[#e07e00] transition-colors flex items-center justify-center gap-2"
               >
                 <Send className="w-5 h-5" />
                 Send Message
@@ -301,32 +301,32 @@ export function Contact() {
               <h3 className="text-2xl text-gray-900 mb-6">Get in touch</h3>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6 text-blue-600" />
+                  <div className="w-12 h-12 bg-[#fff3e0] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-6 h-6 text-[#f78e00]" />
                   </div>
                   <div>
                     <div className="text-gray-900 mb-1">Phone</div>
-                    <a href="tel:+919876543210" className="text-gray-600 hover:text-blue-600">
+                    <a href="tel:+919876543210" className="text-gray-600 hover:text-[#f78e00]">
                       +91 98765 43210
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-6 h-6 text-blue-600" />
+                  <div className="w-12 h-12 bg-[#fff3e0] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-6 h-6 text-[#f78e00]" />
                   </div>
                   <div>
                     <div className="text-gray-900 mb-1">Email</div>
-                    <a href="mailto:info@the3dindia.com" className="text-gray-600 hover:text-blue-600">
+                    <a href="mailto:info@the3dindia.com" className="text-gray-600 hover:text-[#f78e00]">
                       info@the3dindia.com
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-blue-600" />
+                  <div className="w-12 h-12 bg-[#fff3e0] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-[#f78e00]" />
                   </div>
                   <div>
                     <div className="text-gray-900 mb-1">Location</div>
@@ -355,9 +355,9 @@ export function Contact() {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-blue-600 to-orange-500 rounded-2xl p-8 text-white">
+            <div className="bg-gradient-to-br from-[#f78e00] to-orange-500 rounded-2xl p-8 text-white">
               <h4 className="text-xl mb-3">Business Hours</h4>
-              <div className="space-y-2 text-blue-100">
+              <div className="space-y-2 text-[#fff3e0]">
                 <div className="flex justify-between">
                   <span>Monday - Friday</span>
                   <span>9:00 AM - 7:00 PM</span>

@@ -82,7 +82,7 @@ export default function ProductModal({ product, onClose }: Props) {
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', padding: '1rem' }}>
           <div style={{ width: '5.5rem', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {images.map((src, i) => (
-              <button key={i} onClick={() => setSelectedIndex(i)} type="button" style={{ border: selectedIndex === i ? '2px solid #2563eb' : '1px solid #e5e7eb', padding: 0, borderRadius: '0.5rem', overflow: 'hidden', background: '#fff' }}>
+              <button key={i} onClick={() => setSelectedIndex(i)} type="button" style={{ border: selectedIndex === i ? '2px solid #f98f00' : '1px solid #e5e7eb', padding: 0, borderRadius: '0.5rem', overflow: 'hidden', background: '#fff' }}>
                 <img src={src || '/images/3d-printer.jpg'} alt={`thumb-${i}`} style={{ width: '3.75rem', height: '3.75rem', objectFit: 'cover', display: 'block' }} />
               </button>
             ))}
@@ -103,14 +103,14 @@ export default function ProductModal({ product, onClose }: Props) {
         <div style={{ padding: '1.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.4rem' }}>
             <h2 style={{ fontSize: '1.5rem', fontWeight: 600, color: '#111827' }}>{product.name}</h2>
-            <span style={{ fontSize: '1.5rem', fontWeight: 700, color: '#2563eb', whiteSpace: 'nowrap', marginLeft: '1rem' }}>₹{product.price.toLocaleString()}</span>
+            <span style={{ fontSize: '1.5rem', fontWeight: 700, color: '#f98f00', whiteSpace: 'nowrap', marginLeft: '1rem' }}>₹{product.price.toLocaleString()}</span>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
             {[
-              { icon: <Layers size={20} color="#2563eb" />, label: 'Material', value: product.material },
-              { icon: <Ruler size={20} color="#2563eb" />, label: 'Size', value: product.dimensions },
-              { icon: <Clock size={20} color="#2563eb" />, label: 'Print Time', value: product.printTime },
+              { icon: <Layers size={20} color="#f98f00" />, label: 'Material', value: product.material },
+              { icon: <Ruler size={20} color="#f98f00" />, label: 'Size', value: product.dimensions },
+              { icon: <Clock size={20} color="#f98f00" />, label: 'Print Time', value: product.printTime },
             ].map(({ icon, label, value }) => (
               <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', background: '#f9fafb', borderRadius: '0.75rem', padding: '0.75rem' }}>
                 <div style={{ flexShrink: 0 }}>{icon}</div>
@@ -198,7 +198,7 @@ export default function ProductModal({ product, onClose }: Props) {
                           alert('Added to cart!');
                         } catch { setCartLoading(false); alert('Failed to add to cart'); }
                       }}
-                      style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', background: cartLoading ? '#93c5fd' : '#f3f4f6', color: '#374151', padding: '0.75rem 1rem', borderRadius: '0.75rem', fontWeight: 600, fontSize: '0.9rem', border: '1px solid #e5e7eb', cursor: cartLoading ? 'not-allowed' : 'pointer' }}>
+                      style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', background: cartLoading ? '#f98f00' : '#f3f4f6', color: '#374151', padding: '0.75rem 1rem', borderRadius: '0.75rem', fontWeight: 600, fontSize: '0.9rem', border: '1px solid #e5e7eb', cursor: cartLoading ? 'not-allowed' : 'pointer' }}>
                       <ShoppingCart size={18} />
                       {cartLoading ? 'Adding...' : 'Add to Cart'}
                     </button>
@@ -229,7 +229,7 @@ export default function ProductModal({ product, onClose }: Props) {
                         } catch { setOrderError('Failed to place order. Try again.'); }
                         finally { setOrdering(false); }
                       }}
-                      style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', background: ordering ? '#93c5fd' : '#2563eb', color: '#fff', padding: '0.75rem 1rem', borderRadius: '0.75rem', fontWeight: 600, fontSize: '0.9rem', border: 'none', cursor: ordering ? 'not-allowed' : 'pointer' }}>
+                      style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', background: ordering ? '#f98f00' : '#f98f00', color: '#fff', padding: '0.75rem 1rem', borderRadius: '0.75rem', fontWeight: 600, fontSize: '0.9rem', border: 'none', cursor: ordering ? 'not-allowed' : 'pointer' }}>
                       <ShoppingCart size={18} />
                       {ordering ? 'Placing...' : `Buy Now · ₹${(product.price * qty).toLocaleString()}`}
                     </button>
@@ -242,7 +242,7 @@ export default function ProductModal({ product, onClose }: Props) {
                       Sign in to Add
                     </button>
                     <button onClick={() => { onClose(); navigate('/login', { state: { from: '/products' } }); }}
-                      style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', background: '#2563eb', color: '#fff', padding: '0.75rem 1rem', borderRadius: '0.75rem', fontWeight: 600, fontSize: '0.9rem', border: 'none', cursor: 'pointer' }}>
+                      style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', background: '#f98f00', color: '#fff', padding: '0.75rem 1rem', borderRadius: '0.75rem', fontWeight: 600, fontSize: '0.9rem', border: 'none', cursor: 'pointer' }}>
                       <ShoppingCart size={18} />
                       Sign in to Buy
                     </button>

@@ -58,10 +58,9 @@ export function AuthInput({
             transition-all duration-300
             focus:outline-none focus:ring-4
             disabled:opacity-50 disabled:cursor-not-allowed
-            ${
-              error
-                ? 'border-red-300 focus:border-red-500 focus:ring-red-500/10'
-                : 'border-gray-200 focus:border-blue-500 focus:ring-blue-500/10'
+            ${error
+              ? 'border-red-300 focus:border-red-500 focus:ring-red-500/10'
+              : 'border-gray-200 focus:border-[#f78e00] focus:ring-[#f78e00]/10'
             }
             ${showPasswordToggle ? 'pr-10' : ''}
           `}
@@ -74,17 +73,11 @@ export function AuthInput({
             aria-label={showPassword ? 'Hide password' : 'Show password'}
             disabled={disabled}
           >
-            {showPassword ? (
-              <EyeOff className="w-5 h-5" />
-            ) : (
-              <Eye className="w-5 h-5" />
-            )}
+            {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
           </button>
         )}
       </div>
-      {error && (
-        <p className="mt-1.5 text-xs text-red-600">{error}</p>
-      )}
+      {error && <p className="mt-1.5 text-xs text-red-600">{error}</p>}
     </div>
   );
 }

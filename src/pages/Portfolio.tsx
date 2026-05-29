@@ -69,7 +69,7 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
           />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.5), transparent)' }} />
           <div style={{ position: 'absolute', bottom: '1rem', left: '1.5rem' }}>
-            <span style={{ background: '#2563eb', color: '#fff', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.875rem' }}>
+            <span style={{ background: '#f98f00', color: '#fff', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.875rem' }}>
               {project.category}
             </span>
           </div>
@@ -98,14 +98,14 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
           {/* Meta */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', background: '#f9fafb', borderRadius: '0.75rem', padding: '0.75rem' }}>
-              <User size={20} color="#2563eb" />
+              <User size={20} color="#f98f00" />
               <div>
                 <p style={{ fontSize: '0.7rem', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Client</p>
                 <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#1f2937' }}>{project.client || '—'}</p>
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', background: '#f9fafb', borderRadius: '0.75rem', padding: '0.75rem' }}>
-              <Clock size={20} color="#2563eb" />
+              <Clock size={20} color="#f98f00" />
               <div>
                 <p style={{ fontSize: '0.7rem', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Duration</p>
                 <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#1f2937' }}>{project.duration || '—'}</p>
@@ -127,14 +127,14 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
           {project.materials?.length > 0 && (
             <div style={{ marginBottom: '1.25rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                <Layers size={16} color="#2563eb" />
+                <Layers size={16} color="#f98f00" />
                 <p style={{ fontSize: '0.75rem', fontWeight: 600, color: '#374151', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                   Materials Used
                 </p>
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                 {project.materials.map((mat) => (
-                  <span key={mat} style={{ padding: '0.25rem 0.75rem', background: '#eff6ff', color: '#1d4ed8', borderRadius: '9999px', fontSize: '0.875rem', border: '1px solid #bfdbfe' }}>
+                  <span key={mat} className="inline-block px-3 py-1 bg-[#fff8f0] text-[#e07e00] rounded-full text-sm border border-[#fff3e0]">
                     {mat}
                   </span>
                 ))}
@@ -195,10 +195,10 @@ export function Portfolio() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-600 to-orange-500 py-20">
+      <section className="bg-gradient-to-br from-[#f78e00] to-orange-500 py-20">
         <div className="container01 mx-auto px-4 text-center">
           <h1 className="text-5xl text-white mb-6">Our Portfolio</h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+          <p className="text-xl text-[#fff3e0] max-w-3xl mx-auto">
             Explore our diverse portfolio of successful projects across various industries and applications.
           </p>
         </div>
@@ -218,7 +218,7 @@ export function Portfolio() {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-6 py-2 rounded-lg transition-colors ${
                   selectedCategory === category
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-[#f78e00] text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -261,12 +261,12 @@ export function Portfolio() {
                     />
                   </div>
                   <div className="p-6">
-                    <div className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm mb-3">
+                    <div className="inline-block px-3 py-1 bg-[#fff3e0] text-[#e07e00] rounded-full text-sm mb-3">
                       {project.category}
                     </div>
                     <h3 className="text-xl text-gray-900 mb-2">{project.title}</h3>
                     <p className="text-gray-600 mb-4">{project.description}</p>
-                    <span className="text-blue-600 text-sm font-medium group-hover:underline">
+                    <span className="text-[#f78e00] text-sm font-medium group-hover:underline">
                       View Details →
                     </span>
                   </div>
@@ -288,19 +288,19 @@ export function Portfolio() {
         <div className="container01 mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-4xl text-blue-600 mb-2">500+</div>
+              <div className="text-4xl text-[#f78e00] mb-2">500+</div>
               <div className="text-gray-600">Projects Completed</div>
             </div>
             <div>
-              <div className="text-4xl text-blue-600 mb-2">200+</div>
+              <div className="text-4xl text-[#f78e00] mb-2">200+</div>
               <div className="text-gray-600">Happy Clients</div>
             </div>
             <div>
-              <div className="text-4xl text-blue-600 mb-2">50+</div>
+              <div className="text-4xl text-[#f78e00] mb-2">50+</div>
               <div className="text-gray-600">Industries Served</div>
             </div>
             <div>
-              <div className="text-4xl text-blue-600 mb-2">98%</div>
+              <div className="text-4xl text-[#f78e00] mb-2">98%</div>
               <div className="text-gray-600">Satisfaction Rate</div>
             </div>
           </div>

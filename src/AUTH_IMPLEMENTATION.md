@@ -259,7 +259,7 @@ interface AuthButtonProps {
 ## 🎨 Styling System
 
 ### Colors
-- **Primary Blue**: `#2563eb` (600), `#1d4ed8` (700), `#1e3a8a` (800)
+- **Primary Color (was Blue)**: `#f98f00` (primary), fallback/orange shades used for blue palette
 - **Gray**: Various shades for text, borders, backgrounds
 - **Success Green**: `#22c55e` (for validation, success states)
 - **Error Red**: `#ef4444` (for error alerts)

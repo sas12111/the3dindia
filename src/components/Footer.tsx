@@ -16,19 +16,19 @@ export function Footer() {
               Leading 3D printing service provider in India, delivering quality and innovation with every print.
             </p>
             <div className="flex gap-3">
-              <a href="#" className="w-9 h-9 bg-gray-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors">
+              <a href="#" className="w-9 h-9 bg-gray-800 hover:bg-[#f78e00] rounded-lg flex items-center justify-center transition-colors">
                 <Facebook className="w-4 h-4" />
               </a>
-              <a href="#" className="w-9 h-9 bg-gray-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors">
+              <a href="#" className="w-9 h-9 bg-gray-800 hover:bg-[#f78e00] rounded-lg flex items-center justify-center transition-colors">
                 <Twitter className="w-4 h-4" />
               </a>
-              <a href="#" className="w-9 h-9 bg-gray-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors">
+              <a href="#" className="w-9 h-9 bg-gray-800 hover:bg-[#f78e00] rounded-lg flex items-center justify-center transition-colors">
                 <Instagram className="w-4 h-4" />
               </a>
-              <a href="#" className="w-9 h-9 bg-gray-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors">
+              <a href="#" className="w-9 h-9 bg-gray-800 hover:bg-[#f78e00] rounded-lg flex items-center justify-center transition-colors">
                 <Linkedin className="w-4 h-4" />
               </a>
-              <a href="#" className="w-9 h-9 bg-gray-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors">
+              <a href="#" className="w-9 h-9 bg-gray-800 hover:bg-[#f78e00] rounded-lg flex items-center justify-center transition-colors">
                 <Youtube className="w-4 h-4" />
               </a>
             </div>
@@ -38,11 +38,11 @@ export function Footer() {
           <div>
             <h3 className="text-white mb-4">Services</h3>
             <ul className="space-y-2">
-              <li><Link to="/services" className="hover:text-blue-400 transition-colors">3D Printing</Link></li>
-              <li><Link to="/services" className="hover:text-blue-400 transition-colors">CAD Modeling</Link></li>
-              <li><Link to="/services" className="hover:text-blue-400 transition-colors">Prototyping</Link></li>
-              <li><Link to="/services" className="hover:text-blue-400 transition-colors">Custom Gifts</Link></li>
-              <li><Link to="/services" className="hover:text-blue-400 transition-colors">Bulk Manufacturing</Link></li>
+              <li><Link to="/services" className="hover:text-[#f9a030] transition-colors">3D Printing</Link></li>
+              <li><Link to="/services" className="hover:text-[#f9a030] transition-colors">CAD Modeling</Link></li>
+              <li><Link to="/services" className="hover:text-[#f9a030] transition-colors">Prototyping</Link></li>
+              <li><Link to="/services" className="hover:text-[#f9a030] transition-colors">Custom Gifts</Link></li>
+              <li><Link to="/services" className="hover:text-[#f9a030] transition-colors">Bulk Manufacturing</Link></li>
             </ul>
           </div>
 
@@ -50,10 +50,10 @@ export function Footer() {
           <div>
             <h3 className="text-white mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link to="/about" className="hover:text-blue-400 transition-colors">About Us</Link></li>
-              <li><Link to="/portfolio" className="hover:text-blue-400 transition-colors">Portfolio</Link></li>
-              <li><Link to="/pricing" className="hover:text-blue-400 transition-colors">Pricing</Link></li>
-              <li><Link to="/contact" className="hover:text-blue-400 transition-colors">Contact</Link></li>
+              <li><Link to="/about" className="hover:text-[#f9a030] transition-colors">About Us</Link></li>
+              <li><Link to="/portfolio" className="hover:text-[#f9a030] transition-colors">Portfolio</Link></li>
+              <li><Link to="/pricing" className="hover:text-[#f9a030] transition-colors">Pricing</Link></li>
+              <li><Link to="/contact" className="hover:text-[#f9a030] transition-colors">Contact</Link></li>
             </ul>
           </div>
 
@@ -67,9 +67,9 @@ export function Footer() {
               <input
                 type="email"
                 placeholder="Your email"
-                className="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none text-white"
+                className="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#f78e00] focus:border-transparent outline-none text-white"
               />
-              <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors">
+              <button className="px-4 py-2 bg-[#f78e00] hover:bg-[#e07e00] rounded-lg transition-colors">
                 Subscribe
               </button>
             </div>
@@ -82,13 +82,13 @@ export function Footer() {
               © 2025 The3DIndia. All rights reserved.
             </div>
             <div className="flex gap-6 text-sm">
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+              <a href="#" className="text-gray-400 hover:text-[#f9a030] transition-colors">
                 Privacy Policy
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+              <a href="#" className="text-gray-400 hover:text-[#f9a030] transition-colors">
                 Terms of Service
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+              <a href="#" className="text-gray-400 hover:text-[#f9a030] transition-colors">
                 Cookie Policy
               </a>
             </div>

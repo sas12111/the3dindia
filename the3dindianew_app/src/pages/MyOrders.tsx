@@ -25,7 +25,7 @@ interface Order {
 
 const STATUS_CFG: Record<string, { color: string; bg: string; border: string; dot: string }> = {
   Pending:         { color: '#92400e', bg: '#fffbeb', border: '#fde68a', dot: '#f59e0b' },
-  Confirmed:       { color: '#1e40af', bg: '#eff6ff', border: '#bfdbfe', dot: '#3b82f6' },
+  Confirmed:       { color: '#f98f00', bg: '#fff7ed', border: '#ffedd5', dot: '#f98f00' },
   'In Production': { color: '#5b21b6', bg: '#f5f3ff', border: '#ddd6fe', dot: '#8b5cf6' },
   Shipped:         { color: '#0e7490', bg: '#ecfeff', border: '#a5f3fc', dot: '#06b6d4' },
   Delivered:       { color: '#14532d', bg: '#f0fdf4', border: '#bbf7d0', dot: '#22c55e' },
@@ -137,7 +137,7 @@ export function MyOrders() {
 
       {/* ── Top banner ── */}
       <div className="relative overflow-hidden"
-        style={{ background: 'linear-gradient(135deg, #1d4ed8 0%, #2563eb 60%, #ea580c 100%)' }}>
+        style={{ background: 'linear-gradient(135deg, #f98f00 0%, #ea580c 100%)' }}>
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <svg className="absolute inset-0 w-full h-full opacity-5" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -200,7 +200,7 @@ export function MyOrders() {
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-lg flex-shrink-0"
-                  style={{ background: 'linear-gradient(135deg, #2563eb, #ea580c)' }}>
+                  style={{ background: 'linear-gradient(135deg, #f98f00, #ea580c)' }}>
                   {user?.name?.charAt(0).toUpperCase()}
                 </div>
                 <div className="min-w-0">

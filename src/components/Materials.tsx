@@ -57,13 +57,13 @@ export function Materials() {
               className="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <material.icon className="w-6 h-6 text-blue-600" />
+                <div className="w-12 h-12 bg-[#fff3e0] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <material.icon className="w-6 h-6 text-[#f78e00]" />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-lg text-gray-900 mb-2">{material.name}</h3>
                   <p className="text-gray-600 text-sm mb-2">{material.description}</p>
-                  <div className="inline-block px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs">
+                  <div className="inline-block px-3 py-1 bg-[#fff8f0] text-[#e07e00] rounded-full text-xs">
                     {material.properties}
                   </div>
                 </div>
@@ -75,15 +75,15 @@ export function Materials() {
         <div className="bg-white rounded-xl p-8 shadow-sm">
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
-              <div className="text-3xl text-blue-600 mb-2">0.05mm</div>
+              <div className="text-3xl text-[#f78e00] mb-2">0.05mm</div>
               <div className="text-gray-600">Minimum Layer Height</div>
             </div>
             <div>
-              <div className="text-3xl text-blue-600 mb-2">±0.1mm</div>
+              <div className="text-3xl text-[#f78e00] mb-2">±0.1mm</div>
               <div className="text-gray-600">Precision Tolerance</div>
             </div>
             <div>
-              <div className="text-3xl text-blue-600 mb-2">256×256×256mm</div>
+              <div className="text-3xl text-[#f78e00] mb-2">256×256×256mm</div>
               <div className="text-gray-600">Max Build Volume</div>
             </div>
           </div>

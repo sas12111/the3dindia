@@ -69,7 +69,7 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
           />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.5), transparent)' }} />
           <div style={{ position: 'absolute', bottom: '1rem', left: '1.5rem' }}>
-            <span style={{ background: '#2563eb', color: '#fff', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.875rem' }}>
+            <span style={{ background: '#f98f00', color: '#fff', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.875rem' }}>
               {project.category}
             </span>
           </div>
@@ -97,15 +97,15 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           {/* Meta */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', background: '#f9fafb', borderRadius: '0.75rem', padding: '0.75rem' }}>
-              <User size={20} color="#2563eb" />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', background: '#f9fafb', borderRadius: '0.75rem', padding: '0.75rem' }}>
+              <User size={20} color="#f98f00" />
               <div>
                 <p style={{ fontSize: '0.7rem', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Client</p>
                 <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#1f2937' }}>{project.client || '—'}</p>
               </div>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', background: '#f9fafb', borderRadius: '0.75rem', padding: '0.75rem' }}>
-              <Clock size={20} color="#2563eb" />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', background: '#f9fafb', borderRadius: '0.75rem', padding: '0.75rem' }}>
+              <Clock size={20} color="#f98f00" />
               <div>
                 <p style={{ fontSize: '0.7rem', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Duration</p>
                 <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#1f2937' }}>{project.duration || '—'}</p>
@@ -127,14 +127,14 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
           {project.materials?.length > 0 && (
             <div style={{ marginBottom: '1.25rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                <Layers size={16} color="#2563eb" />
+                <Layers size={16} color="#f98f00" />
                 <p style={{ fontSize: '0.75rem', fontWeight: 600, color: '#374151', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                   Materials Used
                 </p>
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                 {project.materials.map((mat) => (
-                  <span key={mat} style={{ padding: '0.25rem 0.75rem', background: '#eff6ff', color: '#1d4ed8', borderRadius: '9999px', fontSize: '0.875rem', border: '1px solid #bfdbfe' }}>
+                  <span key={mat} style={{ padding: '0.25rem 0.75rem', background: '#fff7ed', color: '#f98f00', borderRadius: '9999px', fontSize: '0.875rem', border: '1px solid #ffedd5' }}>
                     {mat}
                   </span>
                 ))}
@@ -153,7 +153,7 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                 {project.tags.map((tag) => (
-                  <span key={tag} style={{ padding: '0.25rem 0.75rem', background: '#fff7ed', color: '#ea580c', borderRadius: '9999px', fontSize: '0.875rem', border: '1px solid #fed7aa' }}>
+                  <span key={tag} style={{ padding: '0.25rem 0.75rem', background: '#fff7ed', color: '#f98f00', borderRadius: '9999px', fontSize: '0.875rem', border: '1px solid #ffedd5' }}>
                     #{tag}
                   </span>
                 ))}

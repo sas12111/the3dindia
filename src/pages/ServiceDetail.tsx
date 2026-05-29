@@ -350,7 +350,7 @@ export function ServiceDetail() {
           <p className="text-gray-600 mb-8">The requested service could not be found.</p>
           <Link
             to="/services"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#f78e00] text-white rounded-lg hover:bg-[#e07e00] transition-colors"
           >
             Back to Services
             <ArrowRight className="w-5 h-5" />
@@ -364,7 +364,7 @@ export function ServiceDetail() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-600 to-orange-500 py-20">
+      <section className="bg-gradient-to-br from-[#f78e00] to-orange-500 py-20">
         <div className="container01 mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -372,18 +372,18 @@ export function ServiceDetail() {
                 <IconComponent className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-5xl text-white mb-6">{service.title}</h1>
-              <p className="text-xl text-blue-100 mb-8">{service.subtitle}</p>
+              <p className="text-xl text-[#fff3e0] mb-8">{service.subtitle}</p>
               <div className="flex flex-wrap gap-4">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors font-semibold"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#f78e00] rounded-lg hover:bg-gray-100 transition-colors font-semibold"
                 >
                   Get Quote
                   <ArrowRight className="w-5 h-5" />
                 </Link>
                 <a
                   href="tel:+917905620142"
-                  className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white text-white rounded-lg hover:bg-white hover:text-blue-600 transition-colors"
+                  className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white text-white rounded-lg hover:bg-white hover:text-[#f78e00] transition-colors"
                 >
                   <Phone className="w-5 h-5" />
                   Call Now
@@ -413,8 +413,8 @@ export function ServiceDetail() {
             {/* Key Stats */}
             <div className="grid md:grid-cols-4 gap-8 mb-16">
               <div className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <Clock className="w-8 h-8 text-blue-600" />
+                <div className="w-16 h-16 bg-[#fff3e0] rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <Clock className="w-8 h-8 text-[#f78e00]" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">24-72h</h3>
                 <p className="text-gray-600">Turnaround Time</p>
@@ -457,7 +457,7 @@ export function ServiceDetail() {
                   <div className="space-y-2">
                     {tech.materials.map((material, idx) => (
                       <div key={idx} className="flex items-center gap-2">
-                        <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                        <CheckCircle className="w-5 h-5 text-[#f78e00] flex-shrink-0" />
                         <span className="text-gray-700">{material}</span>
                       </div>
                     ))}
@@ -475,14 +475,14 @@ export function ServiceDetail() {
             <div className="grid lg:grid-cols-2 gap-16">
               {/* Features */}
               <div>
-                <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
-                  <Zap className="w-8 h-8 text-blue-600" />
+                <div className="w-16 h-16 bg-[#fff3e0] rounded-lg flex items-center justify-center mb-6">
+                  <Zap className="w-8 h-8 text-[#f78e00]" />
                 </div>
                 <h2 className="text-3xl text-gray-900 mb-8">Key Features</h2>
                 <div className="space-y-4">
                   {service.features.map((feature, index) => (
                     <div key={index} className="flex items-center gap-3">
-                      <CheckCircle className="w-6 h-6 text-blue-600 flex-shrink-0" />
+                      <CheckCircle className="w-6 h-6 text-[#f78e00] flex-shrink-0" />
                       <span className="text-lg text-gray-700">{feature}</span>
                     </div>
                   ))}
@@ -516,7 +516,7 @@ export function ServiceDetail() {
             <div className="space-y-8">
               {service.process.map((step, index) => (
                 <div key={index} className="flex items-start gap-6">
-                  <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">
+                  <div className="w-12 h-12 bg-[#f78e00] text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">
                     {index + 1}
                   </div>
                   <div className="flex-1">
@@ -533,12 +533,12 @@ export function ServiceDetail() {
         <div className="container01 mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl text-gray-900 mb-8">Pricing</h2>
-            <div className="bg-gradient-to-br from-blue-600 to-orange-500 rounded-2xl p-8 text-white mb-8">
+            <div className="bg-gradient-to-br from-[#f78e00] to-orange-500 rounded-2xl p-8 text-white mb-8">
               <div className="text-5xl font-bold mb-2">
                 Starting from {service.pricing.starting}
               </div>
-              <div className="text-xl text-blue-100 mb-6">{service.pricing.unit}</div>
-              <p className="text-blue-100 mb-6">
+              <div className="text-xl text-[#fff3e0] mb-6">{service.pricing.unit}</div>
+              <p className="text-[#fff3e0] mb-6">
                 Final pricing depends on various factors:
               </p>
               <div className="grid md:grid-cols-2 gap-4">
@@ -556,14 +556,14 @@ export function ServiceDetail() {
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-[#f78e00] text-white rounded-lg hover:bg-[#e07e00] transition-colors"
               >
                 Get Custom Quote
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <a
                 href="mailto:info@the3dindia.com"
-                className="inline-flex items-center gap-2 px-8 py-4 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 px-8 py-4 border-2 border-[#f78e00] text-[#f78e00] rounded-lg hover:bg-[#f78e00] hover:text-white transition-colors"
               >
                 <Mail className="w-5 h-5" />
                 Email Us
@@ -573,23 +573,23 @@ export function ServiceDetail() {
         </div>
       </section>
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-600 to-orange-500">
+      <section className="py-20 bg-gradient-to-br from-[#f78e00] to-orange-500">
         <div className="container01 mx-auto px-4 text-center">
           <h2 className="text-4xl text-white mb-6">Ready to Get Started?</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-[#fff3e0] mb-8 max-w-2xl mx-auto">
             Let's discuss your project requirements and bring your ideas to life with our {service.title.toLowerCase()}.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors font-semibold"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#f78e00] rounded-lg hover:bg-gray-100 transition-colors font-semibold"
             >
               Start Your Project
               <ArrowRight className="w-5 h-5" />
             </Link>
             <Link
               to="/services"
-              className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white text-white rounded-lg hover:bg-white hover:text-blue-600 transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white text-white rounded-lg hover:bg-white hover:text-[#f78e00] transition-colors"
             >
               View All Services
             </Link>

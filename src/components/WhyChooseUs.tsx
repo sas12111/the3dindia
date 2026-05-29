@@ -50,7 +50,7 @@ export function WhyChooseUs() {
               key={index}
               className="text-center p-6 rounded-xl hover:bg-gray-50 transition-colors"
             >
-              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-[#f78e00] rounded-full flex items-center justify-center mx-auto mb-4">
                 <feature.icon className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl text-gray-900 mb-2">{feature.title}</h3>

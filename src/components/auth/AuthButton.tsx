@@ -35,12 +35,17 @@ export function AuthButton({
 
   const variantClasses = {
     primary:
-      'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 focus:ring-blue-500/30',
+      'text-white font-semibold shadow-lg hover:shadow-xl focus:ring-[#f78e00]/30',
     secondary:
-      'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 font-medium focus:ring-blue-500/20',
+      'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 font-medium focus:ring-[#f78e00]/20',
     social:
-      'bg-white border-2 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 font-medium focus:ring-blue-500/20 gap-2.5 justify-center',
+      'bg-white border-2 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 font-medium focus:ring-[#f78e00]/20 gap-2.5 justify-center',
   };
+
+  const primaryStyle =
+    variant === 'primary'
+      ? { background: isDisabled ? '#f78e00' : 'linear-gradient(135deg, #f78e00 0%, #e07e00 100%)' }
+      : {};
 
   const baseClasses = `
     rounded-lg transition-all duration-300
@@ -59,21 +64,13 @@ export function AuthButton({
       onClick={onClick}
       disabled={isDisabled}
       className={baseClasses}
+      style={primaryStyle}
     >
       {icon && !loading && <span className="flex-shrink-0">{icon}</span>}
       {loading && (
-        <svg
-          className="w-4 h-4 animate-spin mr-2"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
-          />
+        <svg className="w-4 h-4 animate-spin mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
         </svg>
       )}
       {children}

@@ -175,7 +175,7 @@ export function Checkout() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <Loader2 className="w-10 h-10 text-blue-600 animate-spin" />
+        <Loader2 className="w-10 h-10 text-[#f78e00] animate-spin" />
       </div>
     );
   }
@@ -188,7 +188,7 @@ export function Checkout() {
             <ArrowLeft size={32} className="text-gray-400" />
           </div>
           <h2 className="text-xl font-semibold text-gray-900 mb-2">Your cart is empty</h2>
-          <Link to="/products" className="text-blue-600 hover:text-blue-700 font-medium">Go back to shopping</Link>
+          <Link to="/products" className="text-[#f78e00] hover:text-[#e07e00] font-medium">Go back to shopping</Link>
         </div>
       </div>
     );
@@ -214,11 +214,11 @@ export function Checkout() {
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Total Paid</span>
-              <span className="font-bold text-blue-600">₹{total.toLocaleString()}</span>
+              <span className="font-bold text-[#f78e00]">₹{total.toLocaleString()}</span>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <Link to="/my-orders" className="py-2.5 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">View Orders</Link>
+            <Link to="/my-orders" className="py-2.5 bg-[#f78e00] text-white font-semibold rounded-lg hover:bg-[#e07e00] transition-colors">View Orders</Link>
             <Link to="/products" className="py-2.5 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors">Continue Shopping</Link>
           </div>
         </div>
@@ -242,9 +242,9 @@ export function Checkout() {
             <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                  <MapPin size={20} className="text-blue-600" /> Shipping Address
+                  <MapPin size={20} className="text-[#f78e00]" /> Shipping Address
                 </h2>
-                <button onClick={openAddAddressForm} className="text-sm text-blue-600 hover:text-blue-700 font-medium">+ Add New Address</button>
+                <button onClick={openAddAddressForm} className="text-sm text-[#f78e00] hover:text-[#e07e00] font-medium">+ Add New Address</button>
               </div>
               {showAddAddressForm && (
                 <form onSubmit={handleSaveAddress} className="mb-4 p-4 bg-gray-50 border border-gray-200 rounded-xl space-y-3">
@@ -256,7 +256,7 @@ export function Checkout() {
                       value={addressForm.name}
                       onChange={handleAddressInputChange}
                       placeholder="Full Name"
-                      className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f78e00]"
                     />
                     <input
                       name="mobile"
@@ -265,7 +265,7 @@ export function Checkout() {
                       value={addressForm.mobile}
                       onChange={handleAddressInputChange}
                       placeholder="Mobile Number"
-                      className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f78e00]"
                     />
                   </div>
                   <textarea
@@ -274,7 +274,7 @@ export function Checkout() {
                     onChange={handleAddressInputChange}
                     rows={2}
                     placeholder="House no, street, area"
-                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f78e00]"
                   />
                   <div className="grid sm:grid-cols-3 gap-3">
                     <input
@@ -282,14 +282,14 @@ export function Checkout() {
                       value={addressForm.city}
                       onChange={handleAddressInputChange}
                       placeholder="City"
-                      className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f78e00]"
                     />
                     <input
                       name="state"
                       value={addressForm.state}
                       onChange={handleAddressInputChange}
                       placeholder="State"
-                      className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f78e00]"
                     />
                     <input
                       name="pincode"
@@ -298,7 +298,7 @@ export function Checkout() {
                       value={addressForm.pincode}
                       onChange={handleAddressInputChange}
                       placeholder="Pincode"
-                      className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f78e00]"
                     />
                   </div>
                   <label className="inline-flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
@@ -307,12 +307,12 @@ export function Checkout() {
                       name="isDefault"
                       checked={addressForm.isDefault}
                       onChange={handleAddressInputChange}
-                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      className="rounded border-gray-300 text-[#f78e00] focus:ring-[#f78e00]"
                     />
                     Set as default address
                   </label>
                   <div className="flex gap-2">
-                    <button type="submit" className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">Save Address</button>
+                    <button type="submit" className="px-4 py-2 bg-[#f78e00] text-white text-sm font-medium rounded-lg hover:bg-[#e07e00] transition-colors">Save Address</button>
                     <button type="button" onClick={closeAddAddressForm} className="px-4 py-2 bg-white border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors">Cancel</button>
                   </div>
                 </form>
@@ -321,12 +321,12 @@ export function Checkout() {
                 <div className="text-center py-8 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
                   <MapPin size={32} className="text-gray-300 mx-auto mb-3" />
                   <p className="text-gray-600 mb-4">No saved addresses found</p>
-                  <button onClick={openAddAddressForm} className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">Add New Address</button>
+                  <button onClick={openAddAddressForm} className="px-4 py-2 bg-[#f78e00] text-white text-sm font-medium rounded-lg hover:bg-[#e07e00] transition-colors">Add New Address</button>
                 </div>
               ) : (
                 <div className="space-y-3">
                   {addresses.map((addr) => (
-                    <div key={addr.id} onClick={() => setSelectedAddress(addr.id)} className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${selectedAddress === addr.id ? 'border-blue-600 bg-blue-50/50' : 'border-gray-200 hover:border-gray-300'}`}>
+                    <div key={addr.id} onClick={() => setSelectedAddress(addr.id)} className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${selectedAddress === addr.id ? 'border-[#f78e00] bg-[#fff8f0]/50' : 'border-gray-200 hover:border-gray-300'}`}>
                       <div className="flex items-start justify-between">
                         <div>
                           <div className="flex items-center gap-2 mb-1">
@@ -336,7 +336,7 @@ export function Checkout() {
                           <p className="text-sm text-gray-600 mb-1">{addr.mobile}</p>
                           <p className="text-sm text-gray-600">{addr.address}, {addr.city}, {addr.state} - {addr.pincode}</p>
                         </div>
-                        {selectedAddress === addr.id && <CheckCircle size={20} className="text-blue-600" />}
+                        {selectedAddress === addr.id && <CheckCircle size={20} className="text-[#f78e00]" />}
                       </div>
                     </div>
                   ))}
@@ -346,7 +346,7 @@ export function Checkout() {
 
             <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
               <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <CreditCard size={20} className="text-blue-600" /> Payment Method
+                <CreditCard size={20} className="text-[#f78e00]" /> Payment Method
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {[
@@ -355,9 +355,9 @@ export function Checkout() {
                   { id: 'netbanking', label: 'Net Banking', icon: <Banknote size={20} /> },
                   { id: 'cod', label: 'Cash on Delivery', icon: <div className="w-5 h-5 rounded bg-green-500 flex items-center justify-center text-[8px] text-white font-bold">COD</div> },
                 ].map((method) => (
-                  <button key={method.id} onClick={() => setPaymentMethod(method.id as any)} className={`flex flex-col items-center justify-center p-3 rounded-xl border-2 transition-all ${paymentMethod === method.id ? 'border-blue-600 bg-blue-50/50' : 'border-gray-200 hover:border-gray-300'}`}>
-                    <div className={`mb-2 ${paymentMethod === method.id ? 'text-blue-600' : 'text-gray-400'}`}>{method.icon}</div>
-                    <span className={`text-xs font-medium ${paymentMethod === method.id ? 'text-blue-700' : 'text-gray-700'}`}>{method.label}</span>
+                  <button key={method.id} onClick={() => setPaymentMethod(method.id as any)} className={`flex flex-col items-center justify-center p-3 rounded-xl border-2 transition-all ${paymentMethod === method.id ? 'border-[#f78e00] bg-[#fff8f0]/50' : 'border-gray-200 hover:border-gray-300'}`}>
+                    <div className={`mb-2 ${paymentMethod === method.id ? 'text-[#f78e00]' : 'text-gray-400'}`}>{method.icon}</div>
+                    <span className={`text-xs font-medium ${paymentMethod === method.id ? 'text-[#e07e00]' : 'text-gray-700'}`}>{method.label}</span>
                   </button>
                 ))}
               </div>
@@ -410,10 +410,10 @@ export function Checkout() {
               <div className="border-t border-gray-200 pt-4 mt-4">
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-bold text-gray-900">Total</span>
-                  <span className="text-2xl font-bold text-blue-600">₹{total.toLocaleString()}</span>
+                  <span className="text-2xl font-bold text-[#f78e00]">₹{total.toLocaleString()}</span>
                 </div>
               </div>
-              <button onClick={handlePlaceOrder} disabled={saving} className="w-full mt-6 py-2.5 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20 hover:shadow-xl hover:shadow-blue-600/30 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+              <button onClick={handlePlaceOrder} disabled={saving} className="w-full mt-6 py-2.5 bg-[#f78e00] text-white font-semibold rounded-lg hover:bg-[#e07e00] transition-colors shadow-lg shadow-[#f78e00]/20 hover:shadow-xl hover:shadow-[#f78e00]/30 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2">
                 {saving ? (<><Loader2 size={16} className="animate-spin" /> Processing...</>) : (<><Shield size={16} /> Place Order</>)}
               </button>
               <div className="mt-4 flex items-center justify-center gap-2 text-xs text-gray-500">

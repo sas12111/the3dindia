@@ -70,7 +70,7 @@ export function Navigation() {
           <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link key={link.path} to={link.path}
-                className={`text-sm transition-colors ${isActive(link.path) ? 'text-blue-600 font-semibold' : 'text-gray-700 hover:text-blue-600'}`}>
+                className={`text-sm transition-colors ${isActive(link.path) ? 'text-[#f78e00] font-semibold' : 'text-gray-700 hover:text-[#f78e00]'}`}>
                 {link.label}
               </Link>
             ))}
@@ -82,7 +82,7 @@ export function Navigation() {
               <div className="relative" ref={menuRef}>
                 <button onClick={() => setUserMenu(!userMenu)}
                   className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors text-sm font-medium text-gray-700">
-                  <div className="w-7 h-7 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
+                  <div className="w-7 h-7 bg-[#f78e00] rounded-full flex items-center justify-center text-white text-xs font-bold">
                     {user.name.charAt(0).toUpperCase()}
                   </div>
                   <span className="max-w-[100px] truncate">{user.name}</span>
@@ -97,7 +97,7 @@ export function Navigation() {
                     </div>
                     <Link to="/my-orders" onClick={() => setUserMenu(false)}
                       className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
-                      <ShoppingBag size={15} className="text-blue-600" /> My Orders
+                      <ShoppingBag size={15} className="text-[#f78e00]" /> My Orders
                     </Link>
                     <button onClick={handleLogout}
                       className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors">
@@ -108,18 +108,18 @@ export function Navigation() {
               </div>
             ) : (
               <>
-                <Link to="/login" className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
+                <Link to="/login" className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-[#f78e00] transition-colors">
                   Sign In
                 </Link>
-                <Link to="/register" className="px-5 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+                <Link to="/register" className="px-5 py-2 bg-[#f78e00] text-white text-sm font-semibold rounded-lg hover:bg-[#e07e00] transition-colors">
                   Get Started
                 </Link>
               </>
             )}
-            <Link to="/cart" className="relative px-3 py-2 text-gray-700 hover:text-blue-600 transition-colors">
+            <Link to="/cart" className="relative px-3 py-2 text-gray-700 hover:text-[#f78e00] transition-colors">
               <ShoppingBag size={18} />
               {cartCount > 0 && (
-                <span className="absolute top-0 right-0 w-5 h-5 bg-blue-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white">
+                <span className="absolute top-0 right-0 w-5 h-5 bg-[#f78e00] text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white">
                   {cartCount}
                 </span>
               )}
@@ -127,7 +127,7 @@ export function Navigation() {
           </div>
 
           {/* Mobile menu button */}
-          <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden p-2 text-gray-700 hover:text-blue-600">
+          <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden p-2 text-gray-700 hover:text-[#f78e00]">
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
@@ -138,7 +138,7 @@ export function Navigation() {
             <div className="flex flex-col gap-3">
               {navLinks.map((link) => (
                 <Link key={link.path} to={link.path} onClick={() => setIsOpen(false)}
-                  className={`text-sm transition-colors ${isActive(link.path) ? 'text-blue-600 font-semibold' : 'text-gray-700 hover:text-blue-600'}`}>
+                  className={`text-sm transition-colors ${isActive(link.path) ? 'text-[#f78e00] font-semibold' : 'text-gray-700 hover:text-[#f78e00]'}`}>
                   {link.label}
                 </Link>
               ))}
@@ -146,7 +146,7 @@ export function Navigation() {
                 {user ? (
                   <>
                     <div className="flex items-center gap-2 px-1 py-1">
-                      <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                      <div className="w-8 h-8 bg-[#f78e00] rounded-full flex items-center justify-center text-white text-sm font-bold">
                         {user.name.charAt(0).toUpperCase()}
                       </div>
                       <div>
@@ -155,7 +155,7 @@ export function Navigation() {
                       </div>
                     </div>
                     <Link to="/my-orders" onClick={() => setIsOpen(false)}
-                      className="flex items-center gap-2 text-sm text-gray-700 hover:text-blue-600 px-1">
+                      className="flex items-center gap-2 text-sm text-gray-700 hover:text-[#f78e00] px-1">
                       <ShoppingBag size={15} /> My Orders
                     </Link>
                     <button onClick={() => { handleLogout(); setIsOpen(false); }}
@@ -166,18 +166,18 @@ export function Navigation() {
                 ) : (
                   <>
                     <Link to="/login" onClick={() => setIsOpen(false)}
-                      className="text-sm text-gray-700 hover:text-blue-600 px-1">Sign In</Link>
+                      className="text-sm text-gray-700 hover:text-[#f78e00] px-1">Sign In</Link>
                     <Link to="/register" onClick={() => setIsOpen(false)}
-                      className="px-5 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 text-center">
+                      className="px-5 py-2 bg-[#f78e00] text-white text-sm font-semibold rounded-lg hover:bg-[#e07e00] text-center">
                       Get Started
                     </Link>
                     <Link to="/cart" onClick={() => setIsOpen(false)}
-                      className="flex items-center gap-2 text-sm text-gray-700 hover:text-blue-600 px-1">
+                      className="flex items-center gap-2 text-sm text-gray-700 hover:text-[#f78e00] px-1">
                       <ShoppingBag size={14} /> Cart
-                      {cartCount > 0 && <span className="bg-blue-600 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center">{cartCount}</span>}
+                      {cartCount > 0 && <span className="bg-[#f78e00] text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center">{cartCount}</span>}
                     </Link>
                     <Link to="/forgot-password" onClick={() => setIsOpen(false)}
-                      className="text-sm text-gray-700 hover:text-blue-600 px-1">Forgot Password?</Link>
+                      className="text-sm text-gray-700 hover:text-[#f78e00] px-1">Forgot Password?</Link>
                   </>
                 )}
               </div>

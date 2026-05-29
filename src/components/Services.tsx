@@ -50,15 +50,15 @@ export function Services() {
               key={index}
               className="p-8 bg-white border border-gray-200 rounded-xl hover:shadow-xl transition-shadow duration-300 group"
             >
-              <div className="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors">
-                <service.icon className="w-7 h-7 text-blue-600 group-hover:text-white transition-colors" />
+              <div className="w-14 h-14 bg-[#fff3e0] rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#f78e00] transition-colors">
+                <service.icon className="w-7 h-7 text-[#f78e00] group-hover:text-white transition-colors" />
               </div>
               <h3 className="text-xl text-gray-900 mb-3">{service.title}</h3>
               <p className="text-gray-600 mb-4">{service.description}</p>
               <ul className="space-y-2">
                 {service.features.map((feature, idx) => (
                   <li key={idx} className="flex items-center gap-2 text-gray-700">
-                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
+                    <div className="w-1.5 h-1.5 bg-[#f78e00] rounded-full"></div>
                     {feature}
                   </li>
                 ))}

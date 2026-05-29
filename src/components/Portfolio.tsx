@@ -66,7 +66,7 @@ export function Portfolio() {
         </div>
 
         <div className="text-center">
-          <button className="px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center gap-2 group">
+          <button className="px-8 py-4 bg-[#f78e00] text-white rounded-lg hover:bg-[#e07e00] transition-colors inline-flex items-center gap-2 group">
             View Full Portfolio
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>

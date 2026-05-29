@@ -36,7 +36,7 @@ export function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
             {/* Left Visual Panel */}
             <div
               className="relative min-w-0 bg-blue-700 p-8 text-white overflow-hidden md:p-12"
-              style={{ backgroundImage: 'linear-gradient(90deg, #2563eb 0%, #1d4ed8 50%, #1e3a8a 100%)' }}
+                style={{ backgroundImage: 'linear-gradient(90deg, #f98f00 0%, #ea580c 60%, #7c2d12 100%)' }}
             >
               {/* Background Pattern */}
               <div className="absolute inset-0 opacity-10">

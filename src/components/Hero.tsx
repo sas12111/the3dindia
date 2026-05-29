@@ -3,7 +3,7 @@ import logoImage from 'figma:asset/b44ded5f4a40390ef42c1e843eb643a4df65afa1.png'
 
 export function Hero() {
   return (
-    <div className="relative bg-gradient-to-br from-cyan-50 to-blue-100 overflow-hidden">
+    <div className="relative bg-gradient-to-br from-cyan-50 to-[#fff3e0] overflow-hidden">
       {/* Navigation */}
       <nav className="container01 mx-auto px-4 py-6">
         <div className="flex items-center justify-between">
@@ -11,12 +11,12 @@ export function Hero() {
             <img src={logoImage} alt="The3DIndia Logo" className="h-12" />
           </div>
           <div className="hidden md:flex items-center gap-8">
-            <a href="#services" className="text-gray-700 hover:text-blue-600 transition-colors">Services</a>
-            <a href="#portfolio" className="text-gray-700 hover:text-blue-600 transition-colors">Portfolio</a>
-            <a href="#pricing" className="text-gray-700 hover:text-blue-600 transition-colors">Pricing</a>
-            <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors">Contact</a>
+            <a href="#services" className="text-gray-700 hover:text-[#f78e00] transition-colors">Services</a>
+            <a href="#portfolio" className="text-gray-700 hover:text-[#f78e00] transition-colors">Portfolio</a>
+            <a href="#pricing" className="text-gray-700 hover:text-[#f78e00] transition-colors">Pricing</a>
+            <a href="#contact" className="text-gray-700 hover:text-[#f78e00] transition-colors">Contact</a>
           </div>
-          <button className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          <button className="px-6 py-2 bg-[#f78e00] text-white rounded-lg hover:bg-[#e07e00] transition-colors">
             Get Started
           </button>
         </div>
@@ -27,17 +27,17 @@ export function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <h1 className="text-5xl lg:text-6xl text-gray-900 leading-tight">
-              Bring Your Ideas to Life with <span className="text-blue-600">Precision 3D Printing</span>
+              Bring Your Ideas to Life with <span className="text-[#f78e00]">Precision 3D Printing</span>
             </h1>
             <p className="text-xl text-gray-600">
               High-quality, affordable, and fast 3D printing services for prototypes, gifts, industrial parts, and more.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 group">
+              <button className="px-8 py-4 bg-[#f78e00] text-white rounded-lg hover:bg-[#e07e00] transition-colors flex items-center justify-center gap-2 group">
                 Get a Quote
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="px-8 py-4 bg-white text-blue-600 border-2 border-blue-600 rounded-lg hover:bg-blue-50 transition-colors flex items-center justify-center gap-2">
+              <button className="px-8 py-4 bg-white text-[#f78e00] border-2 border-[#f78e00] rounded-lg hover:bg-[#fff8f0] transition-colors flex items-center justify-center gap-2">
                 <Upload className="w-5 h-5" />
                 Upload Your Design
               </button>
@@ -60,7 +60,7 @@ export function Hero() {
             </div>
           </div>
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-orange-500/20 rounded-2xl transform rotate-3"></div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#f78e00]/20 to-orange-500/20 rounded-2xl transform rotate-3"></div>
             <img
               src="/images/3d-printer.jpg"
               alt="3D Printer in action"

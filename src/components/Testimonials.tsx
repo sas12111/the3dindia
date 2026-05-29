@@ -44,7 +44,7 @@ export function Testimonials() {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-blue-50 to-cyan-50">
+    <section className="py-20 bg-gradient-to-br from-[#fff8f0] to-cyan-50">
       <div className="container01 mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl text-gray-900 mb-4">What Our Clients Say</h2>
@@ -86,15 +86,15 @@ export function Testimonials() {
             <div className="flex justify-center gap-4 mt-8">
               <button
                 onClick={prev}
-                className="w-10 h-10 bg-blue-100 hover:bg-blue-200 rounded-full flex items-center justify-center transition-colors"
+                className="w-10 h-10 bg-[#fff3e0] hover:bg-[#ffd09a] rounded-full flex items-center justify-center transition-colors"
               >
-                <ChevronLeft className="w-5 h-5 text-blue-600" />
+                <ChevronLeft className="w-5 h-5 text-[#f78e00]" />
               </button>
               <button
                 onClick={next}
-                className="w-10 h-10 bg-blue-100 hover:bg-blue-200 rounded-full flex items-center justify-center transition-colors"
+                className="w-10 h-10 bg-[#fff3e0] hover:bg-[#ffd09a] rounded-full flex items-center justify-center transition-colors"
               >
-                <ChevronRight className="w-5 h-5 text-blue-600" />
+                <ChevronRight className="w-5 h-5 text-[#f78e00]" />
               </button>
             </div>
 
@@ -104,7 +104,7 @@ export function Testimonials() {
                   key={index}
                   onClick={() => setCurrentIndex(index)}
                   className={`w-2 h-2 rounded-full transition-all ${
-                    index === currentIndex ? 'bg-blue-600 w-8' : 'bg-gray-300'
+                    index === currentIndex ? 'bg-[#f78e00] w-8' : 'bg-gray-300'
                   }`}
                 />
               ))}

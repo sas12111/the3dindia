@@ -50,10 +50,10 @@ export function Services() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-600 to-orange-500 py-20">
+      <section className="bg-gradient-to-br from-[#f78e00] to-orange-500 py-20">
         <div className="container01 mx-auto px-4 text-center">
           <h1 className="text-5xl text-white mb-6">Our Services</h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+          <p className="text-xl text-[#fff3e0] max-w-3xl mx-auto">
             Comprehensive 3D printing solutions tailored to your specific needs. From design to delivery, we've got you covered.
           </p>
         </div>
@@ -92,8 +92,8 @@ export function Services() {
                     }`}
                   >
                     <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
-                      <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
-                        <IconComponent className="w-8 h-8 text-blue-600" />
+                      <div className="w-16 h-16 bg-[#fff3e0] rounded-lg flex items-center justify-center mb-6">
+                        <IconComponent className="w-8 h-8 text-[#f78e00]" />
                       </div>
                       <h2 className="text-3xl text-gray-900 mb-4">{service.title}</h2>
                       <p className="text-lg text-gray-600 mb-6">{service.description}</p>
@@ -101,7 +101,7 @@ export function Services() {
                       <div className="grid sm:grid-cols-2 gap-3 mb-8">
                         {service.features.map((feature, idx) => (
                           <div key={idx} className="flex items-center gap-2">
-                            <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                            <CheckCircle className="w-5 h-5 text-[#f78e00] flex-shrink-0" />
                             <span className="text-gray-700">{feature}</span>
                           </div>
                         ))}
@@ -109,7 +109,7 @@ export function Services() {
 
                       <Link
                         to={`/services/${service.id}`}
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors group"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-[#f78e00] text-white rounded-lg hover:bg-[#e07e00] transition-colors group"
                       >
                         Learn More
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -118,7 +118,7 @@ export function Services() {
 
                     <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
                       <div className="relative">
-                        <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-orange-500/20 rounded-2xl transform rotate-3" />
+                        <div className="absolute inset-0 bg-gradient-to-tr from-[#f78e00]/20 to-orange-500/20 rounded-2xl transform rotate-3" />
                         <img
                           src={imageUrl}
                           alt={service.title}
@@ -150,7 +150,7 @@ export function Services() {
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-[#f78e00] text-white rounded-lg hover:bg-[#e07e00] transition-colors"
           >
             Contact Us
             <ArrowRight className="w-5 h-5" />
