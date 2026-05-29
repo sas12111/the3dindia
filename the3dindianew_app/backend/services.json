@@ -1,0 +1,110 @@
+[
+  {
+    "id": "3d-printing",
+    "icon": "Printer",
+    "title": "3D Printing Services",
+    "description": "Professional FDM, SLA, and Resin printing with high precision and quality finish.",
+    "features": [
+      "FDM Printing (PLA, ABS, PETG)",
+      "SLA/Resin Printing",
+      "Multi-material printing",
+      "High precision output",
+      "Industrial-grade quality",
+      "Fast turnaround time"
+    ],
+    "image": "/service-images/service_1779786953514.png",
+    "order": 1,
+    "active": true,
+    "updatedAt": "2026-05-26T09:15:55.595Z"
+  },
+  {
+    "id": "cad-modeling",
+    "icon": "Pencil",
+    "title": "3D Designing / CAD Modeling",
+    "description": "Expert CAD modeling and design services to bring your concepts to reality.",
+    "features": [
+      "Custom CAD design",
+      "3D modeling from sketches",
+      "Reverse engineering",
+      "Design optimization",
+      "Technical drawings",
+      "File format conversion"
+    ],
+    "image": "/service-images/service_1779786555923.jpg",
+    "order": 2,
+    "active": true,
+    "updatedAt": "2026-05-26T09:09:17.314Z"
+  },
+  {
+    "id": "prototyping",
+    "icon": "Lightbulb",
+    "title": "Prototyping & Product Development",
+    "description": "Rapid prototyping for product testing and iterative development.",
+    "features": [
+      "Rapid prototyping",
+      "Functional testing models",
+      "Iterative design support",
+      "Pre-production samples",
+      "Design validation",
+      "Material testing"
+    ],
+    "image": "/service-images/service_1779781809533.png",
+    "order": 3,
+    "active": true,
+    "updatedAt": "2026-05-26T07:50:12.961Z"
+  },
+  {
+    "id": "architectural-miniature",
+    "icon": "Building",
+    "title": "Architectural Miniature Model Service",
+    "description": "Detailed architectural scale models for presentations, real estate, and urban planning.",
+    "features": [
+      "Scale architectural models",
+      "Building prototypes",
+      "Urban planning models",
+      "Real estate presentations",
+      "Educational models",
+      "Museum displays"
+    ],
+    "image": "/service-images/service_1779786269164.png",
+    "order": 4,
+    "active": true,
+    "updatedAt": "2026-05-26T09:04:31.436Z"
+  },
+  {
+    "id": "custom-gifts",
+    "icon": "Gift",
+    "title": "Custom Gifts & Miniatures",
+    "description": "Personalized gifts, miniatures, keychains, and unique decorative items.",
+    "features": [
+      "Personalized keychains",
+      "Custom figurines",
+      "Miniature models",
+      "Trophy & awards",
+      "Name plates",
+      "Decorative items"
+    ],
+    "image": "/service-images/service_1779786472512.png",
+    "order": 5,
+    "active": true,
+    "updatedAt": "2026-05-26T09:08:01.217Z"
+  },
+  {
+    "id": "bulk-manufacturing",
+    "icon": "Package",
+    "title": "Bulk Manufacturing",
+    "description": "Large-scale production with consistent quality and competitive pricing.",
+    "features": [
+      "Volume production",
+      "Consistent quality",
+      "Competitive pricing",
+      "Quality control",
+      "Custom packaging",
+      "Delivery scheduling"
+    ],
+    "image": "/service-images/service_1779786733430.png",
+    "order": 6,
+    "active": true,
+    "updatedAt": "2026-05-26T09:12:15.682Z"
+  }
+]
