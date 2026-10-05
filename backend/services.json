@@ -3,17 +3,107 @@
     "id": "3d-printing",
     "icon": "Printer",
     "title": "3D Printing Services",
-    "description": "Professional FDM, SLA, and Resin printing with high precision and quality finish.",
+    "description": "Custom FDM 3D printing for prototypes, functional parts, models and small-batch products.",
     "features": [
-      "FDM Printing (PLA, ABS, PETG)",
-      "SLA/Resin Printing",
-      "Multi-material printing",
-      "High precision output",
-      "Industrial-grade quality",
-      "Fast turnaround time"
+      "FDM / FFF technology",
+      "PLA, PETG and TPU materials",
+      "High-detail, consistent results",
+      "Prototypes & functional parts",
+      "Small-batch production",
+      "Multiple colour options"
     ],
-    "image": "/service-images/service_1779786953514.png",
+    "image": "/images/3d-printing/hero-printer.jpg",
     "order": 1,
+    "active": true,
+    "updatedAt": "2026-10-01T05:48:14.527Z"
+  },
+  {
+    "id": "prototyping-product-development",
+    "icon": "Lightbulb",
+    "title": "Prototyping & Product Development",
+    "description": "Turn product ideas into physical prototypes you can see, hold, test and refine.",
+    "features": [
+      "Concept models",
+      "Functional prototypes",
+      "Product enclosures",
+      "Design iterations",
+      "Form, fit & function checks",
+      "Small-batch prototypes"
+    ],
+    "image": "/images/prototyping/hero.jpg",
+    "order": 2,
+    "active": true,
+    "updatedAt": "2026-10-01T05:48:14.527Z"
+  },
+  {
+    "id": "functional-parts",
+    "icon": "Wrench",
+    "title": "Functional Parts & Utility Products",
+    "description": "Custom 3D printed parts for everyday use, prototypes, replacements and specialized requirements.",
+    "features": [
+      "Brackets & mounts",
+      "Enclosures & housings",
+      "Clips & adapters",
+      "Organizers & holders",
+      "Replacement parts (where suitable)",
+      "Custom utility products"
+    ],
+    "image": "/images/functional-parts/hero.jpg",
+    "order": 3,
+    "active": true,
+    "updatedAt": "2026-10-01T05:48:14.527Z"
+  },
+  {
+    "id": "miniature-architectural-models",
+    "icon": "Building",
+    "title": "Miniature & Architectural Models",
+    "description": "Detailed 3D printed architectural and miniature models for presentation, education and visualization.",
+    "features": [
+      "Residential & commercial models",
+      "Interior layouts",
+      "Landscape & site models",
+      "Educational models",
+      "Custom scales & sizes",
+      "Presentation finish"
+    ],
+    "image": "/images/architectural-models/hero-model.jpg",
+    "order": 4,
+    "active": true,
+    "updatedAt": "2026-10-01T05:48:14.527Z"
+  },
+  {
+    "id": "medical-anatomical-models",
+    "icon": "Stethoscope",
+    "title": "Medical & Anatomical Models",
+    "description": "Detailed 3D printed anatomical models for education, training, visualization and presentation.",
+    "features": [
+      "Skeletal & organ models",
+      "Brain & nervous system",
+      "Dental models",
+      "Joint & orthopedic models",
+      "Custom anatomical models",
+      "For educational use"
+    ],
+    "image": "/images/medical-models/hero.jpg",
+    "order": 5,
+    "active": true,
+    "updatedAt": "2026-10-01T05:48:14.527Z"
+  },
+  {
+    "id": "customized-gifts",
+    "icon": "Gift",
+    "title": "Customized Gifts & Personalized Items",
+    "description": "Personalized 3D printed gifts, figurines, name plates, pen stands, keychains and décor.",
+    "features": [
+      "Personalized statues & figurines",
+      "Tabletop name plates",
+      "Custom pen stands",
+      "Photo-based figurines",
+      "Personalized keychains",
+      "Custom décor"
+    ],
+    "image": "/images/customized-gifts/hero.jpg",
+    "order": 6,
     "active": true,
     "updatedAt": "2026-10-01T05:48:14.527Z"
   },
@@ -30,70 +120,16 @@
       "Technical drawings",
       "File format conversion"
     ],
-    "image": "/service-images/service_1779786555923.jpg",
-    "order": 2,
+    "image": "/images/cad-modeling.jpg",
+    "order": 7,
     "active": true,
     "updatedAt": "2026-05-26T09:09:17.314Z"
-  },
-  {
-    "id": "prototyping",
-    "icon": "Lightbulb",
-    "title": "Prototyping & Product Development",
-    "description": "Rapid prototyping for product testing and iterative development.",
-    "features": [
-      "Rapid prototyping",
-      "Functional testing models",
-      "Iterative design support",
-      "Pre-production samples",
-      "Design validation",
-      "Material testing"
-    ],
-    "image": "/service-images/service_1779781809533.png",
-    "order": 3,
-    "active": true,
-    "updatedAt": "2026-05-26T07:50:12.961Z"
-  },
-  {
-    "id": "architectural-miniature",
-    "icon": "Building",
-    "title": "Architectural Miniature Model Service",
-    "description": "Detailed architectural scale models for presentations, real estate, and urban planning.",
-    "features": [
-      "Scale architectural models",
-      "Building prototypes",
-      "Urban planning models",
-      "Real estate presentations",
-      "Educational models",
-      "Museum displays"
-    ],
-    "image": "/service-images/service_1779786269164.png",
-    "order": 4,
-    "active": true,
-    "updatedAt": "2026-05-26T09:04:31.436Z"
-  },
-  {
-    "id": "custom-gifts",
-    "icon": "Gift",
-    "title": "Custom Gifts & Miniatures",
-    "description": "Personalized gifts, miniatures, keychains, and unique decorative items.",
-    "features": [
-      "Personalized keychains",
-      "Custom figurines",
-      "Miniature models",
-      "Trophy & awards",
-      "Name plates",
-      "Decorative items"
-    ],
-    "image": "/service-images/service_1779786472512.png",
-    "order": 5,
-    "active": true,
-    "updatedAt": "2026-05-26T09:08:01.217Z"
   },
   {
     "id": "bulk-manufacturing",
     "icon": "Package",
     "title": "Bulk Manufacturing",
-    "description": "Large-scale production with consistent quality and competitive pricing.",
+    "description": "Small-batch and larger-volume production with consistent quality and competitive pricing.",
     "features": [
       "Volume production",
       "Consistent quality",
@@ -102,8 +138,8 @@
       "Custom packaging",
       "Delivery scheduling"
     ],
-    "image": "/service-images/service_1779786733430.png",
-    "order": 6,
+    "image": "/images/bulk-manufacturing.jpg",
+    "order": 8,
     "active": true,
     "updatedAt": "2026-05-26T09:12:15.682Z"
   }

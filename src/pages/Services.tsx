@@ -4,7 +4,7 @@ import { apiUrl } from '../utils/api';
 import { Link } from 'react-router-dom';
 import {
   Printer, Pencil, Lightbulb, Gift, Package, Building,
-  Wrench, Cpu, ArrowRight, CheckCircle, Loader2,
+  Wrench, Cpu, Stethoscope, ArrowRight, CheckCircle, Loader2,
 } from 'lucide-react';
 
 // Map icon name strings (stored in DB) → Lucide components
@@ -17,6 +17,7 @@ const ICON_MAP: Record<string, React.ElementType> = {
   Building,
   Wrench,
   Cpu,
+  Stethoscope,
 };
 
 interface Service {
@@ -30,6 +31,71 @@ interface Service {
   active: boolean;
 }
 
+// Canonical fallback so the redesigned service pages always surface here,
+// even if the backend API is unavailable or returns an empty list.
+const FALLBACK_SERVICES: Service[] = [
+  {
+    id: '3d-printing',
+    icon: 'Printer',
+    title: '3D Printing Services',
+    description: 'Custom FDM 3D printing for prototypes, functional parts, models and small-batch products.',
+    features: ['FDM / FFF technology', 'PLA, PETG and TPU materials', 'High-detail, consistent results', 'Prototypes & functional parts', 'Small-batch production', 'Multiple colour options'],
+    image: '/images/3d-printing/hero-printer.jpg',
+    order: 1,
+    active: true,
+  },
+  {
+    id: 'prototyping-product-development',
+    icon: 'Lightbulb',
+    title: 'Prototyping & Product Development',
+    description: 'Turn product ideas into physical prototypes you can see, hold, test and refine.',
+    features: ['Concept models', 'Functional prototypes', 'Product enclosures', 'Design iterations', 'Form, fit & function checks', 'Small-batch prototypes'],
+    image: '/images/prototyping/hero.jpg',
+    order: 2,
+    active: true,
+  },
+  {
+    id: 'functional-parts',
+    icon: 'Wrench',
+    title: 'Functional Parts & Utility Products',
+    description: 'Custom 3D printed parts for everyday use, prototypes, replacements and specialized requirements.',
+    features: ['Brackets & mounts', 'Enclosures & housings', 'Clips & adapters', 'Organizers & holders', 'Replacement parts (where suitable)', 'Custom utility products'],
+    image: '/images/functional-parts/hero.jpg',
+    order: 3,
+    active: true,
+  },
+  {
+    id: 'miniature-architectural-models',
+    icon: 'Building',
+    title: 'Miniature & Architectural Models',
+    description: 'Detailed 3D printed architectural and miniature models for presentation, education and visualization.',
+    features: ['Residential & commercial models', 'Interior layouts', 'Landscape & site models', 'Educational models', 'Custom scales & sizes', 'Presentation finish'],
+    image: '/images/architectural-models/hero-model.jpg',
+    order: 4,
+    active: true,
+  },
+  {
+    id: 'medical-anatomical-models',
+    icon: 'Stethoscope',
+    title: 'Medical & Anatomical Models',
+    description: 'Detailed 3D printed anatomical models for education, training, visualization and presentation.',
+    features: ['Skeletal & organ models', 'Brain & nervous system', 'Dental models', 'Joint & orthopedic models', 'Custom anatomical models', 'For educational use'],
+    image: '/images/medical-models/hero.jpg',
+    order: 5,
+    active: true,
+  },
+  {
+    id: 'customized-gifts',
+    icon: 'Gift',
+    title: 'Customized Gifts & Personalized Items',
+    description: 'Personalized 3D printed gifts, figurines, name plates, pen stands, keychains and décor.',
+    features: ['Personalized statues & figurines', 'Tabletop name plates', 'Custom pen stands', 'Photo-based figurines', 'Personalized keychains', 'Custom décor'],
+    image: '/images/customized-gifts/hero.jpg',
+    order: 6,
+    active: true,
+  },
+];
+
 export function Services() {
   const API_BASE = apiUrl('');
   const [services, setServices] = useState<Service[]>([]);
@@ -40,10 +106,17 @@ export function Services() {
     fetch(apiUrl('/api/services'))
       .then(r => r.json())
       .then(data => {
-        if (data.success) setServices(data.services);
-        else setError('Failed to load services.');
+        if (data.success && Array.isArray(data.services) && data.services.length > 0) {
+          setServices(data.services);
+        } else {
+          // API reachable but no data — fall back to the canonical list.
+          setServices(FALLBACK_SERVICES);
+        }
       })
-      .catch(() => setError('Could not connect to server.'))
+      .catch(() => {
+        // API unreachable — still show the redesigned services.
+        setServices(FALLBACK_SERVICES);
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -80,7 +153,7 @@ export function Services() {
                 const IconComponent = ICON_MAP[service.icon] || Package;
                 const defaultImage = '/images/3d-printer.jpg';
                   const imageUrl = service.image
-                  ? (service.image.startsWith('http')
+                  ? (service.image.startsWith('http') || service.image.startsWith('/images/')
                     ? service.image
                     : `${API_BASE}${service.image.startsWith('/') ? service.image : '/' + service.image}`)
                   : defaultImage;
