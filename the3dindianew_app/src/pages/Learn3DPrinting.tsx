@@ -4,16 +4,16 @@ export function Learn3DPrinting() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-cyan-50 to-blue-100 py-20">
+      <section className="bg-gradient-to-br from-cyan-50 to-[#fff3e0] py-20">
         <div className="container01 mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600/10 rounded-full mb-6">
-              <BookOpen className="w-5 h-5 text-blue-600" />
-              <span className="text-blue-600">Educational Guide</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#f78e00]/10 rounded-full mb-6">
+              <BookOpen className="w-5 h-5 text-[#f78e00]" />
+              <span className="text-[#f78e00]">Educational Guide</span>
             </div>
             <h1 className="text-5xl lg:text-6xl text-gray-900 mb-6">
               Everything You Need to Know About{' '}
-              <span className="text-blue-600">3D Printing</span>
+              <span className="text-[#f78e00]">3D Printing</span>
             </h1>
             <p className="text-xl text-gray-600">
               Discover the revolutionary technology that's transforming manufacturing, prototyping, and creative design
@@ -36,7 +36,7 @@ export function Learn3DPrinting() {
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <CheckCircle className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
+                  <CheckCircle className="w-6 h-6 text-[#f78e00] flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="text-lg text-gray-900 mb-1">Layer-by-Layer Construction</h3>
                     <p className="text-gray-600">
@@ -45,7 +45,7 @@ export function Learn3DPrinting() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <CheckCircle className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
+                  <CheckCircle className="w-6 h-6 text-[#f78e00] flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="text-lg text-gray-900 mb-1">Digital to Physical</h3>
                     <p className="text-gray-600">
@@ -54,7 +54,7 @@ export function Learn3DPrinting() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <CheckCircle className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
+                  <CheckCircle className="w-6 h-6 text-[#f78e00] flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="text-lg text-gray-900 mb-1">Minimal Waste</h3>
                     <p className="text-gray-600">
@@ -65,7 +65,7 @@ export function Learn3DPrinting() {
               </div>
             </div>
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-orange-500/20 rounded-2xl transform -rotate-3"></div>
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#f78e00]/20 to-orange-500/20 rounded-2xl transform -rotate-3"></div>
               <img
                 src="/images/3d-printing-tech.jpg"
                 alt="3D Printing Technology"
@@ -89,8 +89,8 @@ export function Learn3DPrinting() {
           <div className="grid lg:grid-cols-3 gap-8">
             {/* FDM */}
             <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
-                <Layers className="w-8 h-8 text-blue-600" />
+              <div className="w-16 h-16 bg-[#fff3e0] rounded-lg flex items-center justify-center mb-6">
+                <Layers className="w-8 h-8 text-[#f78e00]" />
               </div>
               <h3 className="text-2xl text-gray-900 mb-4">FDM (Fused Deposition Modeling)</h3>
               <img
@@ -104,15 +104,15 @@ export function Learn3DPrinting() {
               <h4 className="text-gray-900 mb-2">Best For:</h4>
               <ul className="space-y-2 text-gray-600">
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-[#f78e00] flex-shrink-0 mt-0.5" />
                   <span>Functional prototypes</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-[#f78e00] flex-shrink-0 mt-0.5" />
                   <span>Large parts with moderate detail</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-[#f78e00] flex-shrink-0 mt-0.5" />
                   <span>Budget-friendly projects</span>
                 </li>
               </ul>
@@ -194,12 +194,12 @@ export function Learn3DPrinting() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 border border-blue-100">
+            <div className="bg-gradient-to-br from-[#fff8f0] to-cyan-50 rounded-xl p-6 border border-[#fff3e0]">
               <h3 className="text-xl text-gray-900 mb-3">PLA (Polylactic Acid)</h3>
               <p className="text-gray-600 mb-3">
                 Biodegradable, easy to print, perfect for beginners and decorative items.
               </p>
-              <div className="text-sm text-blue-600">• Eco-friendly • Low warping • Great detail</div>
+              <div className="text-sm text-[#f78e00]">• Eco-friendly • Low warping • Great detail</div>
             </div>
 
             <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-6 border border-orange-100">
@@ -234,7 +234,7 @@ export function Learn3DPrinting() {
               <div className="text-sm text-gray-700">• Very strong • Wear resistant • Flexible</div>
             </div>
 
-            <div className="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-xl p-6 border border-indigo-100">
+            <div className="bg-gradient-to-br from-indigo-50 to-[#fff8f0] rounded-xl p-6 border border-indigo-100">
               <h3 className="text-xl text-gray-900 mb-3">Resin</h3>
               <p className="text-gray-600 mb-3">
                 Liquid photopolymer for high-detail SLA/DLP prints with smooth finish.
@@ -257,8 +257,8 @@ export function Learn3DPrinting() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                <Lightbulb className="w-6 h-6 text-blue-600" />
+              <div className="w-12 h-12 bg-[#fff3e0] rounded-lg flex items-center justify-center mb-4">
+                <Lightbulb className="w-6 h-6 text-[#f78e00]" />
               </div>
               <h3 className="text-xl text-gray-900 mb-2">Prototyping</h3>
               <p className="text-gray-600">
@@ -347,8 +347,8 @@ export function Learn3DPrinting() {
             
             <div className="grid md:grid-cols-2 gap-8">
               <div className="flex gap-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <CheckCircle className="w-6 h-6 text-blue-600" />
+                <div className="w-12 h-12 bg-[#fff3e0] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-6 h-6 text-[#f78e00]" />
                 </div>
                 <div>
                   <h3 className="text-xl text-gray-900 mb-2">Rapid Prototyping</h3>
@@ -359,8 +359,8 @@ export function Learn3DPrinting() {
               </div>
 
               <div className="flex gap-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <CheckCircle className="w-6 h-6 text-blue-600" />
+                <div className="w-12 h-12 bg-[#fff3e0] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-6 h-6 text-[#f78e00]" />
                 </div>
                 <div>
                   <h3 className="text-xl text-gray-900 mb-2">Cost-Effective</h3>
@@ -371,8 +371,8 @@ export function Learn3DPrinting() {
               </div>
 
               <div className="flex gap-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <CheckCircle className="w-6 h-6 text-blue-600" />
+                <div className="w-12 h-12 bg-[#fff3e0] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-6 h-6 text-[#f78e00]" />
                 </div>
                 <div>
                   <h3 className="text-xl text-gray-900 mb-2">Design Freedom</h3>
@@ -383,8 +383,8 @@ export function Learn3DPrinting() {
               </div>
 
               <div className="flex gap-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <CheckCircle className="w-6 h-6 text-blue-600" />
+                <div className="w-12 h-12 bg-[#fff3e0] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-6 h-6 text-[#f78e00]" />
                 </div>
                 <div>
                   <h3 className="text-xl text-gray-900 mb-2">Customization</h3>
@@ -395,8 +395,8 @@ export function Learn3DPrinting() {
               </div>
 
               <div className="flex gap-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <CheckCircle className="w-6 h-6 text-blue-600" />
+                <div className="w-12 h-12 bg-[#fff3e0] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-6 h-6 text-[#f78e00]" />
                 </div>
                 <div>
                   <h3 className="text-xl text-gray-900 mb-2">Less Waste</h3>
@@ -407,8 +407,8 @@ export function Learn3DPrinting() {
               </div>
 
               <div className="flex gap-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <CheckCircle className="w-6 h-6 text-blue-600" />
+                <div className="w-12 h-12 bg-[#fff3e0] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-6 h-6 text-[#f78e00]" />
                 </div>
                 <div>
                   <h3 className="text-xl text-gray-900 mb-2">On-Demand Production</h3>
@@ -423,55 +423,55 @@ export function Learn3DPrinting() {
       </section>
 
       {/* The 3D Printing Process */}
-      <section className="py-20 bg-gradient-to-br from-blue-600 to-blue-700 text-white">
+      <section className="py-20 bg-gradient-to-br from-[#f78e00] to-[#e07e00] text-white">
         <div className="container01 mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-4xl mb-12 text-center">The 3D Printing Process</h2>
             
             <div className="space-y-8">
               <div className="flex gap-6 items-start">
-                <div className="w-12 h-12 bg-white text-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-white text-[#f78e00] rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-xl">1</span>
                 </div>
                 <div>
                   <h3 className="text-2xl mb-2">Design Creation</h3>
-                  <p className="text-blue-100">
+                  <p className="text-[#fff3e0]">
                     Create or obtain a 3D model using CAD software, 3D scanning, or download from online repositories
                   </p>
                 </div>
               </div>
 
               <div className="flex gap-6 items-start">
-                <div className="w-12 h-12 bg-white text-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-white text-[#f78e00] rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-xl">2</span>
                 </div>
                 <div>
                   <h3 className="text-2xl mb-2">File Preparation (Slicing)</h3>
-                  <p className="text-blue-100">
+                  <p className="text-[#fff3e0]">
                     Convert the 3D model into layers using slicing software, which generates instructions (G-code) for the printer
                   </p>
                 </div>
               </div>
 
               <div className="flex gap-6 items-start">
-                <div className="w-12 h-12 bg-white text-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-white text-[#f78e00] rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-xl">3</span>
                 </div>
                 <div>
                   <h3 className="text-2xl mb-2">Printing</h3>
-                  <p className="text-blue-100">
+                  <p className="text-[#fff3e0]">
                     The 3D printer reads the instructions and builds the object layer by layer, which can take hours to days depending on size and complexity
                   </p>
                 </div>
               </div>
 
               <div className="flex gap-6 items-start">
-                <div className="w-12 h-12 bg-white text-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-white text-[#f78e00] rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-xl">4</span>
                 </div>
                 <div>
                   <h3 className="text-2xl mb-2">Post-Processing</h3>
-                  <p className="text-blue-100">
+                  <p className="text-[#fff3e0]">
                     Remove support structures, sand, paint, or apply other finishing techniques to achieve desired appearance and functionality
                   </p>
                 </div>
@@ -484,7 +484,7 @@ export function Learn3DPrinting() {
       {/* CTA Section */}
       <section className="py-20">
         <div className="container01 mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center bg-gradient-to-br from-cyan-50 to-blue-100 rounded-2xl p-12">
+          <div className="max-w-3xl mx-auto text-center bg-gradient-to-br from-cyan-50 to-[#fff3e0] rounded-2xl p-12">
             <h2 className="text-4xl text-gray-900 mb-6">Ready to Start Your 3D Printing Project?</h2>
             <p className="text-xl text-gray-600 mb-8">
               Let The3DIndia bring your ideas to life with our professional 3D printing services
@@ -492,13 +492,13 @@ export function Learn3DPrinting() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="/contact"
-                className="px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="px-8 py-4 bg-[#f78e00] text-white rounded-lg hover:bg-[#e07e00] transition-colors"
               >
                 Get Started Today
               </a>
               <a
                 href="/services"
-                className="px-8 py-4 bg-white text-blue-600 border-2 border-blue-600 rounded-lg hover:bg-blue-50 transition-colors"
+                className="px-8 py-4 bg-white text-[#f78e00] border-2 border-[#f78e00] rounded-lg hover:bg-[#fff8f0] transition-colors"
               >
                 Explore Our Services
               </a>

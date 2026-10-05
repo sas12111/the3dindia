@@ -70,7 +70,7 @@ export function Cart() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <Loader2 className="w-10 h-10 text-blue-600 animate-spin" />
+        <Loader2 className="w-10 h-10 text-[#f78e00] animate-spin" />
       </div>
     );
   }
@@ -84,7 +84,7 @@ export function Cart() {
           </div>
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Your cart is empty</h1>
           <p className="text-gray-600 mb-8">Looks like you haven't added any products to your cart yet. Browse our products and find the perfect 3D printed item for you.</p>
-          <Link to="/products" className="inline-flex items-center gap-2 px-6 py-2.5 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+          <Link to="/products" className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#f78e00] text-white font-semibold rounded-lg hover:bg-[#e07e00] transition-colors">
             Browse Products <ArrowRight size={16} />
           </Link>
         </div>
@@ -116,7 +116,7 @@ export function Cart() {
                           <h3 className="font-semibold text-gray-900 text-lg leading-tight mb-1">{item.name}</h3>
                           <p className="text-sm text-gray-500 mb-2">{item.category}</p>
                           {item.variant && (
-                            <span className="inline-block px-2 py-0.5 bg-blue-50 text-blue-700 text-xs font-medium rounded-full mb-2">
+                            <span className="inline-block px-2 py-0.5 bg-[#fff8f0] text-[#e07e00] text-xs font-medium rounded-full mb-2">
                               {item.variant}
                             </span>
                           )}
@@ -149,7 +149,7 @@ export function Cart() {
               <button onClick={clearCart} className="text-sm text-red-600 hover:text-red-700 font-medium flex items-center gap-2">
                 <Trash2 size={16} /> Clear Cart
               </button>
-              <Link to="/products" className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-2">
+              <Link to="/products" className="text-sm text-[#f78e00] hover:text-[#e07e00] font-medium flex items-center gap-2">
                 Continue Shopping <ArrowRight size={16} />
               </Link>
             </div>
@@ -175,15 +175,15 @@ export function Cart() {
               <div className="border-t border-gray-200 pt-4 mb-6">
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-bold text-gray-900">Total</span>
-                  <span className="text-2xl font-bold text-blue-600">₹{total.toLocaleString()}</span>
+                  <span className="text-2xl font-bold text-[#f78e00]">₹{total.toLocaleString()}</span>
                 </div>
               </div>
               {user ? (
-                <button onClick={() => navigate('/checkout')} className="w-full py-2.5 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20 hover:shadow-xl hover:shadow-blue-600/30 flex items-center justify-center gap-2">
+                <button onClick={() => navigate('/checkout')} className="w-full py-2.5 bg-[#f78e00] text-white font-semibold rounded-lg hover:bg-[#e07e00] transition-colors shadow-lg shadow-[#f78e00]/20 hover:shadow-xl hover:shadow-[#f78e00]/30 flex items-center justify-center gap-2">
                   Proceed to Checkout <ArrowRight size={18} />
                 </button>
               ) : (
-                <Link to="/login" state={{ from: '/cart' }} className="w-full py-2.5 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20 hover:shadow-xl hover:shadow-blue-600/30 flex items-center justify-center gap-2">
+                <Link to="/login" state={{ from: '/cart' }} className="w-full py-2.5 bg-[#f78e00] text-white font-semibold rounded-lg hover:bg-[#e07e00] transition-colors shadow-lg shadow-[#f78e00]/20 hover:shadow-xl hover:shadow-[#f78e00]/30 flex items-center justify-center gap-2">
                   Sign In to Checkout <ArrowRight size={18} />
                 </Link>
               )}

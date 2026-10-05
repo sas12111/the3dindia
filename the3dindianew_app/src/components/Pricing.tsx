@@ -12,11 +12,11 @@ export function Pricing() {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-blue-600 to-orange-500 rounded-2xl p-8 md:p-12 text-white shadow-2xl">
+          <div className="bg-gradient-to-br from-[#f78e00] to-orange-500 rounded-2xl p-8 md:p-12 text-white shadow-2xl">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h3 className="text-3xl mb-4">Get Instant Quote</h3>
-                <p className="text-blue-100 mb-6">
+                <p className="text-[#fff3e0] mb-6">
                   Our intelligent pricing calculator gives you an accurate estimate in seconds. No hidden fees, no surprises.
                 </p>
                 <ul className="space-y-3 mb-8">
@@ -37,7 +37,7 @@ export function Pricing() {
                     <span>Free design optimization</span>
                   </li>
                 </ul>
-                <button className="px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors inline-flex items-center gap-2">
+                <button className="px-8 py-4 bg-white text-[#f78e00] rounded-lg hover:bg-gray-100 transition-colors inline-flex items-center gap-2">
                   <Calculator className="w-5 h-5" />
                   Calculate Cost
                 </button>
@@ -47,23 +47,23 @@ export function Pricing() {
                 <h4 className="text-xl mb-4">Sample Pricing</h4>
                 <div className="space-y-4">
                   <div className="flex justify-between pb-3 border-b border-white/20">
-                    <span className="text-blue-100">Small items (keychains)</span>
+                    <span className="text-[#fff3e0]">Small items (keychains)</span>
                     <span>₹50 - ₹200</span>
                   </div>
                   <div className="flex justify-between pb-3 border-b border-white/20">
-                    <span className="text-blue-100">Medium parts (prototypes)</span>
+                    <span className="text-[#fff3e0]">Medium parts (prototypes)</span>
                     <span>₹500 - ₹2000</span>
                   </div>
                   <div className="flex justify-between pb-3 border-b border-white/20">
-                    <span className="text-blue-100">Large components</span>
+                    <span className="text-[#fff3e0]">Large components</span>
                     <span>₹2000 - ₹10000</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-blue-100">Bulk orders</span>
+                    <span className="text-[#fff3e0]">Bulk orders</span>
                     <span>Custom quote</span>
                   </div>
                 </div>
-                <p className="text-sm text-blue-200 mt-4">
+                <p className="text-sm text-[#ffd09a] mt-4">
                   *Prices vary based on material, size, and complexity
                 </p>
               </div>
@@ -72,15 +72,15 @@ export function Pricing() {
 
           <div className="mt-8 grid md:grid-cols-3 gap-6 text-center">
             <div className="p-6 bg-gray-50 rounded-xl">
-              <div className="text-3xl text-blue-600 mb-2">30%</div>
+              <div className="text-3xl text-[#f78e00] mb-2">30%</div>
               <div className="text-gray-600">Bulk Order Discount</div>
             </div>
             <div className="p-6 bg-gray-50 rounded-xl">
-              <div className="text-3xl text-blue-600 mb-2">₹0</div>
+              <div className="text-3xl text-[#f78e00] mb-2">₹0</div>
               <div className="text-gray-600">Design Correction Fee</div>
             </div>
             <div className="p-6 bg-gray-50 rounded-xl">
-              <div className="text-3xl text-blue-600 mb-2">24h</div>
+              <div className="text-3xl text-[#f78e00] mb-2">24h</div>
               <div className="text-gray-600">Express Delivery</div>
             </div>
           </div>

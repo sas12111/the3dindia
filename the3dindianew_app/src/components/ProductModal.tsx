@@ -107,7 +107,7 @@ export default function ProductModal({ product, onClose }: Props) {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
-              {[
+            {[
               { icon: <Layers size={20} color="#f98f00" />, label: 'Material', value: product.material },
               { icon: <Ruler size={20} color="#f98f00" />, label: 'Size', value: product.dimensions },
               { icon: <Clock size={20} color="#f98f00" />, label: 'Print Time', value: product.printTime },
@@ -137,7 +137,7 @@ export default function ProductModal({ product, onClose }: Props) {
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                 {product.tags.map(tag => (
-                  <span key={tag} style={{ padding: '0.25rem 0.75rem', background: '#fff7ed', color: '#f98f00', borderRadius: '9999px', fontSize: '0.875rem', border: '1px solid #ffedd5' }}>#{tag}</span>
+                  <span key={tag} style={{ padding: '0.25rem 0.75rem', background: '#fff7ed', color: '#ea580c', borderRadius: '9999px', fontSize: '0.875rem', border: '1px solid #fed7aa' }}>#{tag}</span>
                 ))}
               </div>
             </div>

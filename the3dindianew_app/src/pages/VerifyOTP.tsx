@@ -135,15 +135,15 @@ export function VerifyOTP() {
     `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl shadow-blue-900/10 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-orange-50/30 to-gray-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl shadow-orange-900/10 p-8">
 
         {/* Icon */}
         <div className="flex justify-center mb-6">
-          <div className={`w-16 h-16 rounded-full flex items-center justify-center ${success ? 'bg-green-100' : 'bg-blue-100'}`}>
+          <div className={`w-16 h-16 rounded-full flex items-center justify-center ${success ? 'bg-green-100' : 'bg-[#fff3e0]'}`}>
             {success
               ? <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-              : <MailCheck className="w-8 h-8 text-blue-600" />
+              : <MailCheck className="w-8 h-8 text-[#f78e00]" />
             }
           </div>
         </div>
@@ -159,7 +159,7 @@ export function VerifyOTP() {
           }
         </p>
         {!success && (
-          <p className="text-sm font-semibold text-blue-600 text-center mb-6 break-all">{email}</p>
+          <p className="text-sm font-semibold text-[#f78e00] text-center mb-6 break-all">{email}</p>
         )}
 
         {/* OTP boxes */}
@@ -179,9 +179,9 @@ export function VerifyOTP() {
                   onFocus={e => e.target.select()}
                   disabled={loading}
                   className={`w-12 h-14 text-center text-xl font-bold rounded-xl border-2 outline-none transition-all
-                    ${digit ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-gray-200 text-gray-900'}
+                    ${digit ? 'border-[#f78e00] bg-[#fff8f0] text-[#e07e00]' : 'border-gray-200 text-gray-900'}
                     ${error ? 'border-red-400 bg-red-50' : ''}
-                    focus:border-blue-500 focus:bg-blue-50
+                    focus:border-[#f78e00] focus:bg-[#fff8f0]
                     disabled:opacity-50 disabled:cursor-not-allowed`}
                 />
               ))}
@@ -201,7 +201,7 @@ export function VerifyOTP() {
             <button
               onClick={handleVerify}
               disabled={loading || digits.join('').length < OTP_LENGTH}
-              className="w-full py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mb-5"
+              className="w-full py-3 bg-[#f78e00] text-white font-semibold rounded-xl hover:bg-[#e07e00] transition-colors shadow-lg shadow-[#f78e00]/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mb-5"
             >
               {loading ? <><Loader2 size={16} className="animate-spin" /> Verifying…</> : 'Verify Account'}
             </button>
@@ -214,7 +214,7 @@ export function VerifyOTP() {
                 <button
                   onClick={handleResend}
                   disabled={resending}
-                  className="inline-flex items-center gap-1.5 text-blue-600 hover:text-blue-700 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="inline-flex items-center gap-1.5 text-[#f78e00] hover:text-[#e07e00] font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {resending ? <Loader2 size={14} className="animate-spin" /> : <RefreshCw size={14} />}
                   {resending ? 'Sending…' : 'Resend code'}

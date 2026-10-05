@@ -25,16 +25,16 @@ export function Home() {
       <Testimonials />
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-600 to-orange-500">
+      <section className="py-20 bg-gradient-to-br from-[#f78e00] to-orange-500">
         <div className="container01 mx-auto px-4 text-center">
           <h2 className="text-4xl text-white mb-6">Ready to Start Your Project?</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-[#fff3e0] mb-8 max-w-2xl mx-auto">
             Get in touch with us today and let's bring your ideas to life with precision 3D printing
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/contact"
-              className="px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors"
+              className="px-8 py-4 bg-white text-[#f78e00] rounded-lg hover:bg-gray-100 transition-colors"
             >
               Contact Us
             </Link>

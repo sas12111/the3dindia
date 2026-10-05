@@ -34,11 +34,11 @@ export function HowItWorks() {
 
         <div className="grid md:grid-cols-3 gap-8 lg:gap-12 relative">
           {/* Connecting lines */}
-          <div className="hidden md:block absolute top-20 left-1/6 right-1/6 h-0.5 bg-gradient-to-r from-blue-600 via-blue-400 to-blue-600"></div>
+          <div className="hidden md:block absolute top-20 left-1/6 right-1/6 h-0.5 bg-gradient-to-r from-[#f78e00] via-[#f9a030] to-[#f78e00]"></div>
           
           {steps.map((step, index) => (
             <div key={index} className="relative text-center">
-              <div className="w-24 h-24 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 relative z-10 shadow-lg">
+              <div className="w-24 h-24 bg-[#f78e00] rounded-full flex items-center justify-center mx-auto mb-6 relative z-10 shadow-lg">
                 <step.icon className="w-12 h-12 text-white" />
               </div>
               <div className="absolute top-0 right-0 text-7xl opacity-10 z-0">
@@ -51,7 +51,7 @@ export function HowItWorks() {
         </div>
 
         <div className="mt-16 text-center">
-          <button className="px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          <button className="px-8 py-4 bg-[#f78e00] text-white rounded-lg hover:bg-[#e07e00] transition-colors">
             Get Started Now
           </button>
         </div>

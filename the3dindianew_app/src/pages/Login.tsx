@@ -242,13 +242,13 @@ export function Login() {
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
               disabled={loading}
-              className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500/30 cursor-pointer disabled:opacity-50"
+              className="w-4 h-4 rounded border-gray-300 text-[#f78e00] focus:ring-[#f78e00]/30 cursor-pointer disabled:opacity-50"
             />
             <span className="text-sm text-gray-600">Remember me</span>
           </label>
           <Link
             to="/forgot-password"
-            className="text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
+            className="text-sm font-medium text-[#f78e00] hover:text-[#e07e00] transition-colors"
           >
             Forgot password?
           </Link>
@@ -271,7 +271,7 @@ export function Login() {
           Don't have an account?{' '}
           <Link
             to="/register"
-            className="font-medium text-blue-600 hover:text-blue-700 transition-colors"
+            className="font-medium text-[#f78e00] hover:text-[#e07e00] transition-colors"
           >
             Create free account
           </Link>

@@ -17,7 +17,7 @@ const MailIcon = () => (
 );
 
 const InfoIcon = () => (
-  <svg className="w-4 h-4 text-blue-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+  <svg className="w-4 h-4 text-[#f78e00] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -103,7 +103,7 @@ export function ForgotPassword() {
                 setSent(false);
                 setEmail('');
               }}
-              className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+              className="text-[#f78e00] hover:text-[#e07e00] font-medium transition-colors"
             >
               try again
             </button>
@@ -113,7 +113,7 @@ export function ForgotPassword() {
           {/* Back button */}
           <Link
             to="/login"
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#f78e00] hover:text-[#e07e00] hover:bg-[#fff8f0] rounded-lg transition-colors"
           >
             <ArrowLeftIcon />
             Back to sign in
@@ -127,11 +127,11 @@ export function ForgotPassword() {
   return (
     <AuthLayout title="Forgot password?" subtitle="No worries, we'll send you reset instructions">
       {/* Info Alert */}
-      <div className="flex items-start gap-3 px-3.5 py-3 bg-blue-50 border border-blue-200 rounded-lg mb-5">
+      <div className="flex items-start gap-3 px-3.5 py-3 bg-[#fff8f0] border border-[#ffd09a] rounded-lg mb-5">
         <div className="flex-shrink-0 mt-0.5">
           <InfoIcon />
         </div>
-        <p className="text-sm text-blue-700 leading-relaxed">
+        <p className="text-sm text-[#e07e00] leading-relaxed">
           Enter your email address and we'll send you a link to reset your password.
         </p>
       </div>
@@ -179,7 +179,7 @@ export function ForgotPassword() {
       <div className="mt-5 text-center">
         <Link
           to="/login"
-          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#f78e00] hover:text-[#e07e00] hover:bg-[#fff8f0] rounded-lg transition-colors"
         >
           <ArrowLeftIcon />
           Back to sign in

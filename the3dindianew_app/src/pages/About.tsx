@@ -55,10 +55,10 @@ export function About() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-600 to-orange-500 py-20">
+      <section className="bg-gradient-to-br from-[#f78e00] to-orange-500 py-20">
         <div className="container01 mx-auto px-4 text-center">
           <h1 className="text-5xl text-white mb-6">About The3DIndia</h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+          <p className="text-xl text-[#fff3e0] max-w-3xl mx-auto">
             Leading the way in 3D printing innovation, delivering quality and precision since 2018.
           </p>
         </div>
@@ -81,7 +81,7 @@ export function About() {
               </p>
             </div>
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-orange-500/20 rounded-2xl transform rotate-3"></div>
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#f78e00]/20 to-orange-500/20 rounded-2xl transform rotate-3"></div>
               <img
                 src="/images/3d-printer.jpg"
                 alt="Our workshop"
@@ -97,8 +97,8 @@ export function About() {
         <div className="container01 mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
             <div className="text-center p-8 bg-white rounded-2xl shadow-lg">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Target className="w-8 h-8 text-blue-600" />
+              <div className="w-16 h-16 bg-[#fff3e0] rounded-full flex items-center justify-center mx-auto mb-6">
+                <Target className="w-8 h-8 text-[#f78e00]" />
               </div>
               <h3 className="text-2xl text-gray-900 mb-4">Our Mission</h3>
               <p className="text-gray-600">
@@ -106,8 +106,8 @@ export function About() {
               </p>
             </div>
             <div className="text-center p-8 bg-white rounded-2xl shadow-lg">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Eye className="w-8 h-8 text-blue-600" />
+              <div className="w-16 h-16 bg-[#fff3e0] rounded-full flex items-center justify-center mx-auto mb-6">
+                <Eye className="w-8 h-8 text-[#f78e00]" />
               </div>
               <h3 className="text-2xl text-gray-900 mb-4">Our Vision</h3>
               <p className="text-gray-600">
@@ -131,7 +131,7 @@ export function About() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
               <div key={index} className="text-center p-6">
-                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-[#f78e00] rounded-full flex items-center justify-center mx-auto mb-4">
                   <value.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl text-gray-900 mb-3">{value.title}</h3>
@@ -158,11 +158,11 @@ export function About() {
                 <img
                   src={member.image}
                   alt={member.name}
-                  className="w-full h-48 object-cover bg-blue-100"
+                  className="w-full h-48 object-cover bg-[#fff3e0]"
                 />
                 <div className="p-6">
                   <h3 className="text-xl text-gray-900 mb-1">{member.name}</h3>
-                  <div className="text-blue-600 mb-3">{member.role}</div>
+                  <div className="text-[#f78e00] mb-3">{member.role}</div>
                   <p className="text-gray-600 text-sm">{member.description}</p>
                 </div>
               </div>
@@ -185,18 +185,18 @@ export function About() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div className="text-center p-8 bg-blue-50 rounded-xl">
-              <Award className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+            <div className="text-center p-8 bg-[#fff8f0] rounded-xl">
+              <Award className="w-12 h-12 text-[#f78e00] mx-auto mb-4" />
               <h3 className="text-xl text-gray-900 mb-2">Industry Recognition</h3>
               <p className="text-gray-600">Awarded Best 3D Printing Service 2023</p>
             </div>
-            <div className="text-center p-8 bg-blue-50 rounded-xl">
-              <Award className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+            <div className="text-center p-8 bg-[#fff8f0] rounded-xl">
+              <Award className="w-12 h-12 text-[#f78e00] mx-auto mb-4" />
               <h3 className="text-xl text-gray-900 mb-2">Customer Excellence</h3>
               <p className="text-gray-600">98% customer satisfaction rating</p>
             </div>
-            <div className="text-center p-8 bg-blue-50 rounded-xl">
-              <Award className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+            <div className="text-center p-8 bg-[#fff8f0] rounded-xl">
+              <Award className="w-12 h-12 text-[#f78e00] mx-auto mb-4" />
               <h3 className="text-xl text-gray-900 mb-2">Innovation Leader</h3>
               <p className="text-gray-600">Featured in Tech Magazine India</p>
             </div>

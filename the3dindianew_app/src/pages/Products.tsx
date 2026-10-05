@@ -49,10 +49,10 @@ export function Products() {
 
   return (
     <div>
-      <section className="bg-gradient-to-br from-blue-600 to-orange-500 py-20">
+      <section className="bg-gradient-to-br from-[#f78e00] to-orange-500 py-20">
         <div className="container01 mx-auto px-4 text-center">
           <h1 className="text-5xl text-white mb-6">Our Products</h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+          <p className="text-xl text-[#fff3e0] max-w-3xl mx-auto">
             Browse our ready-to-order 3D printed products — from custom gifts to industrial parts. All fully customizable.
           </p>
         </div>
@@ -67,7 +67,7 @@ export function Products() {
             </div>
             {categories.map(cat => (
               <button key={cat} onClick={() => setSelectedCategory(cat)}
-                className={`px-6 py-2 rounded-lg transition-colors ${selectedCategory === cat ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
+                className={`px-6 py-2 rounded-lg transition-colors ${selectedCategory === cat ? 'bg-[#f78e00] text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
                 {cat}
               </button>
             ))}
@@ -97,8 +97,8 @@ export function Products() {
                   </div>
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-3">
-                      <div className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">{product.category}</div>
-                      <span className="text-blue-600 font-bold text-lg">₹{product.price.toLocaleString()}</span>
+                      <div className="inline-block px-3 py-1 bg-[#fff3e0] text-[#e07e00] rounded-full text-sm">{product.category}</div>
+                      <span className="text-[#f78e00] font-bold text-lg">₹{product.price.toLocaleString()}</span>
                     </div>
                     <h3 className="text-xl text-gray-900 mb-1">{product.name}</h3>
                     <div className="flex items-center gap-1 mb-2">
@@ -106,7 +106,7 @@ export function Products() {
                       <span className="text-xs text-gray-400 ml-1">({product.reviews})</span>
                     </div>
                     <p className="text-gray-600 mb-4">{product.description}</p>
-                    <span className="text-blue-600 text-sm font-medium group-hover:underline">View Details →</span>
+                    <span className="text-[#f78e00] text-sm font-medium group-hover:underline">View Details →</span>
                   </div>
                 </button>
               ))}
@@ -124,7 +124,7 @@ export function Products() {
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             Don't see what you're looking for? We build fully custom 3D printed products from your design or idea.
           </p>
-          <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-[#f78e00] text-white rounded-lg hover:bg-[#e07e00] transition-colors">
             Get a Custom Quote →
           </Link>
         </div>
