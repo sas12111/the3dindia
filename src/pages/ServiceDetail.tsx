@@ -1,5 +1,11 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { ThreeDPrintingDetail } from './ThreeDPrintingDetail';
+import { MiniatureArchitecturalDetail } from './MiniatureArchitecturalDetail';
+import { CustomizedGiftsDetail } from './CustomizedGiftsDetail';
+import { MedicalAnatomicalDetail } from './MedicalAnatomicalDetail';
+import { FunctionalPartsDetail } from './FunctionalPartsDetail';
+import { PrototypingDetail } from './PrototypingDetail';
 import { 
   Printer, 
   Pencil, 
@@ -340,6 +346,39 @@ const serviceDetails = {
 };
 export function ServiceDetail() {
   const { serviceId } = useParams<{ serviceId: string }>();
+
+  // The 3D Printing service has a dedicated, premium studio-style detail page.
+  if (serviceId === '3d-printing') {
+    return <ThreeDPrintingDetail />;
+  }
+
+  // Miniature & Architectural Models has a dedicated premium page.
+  // Handles the current slug plus the legacy 'architectural-miniature' slug.
+  if (serviceId === 'miniature-architectural-models' || serviceId === 'architectural-miniature') {
+    return <MiniatureArchitecturalDetail />;
+  }
+
+  // Customized Gifts & Personalized Items has a dedicated premium page.
+  // Handles the current slug plus the legacy 'custom-gifts' slug.
+  if (serviceId === 'customized-gifts' || serviceId === 'custom-gifts') {
+    return <CustomizedGiftsDetail />;
+  }
+
+  // Medical & Anatomical Models has a dedicated scientific/educational page.
+  if (serviceId === 'medical-anatomical-models' || serviceId === 'medical-models') {
+    return <MedicalAnatomicalDetail />;
+  }
+
+  // Functional Parts & Utility Products has a dedicated engineering/workshop page.
+  if (serviceId === 'functional-parts' || serviceId === 'functional-parts-utility-products') {
+    return <FunctionalPartsDetail />;
+  }
+
+  // Prototyping & Product Development has a dedicated product-innovation page.
+  if (serviceId === 'prototyping-product-development' || serviceId === 'prototyping') {
+    return <PrototypingDetail />;
+  }
+
   const service = serviceId ? serviceDetails[serviceId as keyof typeof serviceDetails] : null;
 
   if (!service) {

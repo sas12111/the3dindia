@@ -33,7 +33,7 @@ export function Navigation() {
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/services', label: 'Services' },
-    { path: '/products', label: 'Products' },
+    // { path: '/products', label: 'Products' },
     { path: '/portfolio', label: 'Portfolio' },
     { path: '/about', label: 'About Us' },
     { path: '/learn', label: 'Learn 3D Printing' },

@@ -419,3 +419,467 @@ dialog::backdrop {
 .animate-shake {
   animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
 }
+
+/* ============================================================
+   3D Printing Service Detail Page — scoped animations
+   Prefixed with tdp- to avoid clashing with global styles.
+   ============================================================ */
+
+/* Animated filament line that "fills" the process timeline */
+@keyframes tdp-filament-flow {
+  0%   { background-position: 0 0; }
+  100% { background-position: 48px 0; }
+}
+
+.tdp-filament-line {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #f78e00 0,
+    #f78e00 14px,
+    rgba(247, 142, 0, 0.25) 14px,
+    rgba(247, 142, 0, 0.25) 24px
+  );
+  background-size: 48px 100%;
+  animation: tdp-filament-flow 1.6s linear infinite;
+}
+
+/* Vertical variant for the mobile timeline */
+.tdp-filament-line-v {
+  background-image: repeating-linear-gradient(
+    180deg,
+    #f78e00 0,
+    #f78e00 14px,
+    rgba(247, 142, 0, 0.25) 14px,
+    rgba(247, 142, 0, 0.25) 24px
+  );
+  background-size: 100% 48px;
+  animation: tdp-filament-flow-v 1.6s linear infinite;
+}
+
+@keyframes tdp-filament-flow-v {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 48px; }
+}
+
+/* Subtle technical dot/line grid used in dark sections */
+.tdp-tech-grid {
+  background-image:
+    linear-gradient(rgba(247, 142, 0, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247, 142, 0, 0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Layer-line texture (thin horizontal lines like FDM layers) */
+.tdp-layer-lines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.04) 0,
+    rgba(255, 255, 255, 0.04) 1px,
+    transparent 1px,
+    transparent 6px
+  );
+}
+
+/* Slow CTA background drift */
+@keyframes tdp-slow-pan {
+  0%   { transform: scale(1.08) translate3d(0, 0, 0); }
+  50%  { transform: scale(1.08) translate3d(-2%, -1.5%, 0); }
+  100% { transform: scale(1.08) translate3d(0, 0, 0); }
+}
+
+.tdp-cta-pan {
+  animation: tdp-slow-pan 18s ease-in-out infinite;
+}
+
+/* Soft orange glow pulse */
+@keyframes tdp-glow {
+  0%, 100% { opacity: 0.45; }
+  50%      { opacity: 0.8; }
+}
+
+.tdp-glow-pulse {
+  animation: tdp-glow 4.5s ease-in-out infinite;
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .tdp-filament-line,
+  .tdp-filament-line-v,
+  .tdp-cta-pan,
+  .tdp-glow-pulse {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   Miniature & Architectural Models page — scoped animations
+   Prefixed with arc- to avoid clashing with global styles.
+   ============================================================ */
+
+/* Blueprint / architectural grid, slowly drifting */
+.arc-blueprint-grid {
+  background-image:
+    linear-gradient(rgba(247, 142, 0, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247, 142, 0, 0.08) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+}
+
+@keyframes arc-grid-drift {
+  0%   { background-position: 0 0, 0 0, 0 0, 0 0; }
+  100% { background-position: 120px 120px, 120px 120px, 24px 24px, 24px 24px; }
+}
+
+.arc-blueprint-grid-animated {
+  animation: arc-grid-drift 40s linear infinite;
+}
+
+/* Orange "construction line" that flows along the process timeline */
+@keyframes arc-line-flow {
+  0%   { background-position: 0 0; }
+  100% { background-position: 40px 0; }
+}
+
+.arc-process-line {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #f78e00 0,
+    #f78e00 10px,
+    rgba(247, 142, 0, 0.2) 10px,
+    rgba(247, 142, 0, 0.2) 20px
+  );
+  background-size: 40px 100%;
+  animation: arc-line-flow 1.8s linear infinite;
+}
+
+.arc-process-line-v {
+  background-image: repeating-linear-gradient(
+    180deg,
+    #f78e00 0,
+    #f78e00 10px,
+    rgba(247, 142, 0, 0.2) 10px,
+    rgba(247, 142, 0, 0.2) 20px
+  );
+  background-size: 100% 40px;
+  animation: arc-line-flow-v 1.8s linear infinite;
+}
+
+@keyframes arc-line-flow-v {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 40px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arc-blueprint-grid-animated,
+  .arc-process-line,
+  .arc-process-line-v {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   Customized Gifts page — scoped animations
+   Prefixed with gift- to avoid clashing with global styles.
+   ============================================================ */
+
+/* Warm orange connecting line for the personalization / photo flow */
+@keyframes gift-line-flow {
+  0%   { background-position: 0 0; }
+  100% { background-position: 36px 0; }
+}
+
+.gift-flow-line {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #f78e00 0,
+    #f78e00 9px,
+    rgba(247, 142, 0, 0.22) 9px,
+    rgba(247, 142, 0, 0.22) 18px
+  );
+  background-size: 36px 100%;
+  animation: gift-line-flow 1.8s linear infinite;
+}
+
+.gift-flow-line-v {
+  background-image: repeating-linear-gradient(
+    180deg,
+    #f78e00 0,
+    #f78e00 9px,
+    rgba(247, 142, 0, 0.22) 9px,
+    rgba(247, 142, 0, 0.22) 18px
+  );
+  background-size: 100% 36px;
+  animation: gift-line-flow-v 1.8s linear infinite;
+}
+
+@keyframes gift-line-flow-v {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 36px; }
+}
+
+/* Soft warm radial glow used behind product compositions */
+.gift-warm-glow {
+  background: radial-gradient(circle at 50% 40%, rgba(247, 142, 0, 0.22), transparent 60%);
+}
+
+@keyframes gift-glow-breathe {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%      { opacity: 0.85; transform: scale(1.05); }
+}
+
+.gift-glow-breathe {
+  animation: gift-glow-breathe 6s ease-in-out infinite;
+}
+
+/* Gentle CTA image drift */
+@keyframes gift-slow-pan {
+  0%   { transform: scale(1.08) translate3d(0, 0, 0); }
+  50%  { transform: scale(1.08) translate3d(2%, -1%, 0); }
+  100% { transform: scale(1.08) translate3d(0, 0, 0); }
+}
+
+.gift-cta-pan {
+  animation: gift-slow-pan 20s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gift-flow-line,
+  .gift-flow-line-v,
+  .gift-glow-breathe,
+  .gift-cta-pan {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   Medical & Anatomical Models page — scoped animations
+   Prefixed with med- to avoid clashing with global styles.
+   ============================================================ */
+
+/* Subtle scientific / medical grid */
+.med-grid {
+  background-image:
+    linear-gradient(rgba(247, 142, 0, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247, 142, 0, 0.06) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+}
+
+@keyframes med-grid-drift {
+  0%   { background-position: 0 0, 0 0, 0 0, 0 0; }
+  100% { background-position: 100px 100px, 100px 100px, 20px 20px, 20px 20px; }
+}
+
+.med-grid-animated {
+  animation: med-grid-drift 45s linear infinite;
+}
+
+/* Orange process line */
+@keyframes med-line-flow {
+  0%   { background-position: 0 0; }
+  100% { background-position: 40px 0; }
+}
+
+.med-process-line {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #f78e00 0,
+    #f78e00 11px,
+    rgba(247, 142, 0, 0.2) 11px,
+    rgba(247, 142, 0, 0.2) 20px
+  );
+  background-size: 40px 100%;
+  animation: med-line-flow 1.9s linear infinite;
+}
+
+.med-process-line-v {
+  background-image: repeating-linear-gradient(
+    180deg,
+    #f78e00 0,
+    #f78e00 11px,
+    rgba(247, 142, 0, 0.2) 11px,
+    rgba(247, 142, 0, 0.2) 20px
+  );
+  background-size: 100% 40px;
+  animation: med-line-flow-v 1.9s linear infinite;
+}
+
+@keyframes med-line-flow-v {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 40px; }
+}
+
+/* Scan-line sweep used over close-up / featured imagery */
+@keyframes med-scan {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  40%  { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+.med-scan-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent, rgba(247, 142, 0, 0.35), transparent);
+  height: 40%;
+  animation: med-scan 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .med-grid-animated,
+  .med-process-line,
+  .med-process-line-v {
+    animation: none !important;
+  }
+  .med-scan-line::after {
+    animation: none !important;
+    opacity: 0;
+  }
+}
+
+/* ============================================================
+   Functional Parts page — scoped animations
+   Prefixed with fp- to avoid clashing with global styles.
+   ============================================================ */
+
+/* CAD-style technical grid with crosshair ticks */
+.fp-cad-grid {
+  background-image:
+    linear-gradient(rgba(247, 142, 0, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247, 142, 0, 0.08) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 96px 96px, 96px 96px, 16px 16px, 16px 16px;
+}
+
+@keyframes fp-grid-drift {
+  0%   { background-position: 0 0, 0 0, 0 0, 0 0; }
+  100% { background-position: 96px 96px, 96px 96px, 16px 16px, 16px 16px; }
+}
+
+.fp-cad-grid-animated {
+  animation: fp-grid-drift 38s linear infinite;
+}
+
+/* Orange construction / process line */
+@keyframes fp-line-flow {
+  0%   { background-position: 0 0; }
+  100% { background-position: 38px 0; }
+}
+
+.fp-process-line {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #f78e00 0,
+    #f78e00 12px,
+    rgba(247, 142, 0, 0.2) 12px,
+    rgba(247, 142, 0, 0.2) 19px
+  );
+  background-size: 38px 100%;
+  animation: fp-line-flow 1.7s linear infinite;
+}
+
+.fp-process-line-v {
+  background-image: repeating-linear-gradient(
+    180deg,
+    #f78e00 0,
+    #f78e00 12px,
+    rgba(247, 142, 0, 0.2) 12px,
+    rgba(247, 142, 0, 0.2) 19px
+  );
+  background-size: 100% 38px;
+  animation: fp-line-flow-v 1.7s linear infinite;
+}
+
+@keyframes fp-line-flow-v {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 38px; }
+}
+
+/* Slow rotating gear accent */
+@keyframes fp-gear-spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.fp-gear-spin {
+  animation: fp-gear-spin 24s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fp-cad-grid-animated,
+  .fp-process-line,
+  .fp-process-line-v,
+  .fp-gear-spin {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   Prototyping & Product Development page — scoped animations
+   Prefixed with pt- to avoid clashing with global styles.
+   ============================================================ */
+
+/* Dashed CAD-style grid with a dot overlay (innovation feel) */
+.pt-dev-grid {
+  background-image:
+    radial-gradient(rgba(247, 142, 0, 0.12) 1px, transparent 1.5px),
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px, 48px 48px, 48px 48px;
+}
+
+@keyframes pt-grid-drift {
+  0%   { background-position: 0 0, 0 0, 0 0; }
+  100% { background-position: 48px 48px, 48px 48px, 48px 48px; }
+}
+
+.pt-dev-grid-animated {
+  animation: pt-grid-drift 36s linear infinite;
+}
+
+/* Orange process / iteration line */
+@keyframes pt-line-flow {
+  0%   { background-position: 0 0; }
+  100% { background-position: 34px 0; }
+}
+
+.pt-process-line {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #f78e00 0,
+    #f78e00 10px,
+    rgba(247, 142, 0, 0.2) 10px,
+    rgba(247, 142, 0, 0.2) 17px
+  );
+  background-size: 34px 100%;
+  animation: pt-line-flow 1.7s linear infinite;
+}
+
+.pt-process-line-v {
+  background-image: repeating-linear-gradient(
+    180deg,
+    #f78e00 0,
+    #f78e00 10px,
+    rgba(247, 142, 0, 0.2) 10px,
+    rgba(247, 142, 0, 0.2) 17px
+  );
+  background-size: 100% 34px;
+  animation: pt-line-flow-v 1.7s linear infinite;
+}
+
+@keyframes pt-line-flow-v {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 34px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pt-dev-grid-animated,
+  .pt-process-line,
+  .pt-process-line-v {
+    animation: none !important;
+  }
+}
