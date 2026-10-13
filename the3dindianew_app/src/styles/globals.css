@@ -1032,3 +1032,41 @@ dialog::backdrop {
     animation: none !important;
   }
 }
+
+/* ============================================================
+   Homepage — scoped styles
+   Prefixed with home- to avoid clashing with global styles.
+   ============================================================ */
+
+/* Subtle technical grid for the dark hero */
+.home-hero-grid {
+  background-image:
+    linear-gradient(rgba(247, 142, 0, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 46px 46px, 46px 46px;
+}
+
+/* Hero slide cross-fade (JS toggles .is-active) */
+.home-slide {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.7s ease;
+}
+.home-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Ken-burns style slow zoom on the active hero image */
+@keyframes home-kenburns {
+  0%   { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+.home-kenburns {
+  animation: home-kenburns 7s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-slide { transition: none; }
+  .home-kenburns { animation: none !important; }
+}

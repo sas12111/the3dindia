@@ -52,30 +52,30 @@ const processSteps = [
 ];
 
 const materials = [
-  { name: 'PLA', note: 'Most Common', img: `${IMG}/material-pla.jpg`, alt: 'PLA batch 3D printed parts', accent: '#f78e00', desc: 'Cost-effective and versatile.' },
-  { name: 'PETG', note: '', img: `${IMG}/material-petg.jpg`, alt: 'PETG 3D printed parts', accent: '#2563eb', desc: 'Tough and chemical resistant.' },
-  { name: 'TPU', note: '', img: `${IMG}/material-tpu.jpg`, alt: 'Flexible TPU 3D printed parts', accent: '#dc2626', desc: 'Flexible and impact resistant.' },
+  { name: 'PLA', note: 'Most Common', img: `${IMG}/05_materials_filament_spools.jpg`, alt: 'PLA batch 3D printed parts', accent: '#f78e00', desc: 'Cost-effective and versatile.' },
+  { name: 'PETG', note: '', img: `${IMG}/03_white_parts_batch.jpg`, alt: 'PETG 3D printed parts', accent: '#2563eb', desc: 'Tough and chemical resistant.' },
+  { name: 'TPU', note: '', img: `${IMG}/18_multicolor_lattice_parts.jpg`, alt: 'Flexible TPU 3D printed parts', accent: '#dc2626', desc: 'Flexible and impact resistant.' },
 ];
 
 const industries = [
-  { title: 'Consumer Products', img: `${IMG}/industry-consumer.jpg`, alt: 'Consumer products batch' },
-  { title: 'Automotive', img: `${IMG}/industry-automotive.jpg`, alt: 'Automotive parts batch' },
-  { title: 'Electronics', img: `${IMG}/industry-electronics.jpg`, alt: 'Electronics enclosures batch' },
-  { title: 'Industrial & Machinery', img: `${IMG}/industry-machinery.jpg`, alt: 'Industrial and machinery parts' },
-  { title: 'Medical & Healthcare', img: `${IMG}/industry-medical.jpg`, alt: 'Medical and healthcare models' },
-  { title: 'Architecture & Models', img: `${IMG}/industry-architecture.jpg`, alt: 'Architecture and models batch' },
-  { title: 'Education & Research', img: `${IMG}/industry-education.jpg`, alt: 'Education and research batch' },
+  { title: 'Consumer Products', img: `${IMG}/13_consumer_utility_products.jpg`, alt: 'Consumer products batch' },
+  { title: 'Automotive', img: `${IMG}/08_automotive_components.jpg`, alt: 'Automotive parts batch' },
+  { title: 'Electronics', img: `${IMG}/09_electronics_housings.jpg`, alt: 'Electronics enclosures batch' },
+  { title: 'Industrial & Machinery', img: `${IMG}/10_mechanical_gears.jpg`, alt: 'Industrial and machinery parts' },
+  { title: 'Medical & Healthcare', img: `${IMG}/11_medical_anatomical_models.jpg`, alt: 'Medical and healthcare models' },
+  { title: 'Architecture & Models', img: `${IMG}/12_architectural_scale_model.jpg`, alt: 'Architecture and models batch' },
+  { title: 'Education & Research', img: `${IMG}/16_white_cylindrical_components.jpg`, alt: 'Education and research batch' },
 ];
 
 const gallery = [
-  { img: `${IMG}/gallery-1.jpg`, alt: 'Batch production sample 1' },
-  { img: `${IMG}/gallery-2.jpg`, alt: 'Batch production sample 2' },
-  { img: `${IMG}/gallery-3.jpg`, alt: 'Batch production sample 3' },
-  { img: `${IMG}/gallery-4.jpg`, alt: 'Batch production sample 4' },
-  { img: `${IMG}/gallery-5.jpg`, alt: 'Batch production sample 5' },
-  { img: `${IMG}/gallery-6.jpg`, alt: 'Batch production sample 6' },
-  { img: `${IMG}/gallery-7.jpg`, alt: 'Batch production sample 7' },
-  { img: `${IMG}/gallery-8.jpg`, alt: 'Batch production sample 8' },
+  { img: `${IMG}/02_black_parts_batch.jpg`, alt: 'Batch of black 3D printed parts' },
+  { img: `${IMG}/14_white_brackets_batch.jpg`, alt: 'Batch of white printed brackets' },
+  { img: `${IMG}/17_black_mounts_batch.jpg`, alt: 'Batch of black printed mounts' },
+  { img: `${IMG}/04_warehouse_inventory.jpg`, alt: 'Warehouse inventory of printed parts' },
+  { img: `${IMG}/07_black_enclosures_closeup.jpg`, alt: 'Close-up of black printed enclosures' },
+  { img: `${IMG}/15_black_brackets_batch.jpg`, alt: 'Batch of black printed brackets' },
+  { img: `${IMG}/21_inspection_white_components.jpg`, alt: 'Inspection of white printed components' },
+  { img: `${IMG}/19_drone_frame.jpg`, alt: '3D printed drone frame' },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -114,7 +114,7 @@ export function BulkManufacturingDetail() {
         content: 'From prototypes to high-volume production — reliable, cost-effective and consistent 3D printed parts for your business.',
       },
       { selector: 'meta[property="og:type"]', attr: 'property', key: 'og:type', content: 'website' },
-      { selector: 'meta[property="og:image"]', attr: 'property', key: 'og:image', content: `${IMG}/hero.jpg` },
+      { selector: 'meta[property="og:image"]', attr: 'property', key: 'og:image', content: `${IMG}/01_hero_printer_farm.jpg` },
     ];
 
     const created: HTMLMetaElement[] = [];
@@ -218,7 +218,7 @@ export function BulkManufacturingDetail() {
               <div className="absolute -bottom-4 -left-4 hidden h-20 w-20 border-b-2 border-l-2 border-[#f78e00]/70 sm:block" aria-hidden="true" />
               <div className="relative overflow-hidden rounded-xl shadow-2xl ring-1 ring-white/10">
                 <ImageWithFallback
-                  src={`${IMG}/hero.jpg`}
+                  src={`${IMG}/01_hero_printer_farm.jpg`}
                   alt="Shelves of identical 3D printed parts produced at scale"
                   className="h-[320px] w-full object-cover sm:h-[420px] lg:h-[500px]"
                 />
@@ -301,7 +301,7 @@ export function BulkManufacturingDetail() {
               variants={fadeUp}
             >
               <ImageWithFallback
-                src={`${IMG}/capability.jpg`}
+                src={`${IMG}/20_production_workshop.jpg`}
                 alt="Rows of 3D printers producing batches of parts"
                 loading="lazy"
                 className="h-full max-h-[440px] w-full object-cover"
@@ -496,7 +496,7 @@ export function BulkManufacturingDetail() {
       <section className="relative isolate overflow-hidden bg-[#0d1016] text-white">
         <div className="absolute inset-0" aria-hidden="true">
           <ImageWithFallback
-            src={`${IMG}/cta.jpg`}
+            src={`${IMG}/24_dispatch_logistics.jpg`}
             alt=""
             loading="lazy"
             className="h-full w-full object-cover opacity-25"
