@@ -32,21 +32,21 @@ const IMG = '/images/functional-parts';
 const heroCapabilities = ['Custom Designs', 'Multiple Materials', 'Small-Batch Production', 'Prototype Friendly'];
 
 const whatWeCreate = [
-  { no: '01', title: 'Brackets & Mounts', icon: Wrench, desc: 'Custom brackets, mounts and structural components.', ex: 'Wall mounts, camera mounts, equipment brackets, custom holders.', img: `${IMG}/create-brackets.jpg`, alt: 'Custom 3D printed brackets and mounts' },
-  { no: '02', title: 'Enclosures & Housings', icon: Boxes, desc: 'Custom cases and housings for electronics and other devices.', ex: 'Electronics enclosure, sensor housing, project box, controller case.', img: `${IMG}/create-enclosures.jpg`, alt: '3D printed electronics enclosures and housings' },
-  { no: '03', title: 'Clips & Adapters', icon: PlugZap, desc: 'Custom clips, adapters and connectors for specific requirements.', ex: 'Snap clips, custom adapters, connectors and fittings.', img: `${IMG}/create-clips.jpg`, alt: '3D printed clips and adapters' },
-  { no: '04', title: 'Organizers & Holders', icon: LayoutGrid, desc: 'Desk organizers, tool holders, cable organizers and storage solutions.', ex: 'Desk trays, tool holders, cable organizers, storage.', img: `${IMG}/create-organizers.jpg`, alt: '3D printed organizers and holders' },
-  { no: '05', title: 'Replacement Parts', icon: Repeat2, desc: 'Replacement plastic components for existing products where suitable.', ex: 'Recreated clips, knobs, brackets and small plastic parts.', img: `${IMG}/create-replacement.jpg`, alt: '3D printed replacement plastic parts' },
-  { no: '06', title: 'Custom Utility Products', icon: Puzzle, desc: 'Practical products designed around your specific requirement.', ex: 'Project-specific tools, fittings and utility items.', img: `${IMG}/create-custom.jpg`, alt: 'Custom 3D printed utility products' },
+  { no: '01', title: 'Brackets & Mounts', icon: Wrench, desc: 'Custom brackets, mounts and structural components.', ex: 'Wall mounts, camera mounts, equipment brackets, custom holders.', img: `${IMG}/02_brackets_and_mounts.jpg`, alt: 'Custom 3D printed brackets and mounts' },
+  { no: '02', title: 'Enclosures & Housings', icon: Boxes, desc: 'Custom cases and housings for electronics and other devices.', ex: 'Electronics enclosure, sensor housing, project box, controller case.', img: `${IMG}/03_electronics_enclosures.jpg`, alt: '3D printed electronics enclosures and housings' },
+  { no: '03', title: 'Clips & Adapters', icon: PlugZap, desc: 'Custom clips, adapters and connectors for specific requirements.', ex: 'Snap clips, custom adapters, connectors and fittings.', img: `${IMG}/04_clips_and_adapters.jpg`, alt: '3D printed clips and adapters' },
+  { no: '04', title: 'Organizers & Holders', icon: LayoutGrid, desc: 'Desk organizers, tool holders, cable organizers and storage solutions.', ex: 'Desk trays, tool holders, cable organizers, storage.', img: `${IMG}/05_tool_and_parts_organizers.jpg`, alt: '3D printed organizers and holders' },
+  { no: '05', title: 'Replacement Parts', icon: Repeat2, desc: 'Replacement plastic components for existing products where suitable.', ex: 'Recreated clips, knobs, brackets and small plastic parts.', img: `${IMG}/14_broken_part_replacement.jpg`, alt: '3D printed replacement plastic parts' },
+  { no: '06', title: 'Custom Utility Products', icon: Puzzle, desc: 'Practical products designed around your specific requirement.', ex: 'Project-specific tools, fittings and utility items.', img: `${IMG}/17_utility_components.jpg`, alt: 'Custom 3D printed utility products' },
 ];
 
 const featured = [
-  { name: 'Camera Mount', tag: 'Custom Bracket', img: `${IMG}/featured-camera.jpg`, alt: '3D printed camera mount bracket' },
-  { name: 'Electronics Enclosure', tag: 'Device Housing', img: `${IMG}/featured-enclosure.jpg`, alt: '3D printed electronics enclosure' },
-  { name: 'Gear / Mechanical Part', tag: 'Replacement Component', img: `${IMG}/featured-gear.jpg`, alt: '3D printed mechanical gear part' },
-  { name: 'Phone Holder', tag: 'Desk Accessory', img: `${IMG}/featured-phone.jpg`, alt: '3D printed desk phone holder' },
-  { name: 'Cable Organizer', tag: 'Utility Product', img: `${IMG}/featured-cable.jpg`, alt: '3D printed cable organizer' },
-  { name: 'Custom Adapter', tag: 'Functional Part', img: `${IMG}/featured-adapter.jpg`, alt: '3D printed custom adapter' },
+  { name: 'Camera Mount', tag: 'Custom Bracket', img: `${IMG}/08_camera_mount.jpg`, alt: '3D printed camera mount bracket' },
+  { name: 'Electronics Enclosure', tag: 'Device Housing', img: `${IMG}/09_device_housing.jpg`, alt: '3D printed electronics enclosure' },
+  { name: 'Gear / Mechanical Part', tag: 'Replacement Component', img: `${IMG}/10_gear_set.jpg`, alt: '3D printed mechanical gear part' },
+  { name: 'Phone Holder', tag: 'Desk Accessory', img: `${IMG}/11_phone_stand.jpg`, alt: '3D printed desk phone holder' },
+  { name: 'Cable Organizer', tag: 'Utility Product', img: `${IMG}/12_cable_management.jpg`, alt: '3D printed cable organizer' },
+  { name: 'Custom Adapter', tag: 'Functional Part', img: `${IMG}/16_threaded_adapter.jpg`, alt: '3D printed custom adapter' },
 ];
 
 const problemSolution = [
@@ -63,9 +63,9 @@ const processSteps = [
 ];
 
 const materials = [
-  { name: 'PLA', note: 'Most Common', img: `${IMG}/material-pla.jpg`, alt: 'PLA filament beside printed utility parts', accent: '#f78e00', points: ['Easy to print', 'Good for everyday utility products', 'Suitable for prototypes', 'Multiple colour options'] },
-  { name: 'PETG', note: '', img: `${IMG}/material-petg.jpg`, alt: 'PETG filament beside a functional part', accent: '#2563eb', points: ['Stronger and more durable', 'Better heat resistance than PLA', 'Suitable for many functional parts', 'Good layer adhesion'] },
-  { name: 'TPU', note: '', img: `${IMG}/material-tpu.jpg`, alt: 'TPU filament beside a flexible printed part', accent: '#dc2626', points: ['Flexible and impact resistant', 'Ideal for grips and covers', 'Useful for protective parts', 'Bendable and durable'] },
+  { name: 'PLA', note: 'Most Common', img: `${IMG}/25_filament_spool_holder.jpg`, alt: 'PLA printed utility parts', accent: '#f78e00', points: ['Easy to print', 'Good for everyday utility products', 'Suitable for prototypes', 'Multiple colour options'] },
+  { name: 'PETG', note: '', img: `${IMG}/06_gears_and_mechanical_parts.jpg`, alt: 'PETG functional parts', accent: '#2563eb', points: ['Stronger and more durable', 'Better heat resistance than PLA', 'Suitable for many functional parts', 'Good layer adhesion'] },
+  { name: 'TPU', note: '', img: `${IMG}/20_small_parts_tray.jpg`, alt: 'Flexible TPU printed parts', accent: '#dc2626', points: ['Flexible and impact resistant', 'Ideal for grips and covers', 'Useful for protective parts', 'Bendable and durable'] },
 ];
 
 const whyPoints = [
@@ -78,21 +78,21 @@ const whyPoints = [
 ];
 
 const applications = [
-  { no: '01', title: 'Home & Office', ex: 'Organizers, holders, mounts, storage accessories.', img: `${IMG}/app-home.jpg`, alt: 'Home and office 3D printed products' },
-  { no: '02', title: 'Electronics', ex: 'Enclosures, brackets, project boxes, cable management.', img: `${IMG}/app-electronics.jpg`, alt: 'Electronics 3D printed parts' },
-  { no: '03', title: 'Automotive', ex: 'Clips, brackets, custom accessories.', img: `${IMG}/app-automotive.jpg`, alt: 'Automotive 3D printed accessories' },
-  { no: '04', title: 'Industrial', ex: 'Jigs, fixtures, brackets, prototypes.', img: `${IMG}/app-industrial.jpg`, alt: 'Industrial 3D printed jigs and fixtures' },
-  { no: '05', title: 'Hobby & DIY', ex: 'Custom tools, project components, hobby accessories.', img: `${IMG}/app-hobby.jpg`, alt: 'Hobby and DIY 3D printed components' },
-  { no: '06', title: 'Product Development', ex: 'Prototypes, concept validation, design iterations.', img: `${IMG}/app-product.jpg`, alt: 'Product development 3D printed prototypes' },
+  { no: '01', title: 'Home & Office', ex: 'Organizers, holders, mounts, storage accessories.', img: `${IMG}/22_tool_rack.jpg`, alt: 'Home and office 3D printed products' },
+  { no: '02', title: 'Electronics', ex: 'Enclosures, brackets, project boxes, cable management.', img: `${IMG}/18_component_collection.jpg`, alt: 'Electronics 3D printed parts' },
+  { no: '03', title: 'Automotive', ex: 'Clips, brackets, custom accessories.', img: `${IMG}/19_pipe_mount.jpg`, alt: 'Automotive 3D printed accessories' },
+  { no: '04', title: 'Industrial', ex: 'Jigs, fixtures, brackets, prototypes.', img: `${IMG}/27_adjustable_fixture.jpg`, alt: 'Industrial 3D printed jigs and fixtures' },
+  { no: '05', title: 'Hobby & DIY', ex: 'Custom tools, project components, hobby accessories.', img: `${IMG}/21_wall_mounted_planter.jpg`, alt: 'Hobby and DIY 3D printed components' },
+  { no: '06', title: 'Product Development', ex: 'Prototypes, concept validation, design iterations.', img: `${IMG}/26_rail_mount_assembly.jpg`, alt: 'Product development 3D printed prototypes' },
 ];
 
 const projects = [
-  { name: 'Custom Bracket', category: 'Brackets & Mounts', desc: 'Functional mounting part', img: `${IMG}/project-bracket.jpg`, alt: 'Custom 3D printed bracket' },
-  { name: 'Electronics Case', category: 'Enclosures', desc: 'Device housing', img: `${IMG}/project-case.jpg`, alt: '3D printed electronics case' },
-  { name: 'Phone Holder', category: 'Organizers & Holders', desc: 'Desk accessory', img: `${IMG}/project-phone.jpg`, alt: '3D printed phone holder' },
-  { name: 'Gear Replacement', category: 'Replacement Parts', desc: 'Mechanical component', img: `${IMG}/project-gear.jpg`, alt: '3D printed gear replacement' },
-  { name: 'Cable Clip', category: 'Clips & Adapters', desc: 'Utility product', img: `${IMG}/project-clip.jpg`, alt: '3D printed cable clip' },
-  { name: 'Custom Mount', category: 'Brackets & Mounts', desc: 'Functional part', img: `${IMG}/project-mount.jpg`, alt: 'Custom 3D printed mount' },
+  { name: 'Custom Bracket', category: 'Brackets & Mounts', desc: 'Functional mounting part', img: `${IMG}/23_heavy_duty_bracket.jpg`, alt: 'Custom 3D printed bracket' },
+  { name: 'Electronics Case', category: 'Enclosures', desc: 'Device housing', img: `${IMG}/09_device_housing.jpg`, alt: '3D printed electronics case' },
+  { name: 'Laptop Stand', category: 'Organizers & Holders', desc: 'Desk accessory', img: `${IMG}/24_laptop_stand.jpg`, alt: '3D printed laptop stand' },
+  { name: 'Gear Replacement', category: 'Replacement Parts', desc: 'Mechanical component', img: `${IMG}/10_gear_set.jpg`, alt: '3D printed gear replacement' },
+  { name: 'Threaded Parts', category: 'Clips & Adapters', desc: 'Utility product', img: `${IMG}/28_threaded_parts.jpg`, alt: '3D printed threaded parts' },
+  { name: 'Custom Mount', category: 'Brackets & Mounts', desc: 'Functional part', img: `${IMG}/13_custom_mount_block.jpg`, alt: 'Custom 3D printed mount' },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -131,7 +131,7 @@ export function FunctionalPartsDetail() {
         content: 'Custom 3D printed parts for everyday use, prototypes, replacements and specialized requirements.',
       },
       { selector: 'meta[property="og:type"]', attr: 'property', key: 'og:type', content: 'website' },
-      { selector: 'meta[property="og:image"]', attr: 'property', key: 'og:image', content: `${IMG}/hero.jpg` },
+      { selector: 'meta[property="og:image"]', attr: 'property', key: 'og:image', content: `${IMG}/01_hero_functional_parts.jpg` },
     ];
 
     const created: HTMLMetaElement[] = [];
@@ -236,7 +236,7 @@ export function FunctionalPartsDetail() {
               <div className="absolute -bottom-4 -left-4 hidden h-20 w-20 border-b-2 border-l-2 border-[#f78e00]/70 sm:block" aria-hidden="true" />
               <div className="relative overflow-hidden rounded-xl shadow-2xl ring-1 ring-white/10">
                 <ImageWithFallback
-                  src={`${IMG}/hero.jpg`}
+                  src={`${IMG}/01_hero_functional_parts.jpg`}
                   alt="Functional 3D printed parts arranged on an engineering workbench"
                   className="h-[320px] w-full object-cover sm:h-[430px] lg:h-[520px]"
                 />
@@ -425,9 +425,9 @@ export function FunctionalPartsDetail() {
                 variants={fadeUp}
               >
                 {[
-                  { img: `${IMG}/ps-broken.jpg`, label: row.broken, alt: 'Broken plastic part' },
-                  { img: `${IMG}/ps-design.jpg`, label: row.design, alt: 'Custom CAD design of the part' },
-                  { img: `${IMG}/ps-printed.jpg`, label: row.printed, alt: 'Printed replacement part' },
+                  { img: `${IMG}/14_broken_part_replacement.jpg`, label: row.broken, alt: 'Broken plastic part' },
+                  { img: `${IMG}/15_cad_to_printed_part.jpg`, label: row.design, alt: 'Custom CAD design of the part' },
+                  { img: `${IMG}/07_custom_brackets.jpg`, label: row.printed, alt: 'Printed replacement part' },
                 ].map((cell, idx) => (
                   <div key={cell.label} className="relative flex flex-col">
                     <div className="aspect-square overflow-hidden rounded-lg">
@@ -564,7 +564,7 @@ export function FunctionalPartsDetail() {
               variants={fadeUp}
             >
               <ImageWithFallback
-                src={`${IMG}/why-collage.jpg`}
+                src={`${IMG}/18_component_collection.jpg`}
                 alt="A collage of functional 3D printed parts"
                 loading="lazy"
                 className="h-full max-h-[460px] w-full object-cover"
@@ -754,7 +754,7 @@ export function FunctionalPartsDetail() {
       <section className="relative isolate overflow-hidden bg-[#0b0b0c] text-white">
         <div className="absolute inset-0" aria-hidden="true">
           <ImageWithFallback
-            src={`${IMG}/cta.jpg`}
+            src={`${IMG}/29_custom_mechanical_bracket.jpg`}
             alt=""
             loading="lazy"
             className="h-full w-full object-cover opacity-30"

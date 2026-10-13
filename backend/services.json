@@ -12,7 +12,7 @@
       "Small-batch production",
       "Multiple colour options"
     ],
-    "image": "/images/3d-printing/hero-printer.jpg",
+    "image": "/images/3d-printing/01_hero_3d_printing_services.jpg",
     "order": 1,
     "active": true,
     "updatedAt": "2026-10-01T05:48:14.527Z"
@@ -30,7 +30,7 @@
       "Form, fit & function checks",
       "Small-batch prototypes"
     ],
-    "image": "/images/prototyping/hero.jpg",
+    "image": "/images/prototyping/01_hero_cad_workbench.jpg",
     "order": 2,
     "active": true,
     "updatedAt": "2026-10-01T05:48:14.527Z"
@@ -48,7 +48,7 @@
       "Replacement parts (where suitable)",
       "Custom utility products"
     ],
-    "image": "/images/functional-parts/hero.jpg",
+    "image": "/images/functional-parts/01_hero_functional_parts.jpg",
     "order": 3,
     "active": true,
     "updatedAt": "2026-10-01T05:48:14.527Z"
@@ -66,7 +66,7 @@
       "Custom scales & sizes",
       "Presentation finish"
     ],
-    "image": "/images/architectural-models/hero-model.jpg",
+    "image": "/images/architectural-models/01_modern_luxury_house.jpg",
     "order": 4,
     "active": true,
     "updatedAt": "2026-10-01T05:48:14.527Z"
@@ -84,7 +84,7 @@
       "Custom anatomical models",
       "For educational use"
     ],
-    "image": "/images/medical-models/hero.jpg",
+    "image": "/images/medical-models/01_hero_medical_anatomical_models.jpg",
     "order": 5,
     "active": true,
     "updatedAt": "2026-10-01T05:48:14.527Z"
@@ -102,7 +102,7 @@
       "Personalized keychains",
       "Custom décor"
     ],
-    "image": "/images/customized-gifts/hero.jpg",
+    "image": "/images/customized-gifts/01_hero_customized_gifts.jpg",
     "order": 6,
     "active": true,
     "updatedAt": "2026-10-01T05:48:14.527Z"
@@ -111,16 +111,16 @@
     "id": "cad-modeling",
     "icon": "Pencil",
     "title": "3D Designing / CAD Modeling",
-    "description": "Expert CAD modeling and design services to bring your concepts to reality.",
+    "description": "Professional 3D designing and CAD modeling for product, mechanical, industrial and architectural designs.",
     "features": [
-      "Custom CAD design",
-      "3D modeling from sketches",
-      "Reverse engineering",
-      "Design optimization",
-      "Technical drawings",
-      "File format conversion"
+      "Product design",
+      "Mechanical design",
+      "Industrial design",
+      "Architectural modeling",
+      "Multiple file formats",
+      "Manufacturing-ready models"
     ],
-    "image": "/images/cad-modeling.jpg",
+    "image": "/images/cad-modeling/01_cad_workspace_hero.jpg",
     "order": 7,
     "active": true,
     "updatedAt": "2026-05-26T09:09:17.314Z"
@@ -138,7 +138,7 @@
       "Custom packaging",
       "Delivery scheduling"
     ],
-    "image": "/images/bulk-manufacturing.jpg",
+    "image": "/images/bulk-manufacturing/01_hero_printer_farm.jpg",
     "order": 8,
     "active": true,
     "updatedAt": "2026-05-26T09:12:15.682Z"

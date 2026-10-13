@@ -883,3 +883,190 @@ dialog::backdrop {
     animation: none !important;
   }
 }
+
+/* ============================================================
+   3D Designing & CAD Modeling page — scoped animations
+   Prefixed with cad- to avoid clashing with global styles.
+   ============================================================ */
+
+/* Fine CAD / drafting grid */
+.cad-grid {
+  background-image:
+    linear-gradient(rgba(247, 142, 0, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247, 142, 0, 0.07) 1px, transparent 1px),
+    linear-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+  background-size: 88px 88px, 88px 88px, 22px 22px, 22px 22px;
+}
+
+/* Dark variant for dark sections */
+.cad-grid-dark {
+  background-image:
+    linear-gradient(rgba(247, 142, 0, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247, 142, 0, 0.08) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 88px 88px, 88px 88px, 22px 22px, 22px 22px;
+}
+
+@keyframes cad-grid-drift {
+  0%   { background-position: 0 0, 0 0, 0 0, 0 0; }
+  100% { background-position: 88px 88px, 88px 88px, 22px 22px, 22px 22px; }
+}
+
+.cad-grid-animated {
+  animation: cad-grid-drift 42s linear infinite;
+}
+
+/* Orange process line */
+@keyframes cad-line-flow {
+  0%   { background-position: 0 0; }
+  100% { background-position: 36px 0; }
+}
+
+.cad-process-line {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #f78e00 0,
+    #f78e00 10px,
+    rgba(247, 142, 0, 0.2) 10px,
+    rgba(247, 142, 0, 0.2) 18px
+  );
+  background-size: 36px 100%;
+  animation: cad-line-flow 1.8s linear infinite;
+}
+
+.cad-process-line-v {
+  background-image: repeating-linear-gradient(
+    180deg,
+    #f78e00 0,
+    #f78e00 10px,
+    rgba(247, 142, 0, 0.2) 10px,
+    rgba(247, 142, 0, 0.2) 18px
+  );
+  background-size: 100% 36px;
+  animation: cad-line-flow-v 1.8s linear infinite;
+}
+
+@keyframes cad-line-flow-v {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 36px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cad-grid-animated,
+  .cad-process-line,
+  .cad-process-line-v {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   Bulk Manufacturing page — scoped animations
+   Prefixed with bm- to avoid clashing with global styles.
+   ============================================================ */
+
+/* Production / repeating-unit grid */
+.bm-grid {
+  background-image:
+    linear-gradient(rgba(247, 142, 0, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247, 142, 0, 0.07) 1px, transparent 1px);
+  background-size: 44px 44px, 44px 44px;
+}
+
+.bm-grid-dark {
+  background-image:
+    linear-gradient(rgba(247, 142, 0, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 44px 44px, 44px 44px;
+}
+
+@keyframes bm-grid-slide {
+  0%   { background-position: 0 0, 0 0; }
+  100% { background-position: 0 44px, 44px 0; }
+}
+
+.bm-grid-animated {
+  animation: bm-grid-slide 8s linear infinite;
+}
+
+/* Orange process line */
+@keyframes bm-line-flow {
+  0%   { background-position: 0 0; }
+  100% { background-position: 36px 0; }
+}
+
+.bm-process-line {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #f78e00 0,
+    #f78e00 10px,
+    rgba(247, 142, 0, 0.2) 10px,
+    rgba(247, 142, 0, 0.2) 18px
+  );
+  background-size: 36px 100%;
+  animation: bm-line-flow 1.8s linear infinite;
+}
+
+.bm-process-line-v {
+  background-image: repeating-linear-gradient(
+    180deg,
+    #f78e00 0,
+    #f78e00 10px,
+    rgba(247, 142, 0, 0.2) 10px,
+    rgba(247, 142, 0, 0.2) 18px
+  );
+  background-size: 100% 36px;
+  animation: bm-line-flow-v 1.8s linear infinite;
+}
+
+@keyframes bm-line-flow-v {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 36px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bm-grid-animated,
+  .bm-process-line,
+  .bm-process-line-v {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   Homepage — scoped styles
+   Prefixed with home- to avoid clashing with global styles.
+   ============================================================ */
+
+/* Subtle technical grid for the dark hero */
+.home-hero-grid {
+  background-image:
+    linear-gradient(rgba(247, 142, 0, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 46px 46px, 46px 46px;
+}
+
+/* Hero slide cross-fade (JS toggles .is-active) */
+.home-slide {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.7s ease;
+}
+.home-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Ken-burns style slow zoom on the active hero image */
+@keyframes home-kenburns {
+  0%   { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+.home-kenburns {
+  animation: home-kenburns 7s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-slide { transition: none; }
+  .home-kenburns { animation: none !important; }
+}

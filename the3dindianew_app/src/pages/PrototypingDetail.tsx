@@ -47,18 +47,18 @@ const benefits = [
 ];
 
 const prototypeTypes = [
-  { no: '01', icon: Lightbulb, title: 'Concept Models', desc: 'Physical models for exploring product form and appearance.', ex: 'Product concepts, design studies, shape exploration.', img: `${IMG}/cat-concept.jpg`, alt: 'Physical product concept model prototype' },
-  { no: '02', icon: Cog, title: 'Functional Prototypes', desc: 'Prototypes designed to explore how a product or component works.', ex: 'Moving parts, housings, mechanisms, assemblies.', img: `${IMG}/cat-functional.jpg`, alt: 'Functional 3D printed prototype' },
-  { no: '03', icon: Boxes, title: 'Product Enclosures', desc: 'Custom housings and cases for electronics and devices.', ex: 'Device cases, sensor housings, project boxes.', img: `${IMG}/cat-enclosure.jpg`, alt: '3D printed product enclosure prototype' },
-  { no: '04', icon: Settings2, title: 'Mechanical Prototypes', desc: 'Prototype components for mechanical and engineering projects.', ex: 'Gears, brackets, mechanical assemblies.', img: `${IMG}/cat-mechanical.jpg`, alt: 'Mechanical 3D printed prototype' },
-  { no: '05', icon: Puzzle, title: 'Consumer Product Prototypes', desc: 'Physical prototypes for products intended for everyday users.', ex: 'Consumer product concepts and models.', img: `${IMG}/cat-consumer.jpg`, alt: 'Consumer product prototype' },
-  { no: '06', icon: Rocket, title: 'Startup & Inventor Projects', desc: 'Prototype development for early-stage product ideas and independent projects.', ex: 'Early-stage products, inventor concepts.', img: `${IMG}/cat-startup.jpg`, alt: 'Startup product prototype' },
+  { no: '01', icon: Lightbulb, title: 'Concept Models', desc: 'Physical models for exploring product form and appearance.', ex: 'Product concepts, design studies, shape exploration.', img: `${IMG}/02_concept_product_shell.jpg`, alt: 'Physical product concept model prototype' },
+  { no: '02', icon: Cog, title: 'Functional Prototypes', desc: 'Prototypes designed to explore how a product or component works.', ex: 'Moving parts, housings, mechanisms, assemblies.', img: `${IMG}/13_assembled_prototype.jpg`, alt: 'Functional 3D printed prototype' },
+  { no: '03', icon: Boxes, title: 'Product Enclosures', desc: 'Custom housings and cases for electronics and devices.', ex: 'Device cases, sensor housings, project boxes.', img: `${IMG}/04_electronics_enclosure.jpg`, alt: '3D printed product enclosure prototype' },
+  { no: '04', icon: Settings2, title: 'Mechanical Prototypes', desc: 'Prototype components for mechanical and engineering projects.', ex: 'Gears, brackets, mechanical assemblies.', img: `${IMG}/03_mechanical_prototype.jpg`, alt: 'Mechanical 3D printed prototype' },
+  { no: '05', icon: Puzzle, title: 'Consumer Product Prototypes', desc: 'Physical prototypes for products intended for everyday users.', ex: 'Consumer product concepts and models.', img: `${IMG}/06_phone_stand.jpg`, alt: 'Consumer product prototype' },
+  { no: '06', icon: Rocket, title: 'Startup & Inventor Projects', desc: 'Prototype development for early-stage product ideas and independent projects.', ex: 'Early-stage products, inventor concepts.', img: `${IMG}/07_drone_prototype.jpg`, alt: 'Startup product prototype' },
 ];
 
 const ideaFlow = [
-  { no: '1', label: 'Concept', note: 'Sketch / early product idea', img: `${IMG}/flow-concept.jpg`, alt: 'Product concept sketch' },
-  { no: '2', label: '3D Design', note: 'CAD model / digital design', img: `${IMG}/flow-cad.jpg`, alt: 'CAD model digital design' },
-  { no: '3', label: 'Prototype', note: 'Real printed product', img: `${IMG}/flow-prototype.jpg`, alt: 'Physical 3D printed prototype' },
+  { no: '1', label: 'Concept', note: 'Sketch / early product idea', img: `${IMG}/15_sketch_to_cad_to_print.jpg`, alt: 'Product concept sketch' },
+  { no: '2', label: '3D Design', note: 'CAD model / digital design', img: `${IMG}/10_cad_model_on_grid.jpg`, alt: 'CAD model digital design' },
+  { no: '3', label: 'Prototype', note: 'Real printed product', img: `${IMG}/11_mount_component.jpg`, alt: 'Physical 3D printed prototype' },
 ];
 
 const processSteps = [
@@ -71,10 +71,10 @@ const processSteps = [
 ];
 
 const iterations = [
-  { v: 'V1', label: 'Initial prototype', img: `${IMG}/iter-v1.jpg`, alt: 'Prototype version 1' },
-  { v: 'V2', label: 'Improved shape', img: `${IMG}/iter-v2.jpg`, alt: 'Prototype version 2' },
-  { v: 'V3', label: 'Improved fit', img: `${IMG}/iter-v3.jpg`, alt: 'Prototype version 3' },
-  { v: 'V4', label: 'Refined prototype', img: `${IMG}/iter-v4.jpg`, alt: 'Prototype version 4' },
+  { v: 'V1', label: 'Initial prototype', img: `${IMG}/14_prototype_iteration_series.jpg`, alt: 'Prototype version 1' },
+  { v: 'V2', label: 'Improved shape', img: `${IMG}/20_colored_prototype_parts.jpg`, alt: 'Prototype version 2' },
+  { v: 'V3', label: 'Improved fit', img: `${IMG}/09_custom_bracket.jpg`, alt: 'Prototype version 3' },
+  { v: 'V4', label: 'Refined prototype', img: `${IMG}/27_bracket_detail.jpg`, alt: 'Prototype version 4' },
 ];
 
 const validation = [
@@ -85,34 +85,34 @@ const validation = [
 ];
 
 const industries = [
-  { no: '01', icon: Rocket, title: 'Startups', desc: 'Turn early ideas into tangible prototypes.', img: `${IMG}/app-startups.jpg`, alt: 'Startup product development' },
-  { no: '02', icon: PenTool, title: 'Product Designers', desc: 'Build physical versions of digital concepts.', img: `${IMG}/app-designers.jpg`, alt: 'Product designer workspace' },
-  { no: '03', icon: Cog, title: 'Engineers', desc: 'Explore components, assemblies and design iterations.', img: `${IMG}/app-engineers.jpg`, alt: 'Engineering components and assemblies' },
-  { no: '04', icon: Lightbulb, title: 'Inventors', desc: 'Visualize and refine new product ideas.', img: `${IMG}/app-inventors.jpg`, alt: 'Inventor refining a product idea' },
-  { no: '05', icon: GraduationCap, title: 'Students & Projects', desc: 'Create physical models for academic and engineering projects.', img: `${IMG}/app-students.jpg`, alt: 'Student academic project models' },
-  { no: '06', icon: Building2, title: 'Small Businesses', desc: 'Develop custom products and prototypes before larger production decisions.', img: `${IMG}/app-business.jpg`, alt: 'Small business custom product' },
+  { no: '01', icon: Rocket, title: 'Startups', desc: 'Turn early ideas into tangible prototypes.', img: `${IMG}/07_drone_prototype.jpg`, alt: 'Startup product development' },
+  { no: '02', icon: PenTool, title: 'Product Designers', desc: 'Build physical versions of digital concepts.', img: `${IMG}/15_sketch_to_cad_to_print.jpg`, alt: 'Product designer workspace' },
+  { no: '03', icon: Cog, title: 'Engineers', desc: 'Explore components, assemblies and design iterations.', img: `${IMG}/19_mechanical_linkage.jpg`, alt: 'Engineering components and assemblies' },
+  { no: '04', icon: Lightbulb, title: 'Inventors', desc: 'Visualize and refine new product ideas.', img: `${IMG}/08_prototype_parts_collection.jpg`, alt: 'Inventor refining a product idea' },
+  { no: '05', icon: GraduationCap, title: 'Students & Projects', desc: 'Create physical models for academic and engineering projects.', img: `${IMG}/16_multiple_prototype_sizes.jpg`, alt: 'Student academic project models' },
+  { no: '06', icon: Building2, title: 'Small Businesses', desc: 'Develop custom products and prototypes before larger production decisions.', img: `${IMG}/22_prototype_collection.jpg`, alt: 'Small business custom product' },
 ];
 
 const materials = [
-  { name: 'PLA', note: 'Most Common', img: `${IMG}/material-pla.jpg`, alt: 'PLA filament beside a concept prototype', accent: '#f78e00', desc: 'Good for concept and visual prototypes.' },
-  { name: 'PETG', note: '', img: `${IMG}/material-petg.jpg`, alt: 'PETG filament beside a durable prototype', accent: '#2563eb', desc: 'Useful when greater durability is required.' },
-  { name: 'TPU', note: '', img: `${IMG}/material-tpu.jpg`, alt: 'TPU filament beside a flexible prototype', accent: '#dc2626', desc: 'Useful for flexible prototypes and components.' },
+  { name: 'PLA', note: 'Most Common', img: `${IMG}/23_filament_and_parts.jpg`, alt: 'PLA filament beside a concept prototype', accent: '#f78e00', desc: 'Good for concept and visual prototypes.' },
+  { name: 'PETG', note: '', img: `${IMG}/20_colored_prototype_parts.jpg`, alt: 'PETG filament beside a durable prototype', accent: '#2563eb', desc: 'Useful when greater durability is required.' },
+  { name: 'TPU', note: '', img: `${IMG}/05_gear_prototypes.jpg`, alt: 'TPU filament beside a flexible prototype', accent: '#dc2626', desc: 'Useful for flexible prototypes and components.' },
 ];
 
 const showcase = [
-  { name: 'Product Enclosure', tag: 'Enclosure Prototype', img: `${IMG}/showcase-1.jpg`, alt: 'Product enclosure prototype' },
-  { name: 'Consumer Product Concept', tag: 'Concept Model', img: `${IMG}/showcase-2.jpg`, alt: 'Consumer product concept prototype' },
-  { name: 'Mechanical Component', tag: 'Functional Prototype', img: `${IMG}/showcase-3.jpg`, alt: 'Mechanical component prototype' },
-  { name: 'Electronics Housing', tag: 'Device Housing', img: `${IMG}/showcase-4.jpg`, alt: 'Electronics housing prototype' },
-  { name: 'Functional Assembly', tag: 'Assembly Prototype', img: `${IMG}/showcase-5.jpg`, alt: 'Functional assembly prototype' },
-  { name: 'Device Stand', tag: 'Product Concept', img: `${IMG}/showcase-6.jpg`, alt: 'Device stand prototype' },
+  { name: 'Product Enclosure', tag: 'Enclosure Prototype', img: `${IMG}/24_black_enclosure.jpg`, alt: 'Product enclosure prototype' },
+  { name: 'Consumer Product Concept', tag: 'Concept Model', img: `${IMG}/25_phone_stand_detail.jpg`, alt: 'Consumer product concept prototype' },
+  { name: 'Mechanical Component', tag: 'Functional Prototype', img: `${IMG}/19_mechanical_linkage.jpg`, alt: 'Mechanical component prototype' },
+  { name: 'Electronics Housing', tag: 'Device Housing', img: `${IMG}/18_electronics_enclosure_open.jpg`, alt: 'Electronics housing prototype' },
+  { name: 'Functional Assembly', tag: 'Assembly Prototype', img: `${IMG}/21_gear_assembly.jpg`, alt: 'Functional assembly prototype' },
+  { name: 'Device Stand', tag: 'Custom Mechanism', img: `${IMG}/29_custom_mechanism.jpg`, alt: 'Custom mechanism prototype' },
 ];
 
 const cadFlow = [
-  { label: 'CAD Model', note: 'Digital design', img: `${IMG}/cad-screen.jpg`, alt: 'CAD model on screen' },
-  { label: 'Material Selection', note: 'Sliced for printing', img: `${IMG}/cad-sliced.jpg`, alt: 'Sliced model preview' },
-  { label: 'Printing', note: 'Layer by layer', img: `${IMG}/cad-printing.jpg`, alt: 'Prototype being printed' },
-  { label: 'Physical Prototype', note: 'Finished part', img: `${IMG}/cad-finished.jpg`, alt: 'Finished printed prototype' },
+  { label: 'CAD Model', note: 'Digital design', img: `${IMG}/10_cad_model_on_grid.jpg`, alt: 'CAD model on screen' },
+  { label: 'Material Selection', note: 'Sliced for printing', img: `${IMG}/15_sketch_to_cad_to_print.jpg`, alt: 'Sliced model preview' },
+  { label: 'Printing', note: 'Layer by layer', img: `${IMG}/08_prototype_parts_collection.jpg`, alt: 'Prototype being printed' },
+  { label: 'Physical Prototype', note: 'Finished part', img: `${IMG}/11_mount_component.jpg`, alt: 'Finished printed prototype' },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -151,7 +151,7 @@ export function PrototypingDetail() {
         content: 'From early concepts to functional prototypes, we help transform ideas into physical products you can see, hold and refine.',
       },
       { selector: 'meta[property="og:type"]', attr: 'property', key: 'og:type', content: 'website' },
-      { selector: 'meta[property="og:image"]', attr: 'property', key: 'og:image', content: `${IMG}/hero.jpg` },
+      { selector: 'meta[property="og:image"]', attr: 'property', key: 'og:image', content: `${IMG}/01_hero_cad_workbench.jpg` },
     ];
 
     const created: HTMLMetaElement[] = [];
@@ -255,7 +255,7 @@ export function PrototypingDetail() {
               <div className="absolute -bottom-4 -left-4 hidden h-20 w-20 border-b-2 border-l-2 border-[#f78e00]/70 sm:block" aria-hidden="true" />
               <div className="relative overflow-hidden rounded-xl shadow-2xl ring-1 ring-white/10">
                 <ImageWithFallback
-                  src={`${IMG}/hero.jpg`}
+                  src={`${IMG}/01_hero_cad_workbench.jpg`}
                   alt="Product development workspace with a CAD model, prototype and iterations"
                   className="h-[320px] w-full object-cover sm:h-[430px] lg:h-[520px]"
                 />
@@ -514,7 +514,7 @@ export function PrototypingDetail() {
               variants={fadeUp}
             >
               <ImageWithFallback
-                src={`${IMG}/fff-measure.jpg`}
+                src={`${IMG}/12_caliper_measurement.jpg`}
                 alt="A prototype being measured with a digital caliper"
                 loading="lazy"
                 className="h-full max-h-[460px] w-full object-cover"
@@ -810,7 +810,7 @@ export function PrototypingDetail() {
       <section className="relative isolate overflow-hidden bg-[#0c0e12] text-white">
         <div className="absolute inset-0" aria-hidden="true">
           <ImageWithFallback
-            src={`${IMG}/cta.jpg`}
+            src={`${IMG}/31_final_prototyping_cta.jpg`}
             alt=""
             loading="lazy"
             className="h-full w-full object-cover opacity-30"

@@ -47,7 +47,7 @@ const whatWeCreate = [
     no: '01',
     title: 'Residential Models',
     desc: 'Detailed houses and villa models for presentation and client discussions.',
-    img: `${IMG}/create-residential.jpg`,
+    img: `${IMG}/02_contemporary_villa.jpg`,
     alt: '3D printed residential villa scale model',
     icon: Home,
   },
@@ -55,7 +55,7 @@ const whatWeCreate = [
     no: '02',
     title: 'Commercial Buildings',
     desc: 'Office buildings, complexes, retail spaces and mixed-use developments.',
-    img: `${IMG}/create-commercial.jpg`,
+    img: `${IMG}/11_commercial_building.jpg`,
     alt: '3D printed commercial building scale model',
     icon: Building2,
   },
@@ -63,7 +63,7 @@ const whatWeCreate = [
     no: '03',
     title: 'Interior Layouts',
     desc: 'Detailed interior models to show space planning, furniture and design elements.',
-    img: `${IMG}/create-interior.jpg`,
+    img: `${IMG}/07_interior_floor_plan.jpg`,
     alt: '3D printed interior layout model with furniture',
     icon: Sofa,
   },
@@ -71,7 +71,7 @@ const whatWeCreate = [
     no: '04',
     title: 'Landscape Models',
     desc: 'Site layouts, landscaping, roads, greenery and outdoor elements.',
-    img: `${IMG}/create-landscape.jpg`,
+    img: `${IMG}/08_landscape_park.jpg`,
     alt: '3D printed landscape site model with roads and greenery',
     icon: Trees,
   },
@@ -79,18 +79,18 @@ const whatWeCreate = [
     no: '05',
     title: 'Educational Models',
     desc: 'Models for educational institutions, exhibitions and learning purposes.',
-    img: `${IMG}/create-educational.jpg`,
+    img: `${IMG}/06_civic_building_model.jpg`,
     alt: '3D printed educational architectural model',
     icon: GraduationCap,
   },
 ];
 
 const featured = [
-  { title: 'Modern Residential Villa', tag: 'Scale Model · Detailed Exterior', img: `${IMG}/featured-villa.jpg`, alt: 'Modern residential villa architectural scale model' },
-  { title: 'Commercial Building Complex', tag: 'Scale Model · Site Layout', img: `${IMG}/featured-commercial.jpg`, alt: 'Commercial building complex scale model' },
-  { title: 'Interior Floor Plan', tag: 'Detailed Interior · Furniture', img: `${IMG}/featured-interior.jpg`, alt: 'Interior floor plan architectural model' },
-  { title: 'Temple / Cultural Model', tag: 'Scale Model · Presentation', img: `${IMG}/featured-cultural.jpg`, alt: 'Temple cultural architectural scale model' },
-  { title: 'Landscape / Site Model', tag: 'Site Planning · Visualization', img: `${IMG}/featured-landscape.jpg`, alt: 'Landscape and site planning architectural model' },
+  { title: 'Modern Residential Villa', tag: 'Scale Model · Detailed Exterior', img: `${IMG}/02_contemporary_villa.jpg`, alt: 'Modern residential villa architectural scale model' },
+  { title: 'Commercial Building Complex', tag: 'Scale Model · Site Layout', img: `${IMG}/09_residential_complex.jpg`, alt: 'Commercial building complex scale model' },
+  { title: 'Interior Floor Plan', tag: 'Detailed Interior · Furniture', img: `${IMG}/13_interior_architecture.jpg`, alt: 'Interior floor plan architectural model' },
+  { title: 'Temple / Cultural Model', tag: 'Scale Model · Presentation', img: `${IMG}/04_hindu_temple_model.jpg`, alt: 'Temple cultural architectural scale model' },
+  { title: 'Landscape / Site Model', tag: 'Site Planning · Visualization', img: `${IMG}/14_landscape_masterplan.jpg`, alt: 'Landscape and site planning architectural model' },
 ];
 
 const processSteps = [
@@ -112,23 +112,23 @@ const materials = [
   {
     name: 'PLA',
     note: 'Most Common',
-    img: `${IMG}/material-pla.jpg`,
-    alt: 'PLA filament spools beside a white architectural miniature',
+    img: `${IMG}/15_housing_development.jpg`,
+    alt: 'White PLA architectural scale model',
     accent: '#f78e00',
     points: ['Smooth finish', 'Great for detailed models', 'Multiple colour options', 'Ideal for presentation models'],
   },
   {
     name: 'PETG',
     note: '',
-    img: `${IMG}/material-petg.jpg`,
-    alt: 'PETG filament beside a larger durable architectural model',
+    img: `${IMG}/10_modern_office_building.jpg`,
+    alt: 'Larger durable PETG architectural model',
     accent: '#2563eb',
     points: ['Stronger and durable', 'Suitable for larger models', 'Useful for functional elements'],
   },
   {
     name: 'Custom Finishes',
     note: '',
-    img: `${IMG}/material-finishes.jpg`,
+    img: `${IMG}/21_interior_room_model.jpg`,
     alt: 'Architectural model being hand finished and painted',
     accent: '#6b7280',
     points: ['Sanded and cleaned', 'Painted where required', 'Multi-colour finishing', 'Enhanced detailing'],
@@ -145,9 +145,9 @@ const applications = [
 ];
 
 const gallery = [
-  { name: 'Modern Villa', type: 'Architectural Scale Model', material: 'PLA', purpose: 'Presentation Model', img: `${IMG}/gallery-villa.jpg`, alt: 'Modern villa architectural scale model' },
-  { name: 'Commercial Complex', type: 'Building Scale Model', material: 'PLA', purpose: 'Real Estate Presentation', img: `${IMG}/gallery-commercial.jpg`, alt: 'Commercial complex building scale model' },
-  { name: 'Interior Layout', type: 'Interior Model', material: 'PLA', purpose: 'Design Visualization', img: `${IMG}/gallery-interior.jpg`, alt: 'Interior layout architectural model' },
+  { name: 'Modern Villa', type: 'Architectural Scale Model', material: 'PLA', purpose: 'Presentation Model', img: `${IMG}/01_modern_luxury_house.jpg`, alt: 'Modern villa architectural scale model' },
+  { name: 'Apartment Tower', type: 'Building Scale Model', material: 'PLA', purpose: 'Real Estate Presentation', img: `${IMG}/03_apartment_tower.jpg`, alt: 'Apartment tower building scale model' },
+  { name: 'Interior Room', type: 'Interior Model', material: 'PLA', purpose: 'Design Visualization', img: `${IMG}/21_interior_room_model.jpg`, alt: 'Interior room architectural model' },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -188,7 +188,7 @@ export function MiniatureArchitecturalDetail() {
         content: 'We turn architectural drawings, CAD files and ideas into detailed physical miniature models.',
       },
       { selector: 'meta[property="og:type"]', attr: 'property', key: 'og:type', content: 'website' },
-      { selector: 'meta[property="og:image"]', attr: 'property', key: 'og:image', content: `${IMG}/hero-model.jpg` },
+      { selector: 'meta[property="og:image"]', attr: 'property', key: 'og:image', content: `${IMG}/01_modern_luxury_house.jpg` },
     ];
 
     const created: HTMLMetaElement[] = [];
@@ -299,7 +299,7 @@ export function MiniatureArchitecturalDetail() {
               </div>
               <div className="relative overflow-hidden rounded-xl shadow-2xl ring-1 ring-white/10">
                 <ImageWithFallback
-                  src={`${IMG}/hero-model.jpg`}
+                  src={`${IMG}/01_modern_luxury_house.jpg`}
                   alt="Detailed modern residential architectural miniature on a presentation base"
                   className="h-[320px] w-full object-cover sm:h-[420px] lg:h-[500px]"
                 />
@@ -776,7 +776,7 @@ export function MiniatureArchitecturalDetail() {
       <section className="relative isolate overflow-hidden bg-[#0e0e10] text-white">
         <div className="absolute inset-0" aria-hidden="true">
           <ImageWithFallback
-            src={`${IMG}/cta-model.jpg`}
+            src={`${IMG}/18_city_skyline.jpg`}
             alt=""
             loading="lazy"
             className="h-full w-full object-cover opacity-30"

@@ -6,6 +6,8 @@ import { CustomizedGiftsDetail } from './CustomizedGiftsDetail';
 import { MedicalAnatomicalDetail } from './MedicalAnatomicalDetail';
 import { FunctionalPartsDetail } from './FunctionalPartsDetail';
 import { PrototypingDetail } from './PrototypingDetail';
+import { CadModelingDetail } from './CadModelingDetail';
+import { BulkManufacturingDetail } from './BulkManufacturingDetail';
 import { 
   Printer, 
   Pencil, 
@@ -377,6 +379,16 @@ export function ServiceDetail() {
   // Prototyping & Product Development has a dedicated product-innovation page.
   if (serviceId === 'prototyping-product-development' || serviceId === 'prototyping') {
     return <PrototypingDetail />;
+  }
+
+  // 3D Designing & CAD Modeling has a dedicated page.
+  if (serviceId === 'cad-modeling' || serviceId === '3d-designing-cad-modeling') {
+    return <CadModelingDetail />;
+  }
+
+  // Bulk Manufacturing has a dedicated production-focused page.
+  if (serviceId === 'bulk-manufacturing') {
+    return <BulkManufacturingDetail />;
   }
 
   const service = serviceId ? serviceDetails[serviceId as keyof typeof serviceDetails] : null;

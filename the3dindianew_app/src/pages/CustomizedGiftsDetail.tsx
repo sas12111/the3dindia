@@ -31,30 +31,30 @@ const IMG = '/images/customized-gifts';
 const heroCapabilities = ['Personalized Designs', 'Made to Order', 'Unique Gift Ideas', 'Custom Names & Messages'];
 
 const whatWeCreate = [
-  { no: '01', title: 'Personalized Statues', desc: 'Turn a person, couple or special memory into a unique 3D printed keepsake.', img: `${IMG}/create-statue.jpg`, alt: 'Personalized 3D printed couple figurine', icon: Heart },
-  { no: '02', title: 'Tabletop Name Plates', desc: 'Personalized name plates for desks, rooms, offices and special occasions.', img: `${IMG}/create-nameplate.jpg`, alt: 'Personalized tabletop name plate', icon: PenLine },
-  { no: '03', title: 'Custom Pen Stands', desc: 'Functional desk accessories personalized with names, initials or messages.', img: `${IMG}/create-penstand.jpg`, alt: 'Personalized 3D printed pen stand', icon: Package2 },
-  { no: '04', title: 'Photo-Based Figurines', desc: 'Create custom figurines inspired by your photographs.', img: `${IMG}/create-figurine.jpg`, alt: '3D printed figurine inspired by a photograph', icon: ImageIcon },
-  { no: '05', title: 'Personalized Keychains', desc: 'Names, initials, symbols and custom shapes designed as memorable everyday gifts.', img: `${IMG}/create-keychain.jpg`, alt: 'Personalized 3D printed keychain', icon: Sparkles },
-  { no: '06', title: 'Custom Décor', desc: 'Create decorative pieces for homes, offices, celebrations and special occasions.', img: `${IMG}/create-decor.jpg`, alt: 'Personalized 3D printed decorative object', icon: Home },
+  { no: '01', title: 'Personalized Statues', desc: 'Turn a person, couple or special memory into a unique 3D printed keepsake.', img: `${IMG}/20_custom_couple_figurine.jpg`, alt: 'Personalized 3D printed couple figurine', icon: Heart },
+  { no: '02', title: 'Tabletop Name Plates', desc: 'Personalized name plates for desks, rooms, offices and special occasions.', img: `${IMG}/13_custom_message_pen_holder.jpg`, alt: 'Personalized tabletop name plate', icon: PenLine },
+  { no: '03', title: 'Custom Pen Stands', desc: 'Functional desk accessories personalized with names, initials or messages.', img: `${IMG}/04_personalized_pen_holder.jpg`, alt: 'Personalized 3D printed pen stand', icon: Package2 },
+  { no: '04', title: 'Photo-Based Figurines', desc: 'Create custom figurines inspired by your photographs.', img: `${IMG}/06_personalized_family_figurine.jpg`, alt: '3D printed figurine inspired by a photograph', icon: ImageIcon },
+  { no: '05', title: 'Personalized Keychains', desc: 'Names, initials, symbols and custom shapes designed as memorable everyday gifts.', img: `${IMG}/05_custom_keychain.jpg`, alt: 'Personalized 3D printed keychain', icon: Sparkles },
+  { no: '06', title: 'Custom Décor', desc: 'Create decorative pieces for homes, offices, celebrations and special occasions.', img: `${IMG}/03_personalized_photo_lamp.jpg`, alt: 'Personalized 3D printed decorative object', icon: Home },
 ];
 
 const occasions = [
-  { title: 'Birthday', desc: 'Make their birthday gift truly personal.', img: `${IMG}/occasion-birthday.jpg`, alt: 'Personalized birthday gift' },
-  { title: 'Anniversary', desc: 'Celebrate your story with something made just for you.', img: `${IMG}/occasion-anniversary.jpg`, alt: 'Personalized anniversary keepsake' },
-  { title: 'Wedding', desc: 'Personalized gifts for couples and special celebrations.', img: `${IMG}/occasion-wedding.jpg`, alt: 'Personalized wedding gift' },
-  { title: 'Housewarming', desc: 'Unique décor and personalized pieces for a new home.', img: `${IMG}/occasion-housewarming.jpg`, alt: 'Personalized housewarming décor' },
-  { title: 'Corporate', desc: 'Custom gifts for employees, clients and teams.', img: `${IMG}/occasion-corporate.jpg`, alt: 'Personalized corporate gift' },
-  { title: 'Festivals', desc: 'Personalized gifts for Diwali, Christmas and other celebrations.', img: `${IMG}/occasion-festival.jpg`, alt: 'Personalized festive gift' },
+  { title: 'Birthday', desc: 'Make their birthday gift truly personal.', img: `${IMG}/14_astronaut_moon_lamp.jpg`, alt: 'Personalized birthday gift' },
+  { title: 'Anniversary', desc: 'Celebrate your story with something made just for you.', img: `${IMG}/20_custom_couple_figurine.jpg`, alt: 'Personalized anniversary keepsake' },
+  { title: 'Wedding', desc: 'Personalized gifts for couples and special celebrations.', img: `${IMG}/24_custom_cat_family_figurines.jpg`, alt: 'Personalized wedding gift' },
+  { title: 'Housewarming', desc: 'Unique décor and personalized pieces for a new home.', img: `${IMG}/12_custom_planter.jpg`, alt: 'Personalized housewarming décor' },
+  { title: 'Corporate', desc: 'Custom gifts for employees, clients and teams.', img: `${IMG}/22_personalized_desk_organizer.jpg`, alt: 'Personalized corporate gift' },
+  { title: 'Festivals', desc: 'Personalized gifts for Diwali, Christmas and other celebrations.', img: `${IMG}/02_ganesha_figurines.jpg`, alt: 'Personalized festive gift' },
 ];
 
 const featured = [
-  { name: 'Personalized Couple Figurine', desc: 'Custom 3D printed keepsake', img: `${IMG}/featured-couple.jpg`, alt: 'Personalized couple figurine' },
-  { name: 'Tabletop Name Plate', desc: 'Personalized desk & office décor', img: `${IMG}/featured-nameplate.jpg`, alt: 'Tabletop personalized name plate' },
-  { name: 'Custom Pen Stand', desc: 'Functional personalized desk accessory', img: `${IMG}/featured-penstand.jpg`, alt: 'Custom personalized pen stand' },
-  { name: 'Family Figurine', desc: 'A keepsake made around your family', img: `${IMG}/featured-family.jpg`, alt: 'Personalized family figurine' },
-  { name: 'Personalized Keychain', desc: 'A small, memorable everyday gift', img: `${IMG}/featured-keychain.jpg`, alt: 'Personalized keychain' },
-  { name: 'Decorative Gift', desc: 'A personalized piece for any space', img: `${IMG}/featured-decor.jpg`, alt: 'Personalized decorative gift' },
+  { name: 'Personalized Couple Figurine', desc: 'Custom 3D printed keepsake', img: `${IMG}/20_custom_couple_figurine.jpg`, alt: 'Personalized couple figurine' },
+  { name: 'Personalized Pen Holder', desc: 'Personalized desk & office décor', img: `${IMG}/13_custom_message_pen_holder.jpg`, alt: 'Personalized pen holder' },
+  { name: 'Custom Pen Stand', desc: 'Functional personalized desk accessory', img: `${IMG}/04_personalized_pen_holder.jpg`, alt: 'Custom personalized pen stand' },
+  { name: 'Family Figurine', desc: 'A keepsake made around your family', img: `${IMG}/06_personalized_family_figurine.jpg`, alt: 'Personalized family figurine' },
+  { name: 'Personalized Keychain', desc: 'A small, memorable everyday gift', img: `${IMG}/05_custom_keychain.jpg`, alt: 'Personalized keychain' },
+  { name: 'Decorative Moon Lamp', desc: 'A personalized piece for any space', img: `${IMG}/19_mountain_moon_lamp.jpg`, alt: 'Personalized decorative moon lamp' },
 ];
 
 const personalizeSteps = [
@@ -72,29 +72,29 @@ const finishes = [
 ];
 
 const perfectFor = [
-  { title: 'Birthdays', img: `${IMG}/perfect-birthday.jpg`, alt: 'Birthday personalized gift' },
-  { title: 'Anniversaries', img: `${IMG}/perfect-anniversary.jpg`, alt: 'Anniversary personalized gift' },
-  { title: 'Weddings', img: `${IMG}/perfect-wedding.jpg`, alt: 'Wedding personalized gift' },
-  { title: 'Corporate Gifts', img: `${IMG}/perfect-corporate.jpg`, alt: 'Corporate personalized gift' },
-  { title: 'Festive Gifts', img: `${IMG}/perfect-festive.jpg`, alt: 'Festive personalized gift' },
-  { title: 'Return Gifts', img: `${IMG}/perfect-return.jpg`, alt: 'Return personalized gift' },
-  { title: 'Desk Accessories', img: `${IMG}/perfect-desk.jpg`, alt: 'Personalized desk accessory' },
-  { title: 'Home Décor', img: `${IMG}/perfect-decor.jpg`, alt: 'Personalized home décor' },
+  { title: 'Birthdays', img: `${IMG}/15_rocket_moon_lamp.jpg`, alt: 'Birthday personalized gift' },
+  { title: 'Anniversaries', img: `${IMG}/20_custom_couple_figurine.jpg`, alt: 'Anniversary personalized gift' },
+  { title: 'Weddings', img: `${IMG}/24_custom_cat_family_figurines.jpg`, alt: 'Wedding personalized gift' },
+  { title: 'Corporate Gifts', img: `${IMG}/22_personalized_desk_organizer.jpg`, alt: 'Corporate personalized gift' },
+  { title: 'Festive Gifts', img: `${IMG}/16_miniature_temple_model.jpg`, alt: 'Festive personalized gift' },
+  { title: 'Return Gifts', img: `${IMG}/05_custom_keychain.jpg`, alt: 'Return personalized gift' },
+  { title: 'Desk Accessories', img: `${IMG}/11_personalized_phone_stand.jpg`, alt: 'Personalized desk accessory' },
+  { title: 'Home Décor', img: `${IMG}/21_geometric_lotus_lamp.jpg`, alt: 'Personalized home décor' },
 ];
 
 const portfolio = [
-  { title: 'Couple Figurine', tag: 'Personalized Keepsake', img: `${IMG}/portfolio-couple.jpg`, alt: 'Personalized couple figurine' },
-  { title: 'Custom Name Plate', tag: 'Desk & Office', img: `${IMG}/portfolio-nameplate.jpg`, alt: 'Custom personalized name plate' },
-  { title: 'Pen Stand', tag: 'Desk Accessory', img: `${IMG}/portfolio-penstand.jpg`, alt: 'Personalized pen stand' },
-  { title: 'Family Figurine', tag: 'Personalized Keepsake', img: `${IMG}/portfolio-family.jpg`, alt: 'Personalized family figurine' },
-  { title: 'Keychain', tag: 'Everyday Gift', img: `${IMG}/portfolio-keychain.jpg`, alt: 'Personalized keychain' },
-  { title: 'Custom Décor', tag: 'Decorative Gift', img: `${IMG}/portfolio-decor.jpg`, alt: 'Custom decorative gift' },
+  { title: 'Dragon Figurine', tag: 'Decorative Keepsake', img: `${IMG}/23_dragon_figurine.jpg`, alt: '3D printed dragon figurine' },
+  { title: 'Geometric Lion', tag: 'Decorative Gift', img: `${IMG}/08_geometric_lion_figurine.jpg`, alt: 'Geometric lion figurine' },
+  { title: 'Custom Pet Figurine', tag: 'Personalized Keepsake', img: `${IMG}/18_custom_pet_figurine.jpg`, alt: 'Custom pet figurine' },
+  { title: 'Miniature Castle', tag: 'Decorative Model', img: `${IMG}/17_miniature_castle_model.jpg`, alt: 'Miniature castle model' },
+  { title: 'Geometric Elephant', tag: 'Decorative Gift', img: `${IMG}/10_geometric_elephant_figurine.jpg`, alt: 'Geometric elephant figurine' },
+  { title: 'Lotus Moon Lamp', tag: 'Home Décor', img: `${IMG}/21_geometric_lotus_lamp.jpg`, alt: 'Geometric lotus lamp' },
 ];
 
 const photoFlow = [
-  { label: 'Photo', note: 'Your favourite reference', img: `${IMG}/photo-reference.jpg`, alt: 'Framed photo reference' },
-  { label: '3D Model', note: 'Designed into a figurine', img: `${IMG}/photo-model.jpg`, alt: '3D model concept of a figurine' },
-  { label: 'Printed Figurine', note: 'A physical keepsake', img: `${IMG}/photo-printed.jpg`, alt: 'Physical 3D printed figurine' },
+  { label: 'Your Pet or Person', note: 'Share a favourite reference', img: `${IMG}/07_custom_dog_figurine.jpg`, alt: 'Custom dog figurine' },
+  { label: '3D Model', note: 'Designed into a figurine', img: `${IMG}/18_custom_pet_figurine.jpg`, alt: '3D model of a custom pet figurine' },
+  { label: 'Printed Figurine', note: 'A physical keepsake', img: `${IMG}/06_personalized_family_figurine.jpg`, alt: 'Physical 3D printed family figurine' },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -133,7 +133,7 @@ export function CustomizedGiftsDetail() {
         content: 'Turn memories, names, people and ideas into personalized physical gifts, 3D printed by The3DIndia.',
       },
       { selector: 'meta[property="og:type"]', attr: 'property', key: 'og:type', content: 'website' },
-      { selector: 'meta[property="og:image"]', attr: 'property', key: 'og:image', content: `${IMG}/hero.jpg` },
+      { selector: 'meta[property="og:image"]', attr: 'property', key: 'og:image', content: `${IMG}/01_hero_customized_gifts.jpg` },
     ];
 
     const created: HTMLMetaElement[] = [];
@@ -236,7 +236,7 @@ export function CustomizedGiftsDetail() {
             >
               <div className="relative overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10">
                 <ImageWithFallback
-                  src={`${IMG}/hero.jpg`}
+                  src={`${IMG}/01_hero_customized_gifts.jpg`}
                   alt="A collection of personalized 3D printed gifts arranged on a desk"
                   className="h-[320px] w-full object-cover sm:h-[430px] lg:h-[520px]"
                 />
@@ -713,7 +713,7 @@ export function CustomizedGiftsDetail() {
       <section className="relative isolate overflow-hidden bg-[#17120e] text-white">
         <div className="absolute inset-0" aria-hidden="true">
           <ImageWithFallback
-            src={`${IMG}/cta.jpg`}
+            src={`${IMG}/19_mountain_moon_lamp.jpg`}
             alt=""
             loading="lazy"
             className="h-full w-full object-cover opacity-30 gift-cta-pan"

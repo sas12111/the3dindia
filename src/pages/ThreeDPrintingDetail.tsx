@@ -34,37 +34,37 @@ const whatWePrint = [
   {
     title: 'Functional Parts',
     desc: 'Brackets, mounts, adapters, clips and replacement components.',
-    img: `${IMG}/card-functional.jpg`,
+    img: `${IMG}/14_brackets_gears_and_mounts.jpg`,
     alt: 'Black and orange 3D printed mechanical bracket',
   },
   {
     title: 'Prototypes',
     desc: 'Validate size, shape and fit before moving to production.',
-    img: `${IMG}/card-prototype.jpg`,
+    img: `${IMG}/06_precision_mechanical_part.jpg`,
     alt: 'Orange 3D printed prototype component',
   },
   {
     title: 'Enclosures',
     desc: 'Custom housings for electronics and other projects.',
-    img: `${IMG}/card-enclosure.jpg`,
+    img: `${IMG}/05_electronics_enclosures.jpg`,
     alt: 'Black PETG 3D printed electronics enclosure',
   },
   {
     title: 'Models & Miniatures',
     desc: 'Figurines, scale models, decorative objects and collectibles.',
-    img: `${IMG}/card-miniature.jpg`,
+    img: `${IMG}/10_miniature_figures_and_castle.jpg`,
     alt: 'Detailed 3D printed figurine',
   },
   {
     title: 'Architectural Models',
     desc: 'Physical models for presentation, education and visualization.',
-    img: `${IMG}/card-architecture.jpg`,
+    img: `${IMG}/20_architectural_city_model.jpg`,
     alt: 'White 3D printed architectural scale model',
   },
   {
     title: 'Small-Batch Production',
     desc: 'Produce limited quantities without expensive tooling.',
-    img: `${IMG}/card-smallbatch.jpg`,
+    img: `${IMG}/18_colorful_functional_parts.jpg`,
     alt: 'Several identical 3D printed parts arranged together',
   },
 ];
@@ -81,7 +81,7 @@ const processSteps = [
 const materials = [
   {
     name: 'PLA',
-    img: `${IMG}/material-pla.jpg`,
+    img: `${IMG}/02_filament_spools_and_prints.jpg`,
     alt: 'PLA filament spool with a printed sample',
     accent: '#f78e00',
     uses: ['Prototypes', 'Models', 'Miniatures', 'Decorative products'],
@@ -89,16 +89,16 @@ const materials = [
   },
   {
     name: 'PETG',
-    img: `${IMG}/material-petg.jpg`,
-    alt: 'PETG filament spool with a functional printed part',
+    img: `${IMG}/12_custom_enclosures_and_housings.jpg`,
+    alt: 'Functional PETG printed enclosures',
     accent: '#2563eb',
     uses: ['Functional parts', 'Brackets', 'Enclosures', 'Everyday-use components'],
     character: 'Tough, durable, impact resistant',
   },
   {
     name: 'TPU',
-    img: `${IMG}/material-tpu.jpg`,
-    alt: 'Flexible TPU filament spool with a flexible printed sample',
+    img: `${IMG}/15_honeycomb_flexible_part.jpg`,
+    alt: 'Flexible TPU honeycomb printed part',
     accent: '#dc2626',
     uses: ['Flexible parts', 'Grips', 'Covers', 'Protective components'],
     character: 'Flexible, rubber-like and durable',
@@ -117,21 +117,21 @@ const printerSpecs = [
 ];
 
 const applications = [
-  { title: 'Engineering', desc: 'Jigs, fixtures and functional components.', img: `${IMG}/app-engineering.jpg`, alt: 'Engineering 3D printed part' },
-  { title: 'Electronics', desc: 'Custom enclosures and mounts.', img: `${IMG}/app-electronics.jpg`, alt: 'Electronics 3D printed enclosure' },
-  { title: 'Automotive', desc: 'Replacement parts and prototypes.', img: `${IMG}/app-automotive.jpg`, alt: 'Automotive 3D printed component' },
-  { title: 'Architecture', desc: 'Scale and presentation models.', img: `${IMG}/app-architecture.jpg`, alt: 'Architecture 3D printed model' },
-  { title: 'Education', desc: 'Teaching aids and visual models.', img: `${IMG}/app-education.jpg`, alt: 'Educational 3D printed model' },
-  { title: 'Hobby & Collectibles', desc: 'Figurines, props and custom pieces.', img: `${IMG}/app-hobby.jpg`, alt: 'Hobby 3D printed collectible' },
+  { title: 'Engineering', desc: 'Jigs, fixtures and functional components.', img: `${IMG}/03_mechanical_engine_block.jpg`, alt: 'Engineering 3D printed part' },
+  { title: 'Electronics', desc: 'Custom enclosures and mounts.', img: `${IMG}/05_electronics_enclosures.jpg`, alt: 'Electronics 3D printed enclosure' },
+  { title: 'Automotive', desc: 'Replacement parts and prototypes.', img: `${IMG}/21_custom_pipe_fitting.jpg`, alt: 'Automotive 3D printed component' },
+  { title: 'Architecture', desc: 'Scale and presentation models.', img: `${IMG}/07_lattice_architecture_print.jpg`, alt: 'Architecture 3D printed model' },
+  { title: 'Education', desc: 'Teaching aids and visual models.', img: `${IMG}/17_anatomical_skull_model.jpg`, alt: 'Educational 3D printed model' },
+  { title: 'Hobby & Collectibles', desc: 'Figurines, props and custom pieces.', img: `${IMG}/13_colorful_lattice_vases.jpg`, alt: 'Hobby 3D printed collectible' },
 ];
 
 const portfolio = [
-  { title: 'Custom Bracket', tag: 'PETG · Functional Part', img: `${IMG}/portfolio-1.jpg`, alt: 'Custom 3D printed bracket' },
-  { title: 'Electronics Enclosure', tag: 'PETG · Prototype', img: `${IMG}/portfolio-2.jpg`, alt: '3D printed electronics enclosure' },
-  { title: 'Statue / Figurine', tag: 'PLA · Detailed Model', img: `${IMG}/portfolio-3.jpg`, alt: '3D printed statue figurine' },
-  { title: 'Architectural Model', tag: 'PLA · Scale Model', img: `${IMG}/portfolio-4.jpg`, alt: '3D printed architectural model' },
-  { title: 'Replacement Part', tag: 'PETG · Custom Component', img: `${IMG}/portfolio-5.jpg`, alt: '3D printed replacement part' },
-  { title: 'Custom Nameplate', tag: 'PLA · Personalised Product', img: `${IMG}/portfolio-6.jpg`, alt: '3D printed custom nameplate' },
+  { title: 'Brackets & Gears', tag: 'PETG · Functional Parts', img: `${IMG}/14_brackets_gears_and_mounts.jpg`, alt: '3D printed brackets gears and mounts' },
+  { title: 'Electronics Enclosures', tag: 'PETG · Device Housing', img: `${IMG}/12_custom_enclosures_and_housings.jpg`, alt: '3D printed electronics enclosures' },
+  { title: 'Miniatures & Castle', tag: 'PLA · Detailed Models', img: `${IMG}/10_miniature_figures_and_castle.jpg`, alt: '3D printed miniatures and castle' },
+  { title: 'Architectural City Model', tag: 'PLA · Scale Model', img: `${IMG}/20_architectural_city_model.jpg`, alt: '3D printed architectural city model' },
+  { title: 'Mechanical Component', tag: 'PETG · Custom Component', img: `${IMG}/09_curved_mechanical_part.jpg`, alt: '3D printed mechanical component' },
+  { title: 'Gears & Lattice Prints', tag: 'PLA · Precision Parts', img: `${IMG}/04_gears_and_lattice_prints.jpg`, alt: '3D printed gears and lattice parts' },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -173,7 +173,7 @@ export function ThreeDPrintingDetail() {
         content: 'From digital model to physical part — FDM 3D printing for prototypes, functional parts, models and small-batch products.',
       },
       { selector: 'meta[property="og:type"]', attr: 'property', key: 'og:type', content: 'website' },
-      { selector: 'meta[property="og:image"]', attr: 'property', key: 'og:image', content: `${IMG}/hero-printer.jpg` },
+      { selector: 'meta[property="og:image"]', attr: 'property', key: 'og:image', content: `${IMG}/01_hero_3d_printing_services.jpg` },
     ];
 
     const created: HTMLMetaElement[] = [];
@@ -274,7 +274,7 @@ export function ThreeDPrintingDetail() {
               <div className="absolute -bottom-5 -left-5 hidden h-24 w-24 border-b-2 border-r-2 border-[#f78e00]/70 sm:block" aria-hidden="true" />
               <div className="relative overflow-hidden rounded-xl shadow-2xl ring-1 ring-white/10">
                 <ImageWithFallback
-                  src={`${IMG}/hero-printer.jpg`}
+                  src={`${IMG}/01_hero_3d_printing_services.jpg`}
                   alt="Desktop FDM 3D printer actively printing an orange object in a workshop"
                   className="h-[320px] w-full object-cover sm:h-[420px] lg:h-[500px]"
                 />
@@ -511,7 +511,7 @@ export function ThreeDPrintingDetail() {
             >
               <div className="relative h-full min-h-[260px] overflow-hidden rounded-xl ring-1 ring-white/10">
                 <ImageWithFallback
-                  src={`${IMG}/printer-setup.jpg`}
+                  src={`${IMG}/16_fdm_printer_in_action.jpg`}
                   alt="The3DIndia FDM 3D printer setup"
                   loading="lazy"
                   className="h-full w-full object-cover"
@@ -740,7 +740,7 @@ export function ThreeDPrintingDetail() {
       <section className="relative isolate overflow-hidden bg-[#0d0d0f] text-white">
         <div className="absolute inset-0" aria-hidden="true">
           <ImageWithFallback
-            src={`${IMG}/cta-closeup.jpg`}
+            src={`${IMG}/18_colorful_functional_parts.jpg`}
             alt=""
             loading="lazy"
             className="h-full w-full object-cover opacity-30 tdp-cta-pan"

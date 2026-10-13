@@ -51,21 +51,21 @@ const benefits = [
 ];
 
 const categories = [
-  { no: '01', title: 'Skeletal Models', icon: Bone, examples: 'Examples include skull, spine, vertebrae, bones and joints.', img: `${IMG}/cat-skeletal.jpg`, alt: '3D printed skeletal anatomical model' },
-  { no: '02', title: 'Organ Models', icon: Heart, examples: 'Examples include heart, lungs, kidneys, liver and other structures.', img: `${IMG}/cat-organ.jpg`, alt: '3D printed organ anatomical model' },
-  { no: '03', title: 'Brain & Nervous System', icon: Brain, examples: 'Examples include brain models, brain sections and neurological teaching models.', img: `${IMG}/cat-brain.jpg`, alt: '3D printed brain and nervous system model' },
-  { no: '04', title: 'Dental Models', icon: Activity, examples: 'Examples include teeth, jaw, dental anatomy and educational dental models.', img: `${IMG}/cat-dental.jpg`, alt: '3D printed dental anatomical model' },
-  { no: '05', title: 'Joint & Orthopedic Models', icon: Bone, examples: 'Examples include knee, hip, shoulder and bone structures.', img: `${IMG}/cat-joint.jpg`, alt: '3D printed joint and orthopedic model' },
-  { no: '06', title: 'Custom Anatomical Models', icon: Sparkles, examples: 'Models created according to a specific educational, visualization or project requirement.', img: `${IMG}/cat-custom.jpg`, alt: 'Custom 3D printed anatomical model' },
+  { no: '01', title: 'Skeletal Models', icon: Bone, examples: 'Examples include skull, spine, vertebrae, bones and joints.', img: `${IMG}/22_full_skeleton_model.jpg`, alt: '3D printed skeletal anatomical model' },
+  { no: '02', title: 'Organ Models', icon: Heart, examples: 'Examples include heart, lungs, kidneys, liver and other structures.', img: `${IMG}/06_lungs_model.jpg`, alt: '3D printed organ anatomical model' },
+  { no: '03', title: 'Brain & Nervous System', icon: Brain, examples: 'Examples include brain models, brain sections and neurological teaching models.', img: `${IMG}/04_brain_model.jpg`, alt: '3D printed brain and nervous system model' },
+  { no: '04', title: 'Dental Models', icon: Activity, examples: 'Examples include teeth, jaw, dental anatomy and educational dental models.', img: `${IMG}/09_dental_model.jpg`, alt: '3D printed dental anatomical model' },
+  { no: '05', title: 'Joint & Orthopedic Models', icon: Bone, examples: 'Examples include knee, hip, shoulder and bone structures.', img: `${IMG}/08_knee_joint_model.jpg`, alt: '3D printed joint and orthopedic model' },
+  { no: '06', title: 'Custom Anatomical Models', icon: Sparkles, examples: 'Models created according to a specific educational, visualization or project requirement.', img: `${IMG}/27_model_collection.jpg`, alt: 'Custom 3D printed anatomical model' },
 ];
 
 const featured = [
-  { name: 'Human Skull', desc: 'Detailed skeletal anatomy model', img: `${IMG}/featured-skull.jpg`, alt: '3D printed human skull anatomy model' },
-  { name: 'Heart', desc: 'Physical model for anatomical visualization', img: `${IMG}/featured-heart.jpg`, alt: '3D printed heart anatomy model' },
-  { name: 'Brain', desc: 'Educational model of brain structure', img: `${IMG}/featured-brain.jpg`, alt: '3D printed brain anatomy model' },
-  { name: 'Spine', desc: 'Vertebrae and spinal structure', img: `${IMG}/featured-spine.jpg`, alt: '3D printed spine anatomy model' },
-  { name: 'Knee Joint', desc: '3D representation of joint structure', img: `${IMG}/featured-knee.jpg`, alt: '3D printed knee joint anatomy model' },
-  { name: 'Human Anatomy Model', desc: 'Full anatomical teaching model', img: `${IMG}/featured-anatomy.jpg`, alt: '3D printed full human anatomy model' },
+  { name: 'Human Skull', desc: 'Detailed skeletal anatomy model', img: `${IMG}/02_skull_model.jpg`, alt: '3D printed human skull anatomy model' },
+  { name: 'Heart', desc: 'Physical model for anatomical visualization', img: `${IMG}/03_heart_model.jpg`, alt: '3D printed heart anatomy model' },
+  { name: 'Brain', desc: 'Educational model of brain structure', img: `${IMG}/04_brain_model.jpg`, alt: '3D printed brain anatomy model' },
+  { name: 'Spine', desc: 'Vertebrae and spinal structure', img: `${IMG}/07_spine_model.jpg`, alt: '3D printed spine anatomy model' },
+  { name: 'Knee Joint', desc: '3D representation of joint structure', img: `${IMG}/08_knee_joint_model.jpg`, alt: '3D printed knee joint anatomy model' },
+  { name: 'Human Anatomy Model', desc: 'Full anatomical teaching model', img: `${IMG}/10_torso_model.jpg`, alt: '3D printed full human anatomy model' },
 ];
 
 const detailPoints = [
@@ -90,9 +90,9 @@ const dataFlow = [
 ];
 
 const materials = [
-  { name: 'PLA', note: 'Most Common', img: `${IMG}/material-pla.jpg`, alt: 'PLA filament beside an anatomical model', accent: '#f78e00', points: ['Good for educational models', 'Available in multiple colours', 'Suitable for detailed shapes'] },
-  { name: 'PETG', note: '', img: `${IMG}/material-petg.jpg`, alt: 'PETG filament beside a larger model', accent: '#2563eb', points: ['Durable material', 'Useful for larger or frequently handled models'] },
-  { name: 'Custom Finish', note: '', img: `${IMG}/material-finish.jpg`, alt: 'Anatomical model being cleaned and finished', accent: '#6b7280', points: ['Cleaning', 'Support removal', 'Colour selection', 'Additional finishing where available'] },
+  { name: 'PLA', note: 'Most Common', img: `${IMG}/27_model_collection.jpg`, alt: 'PLA anatomical models in multiple colours', accent: '#f78e00', points: ['Good for educational models', 'Available in multiple colours', 'Suitable for detailed shapes'] },
+  { name: 'PETG', note: '', img: `${IMG}/10_torso_model.jpg`, alt: 'Durable PETG anatomical model', accent: '#2563eb', points: ['Durable material', 'Useful for larger or frequently handled models'] },
+  { name: 'Custom Finish', note: '', img: `${IMG}/24_3d_printing_medical_model.jpg`, alt: 'Anatomical model being printed and finished', accent: '#6b7280', points: ['Cleaning', 'Support removal', 'Colour selection', 'Additional finishing where available'] },
 ];
 
 const scales = [
@@ -112,12 +112,12 @@ const processSteps = [
 ];
 
 const portfolio = [
-  { name: 'Human Skull', category: 'Anatomy Education', purpose: 'Physical teaching model', img: `${IMG}/portfolio-skull.jpg`, alt: '3D printed human skull educational model' },
-  { name: 'Heart Model', category: 'Anatomical Visualization', purpose: 'Educational reference', img: `${IMG}/portfolio-heart.jpg`, alt: '3D printed heart educational model' },
-  { name: 'Brain Model', category: 'Anatomy Education', purpose: 'Teaching aid', img: `${IMG}/portfolio-brain.jpg`, alt: '3D printed brain educational model' },
-  { name: 'Spine Model', category: 'Anatomical Visualization', purpose: 'Demonstration model', img: `${IMG}/portfolio-spine.jpg`, alt: '3D printed spine educational model' },
-  { name: 'Knee Joint', category: 'Orthopedic Model', purpose: 'Educational reference', img: `${IMG}/portfolio-knee.jpg`, alt: '3D printed knee joint educational model' },
-  { name: 'Dental Model', category: 'Dental Education', purpose: 'Teaching aid', img: `${IMG}/portfolio-dental.jpg`, alt: '3D printed dental educational model' },
+  { name: 'Kidney Model', category: 'Anatomical Visualization', purpose: 'Educational reference', img: `${IMG}/19_kidney_model.jpg`, alt: '3D printed kidney educational model' },
+  { name: 'Heart Section', category: 'Anatomical Visualization', purpose: 'Educational reference', img: `${IMG}/17_heart_section_model.jpg`, alt: '3D printed heart section educational model' },
+  { name: 'Brain Section', category: 'Anatomy Education', purpose: 'Teaching aid', img: `${IMG}/18_brain_section_model.jpg`, alt: '3D printed brain section educational model' },
+  { name: 'Pelvis Model', category: 'Skeletal Model', purpose: 'Demonstration model', img: `${IMG}/13_pelvis_model.jpg`, alt: '3D printed pelvis educational model' },
+  { name: 'Foot Bone Model', category: 'Orthopedic Model', purpose: 'Educational reference', img: `${IMG}/12_foot_bone_model.jpg`, alt: '3D printed foot bone educational model' },
+  { name: 'Ear Model', category: 'Anatomy Education', purpose: 'Teaching aid', img: `${IMG}/05_ear_model.jpg`, alt: '3D printed ear educational model' },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -156,7 +156,7 @@ export function MedicalAnatomicalDetail() {
         content: 'Detailed 3D printed anatomical models designed for medical education, training, visualization and presentation.',
       },
       { selector: 'meta[property="og:type"]', attr: 'property', key: 'og:type', content: 'website' },
-      { selector: 'meta[property="og:image"]', attr: 'property', key: 'og:image', content: `${IMG}/hero.jpg` },
+      { selector: 'meta[property="og:image"]', attr: 'property', key: 'og:image', content: `${IMG}/01_hero_medical_anatomical_models.jpg` },
     ];
 
     const created: HTMLMetaElement[] = [];
@@ -265,7 +265,7 @@ export function MedicalAnatomicalDetail() {
               </div>
               <div className="relative overflow-hidden rounded-xl shadow-2xl ring-1 ring-white/10 med-scan-line">
                 <ImageWithFallback
-                  src={`${IMG}/hero.jpg`}
+                  src={`${IMG}/01_hero_medical_anatomical_models.jpg`}
                   alt="Detailed 3D printed anatomical model in a clean educational studio"
                   className="h-[320px] w-full object-cover sm:h-[430px] lg:h-[520px]"
                 />
@@ -436,7 +436,7 @@ export function MedicalAnatomicalDetail() {
               variants={fadeUp}
             >
               <ImageWithFallback
-                src={`${IMG}/closeup.jpg`}
+                src={`${IMG}/26_brain_detail_closeup.jpg`}
                 alt="Macro close-up of a 3D printed anatomical model showing fine detail"
                 loading="lazy"
                 className="h-full max-h-[460px] w-full object-cover"
@@ -814,7 +814,7 @@ export function MedicalAnatomicalDetail() {
       <section className="relative isolate overflow-hidden bg-[#0d1016] text-white">
         <div className="absolute inset-0" aria-hidden="true">
           <ImageWithFallback
-            src={`${IMG}/cta.jpg`}
+            src={`${IMG}/02_skull_model.jpg`}
             alt=""
             loading="lazy"
             className="h-full w-full object-cover opacity-25"
