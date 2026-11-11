@@ -8,12 +8,13 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-const JWT_SECRET = process.env.JWT_SECRET || 'the3dindia_secret_2024';
+const JWT_SECRET = process.env.JWT_SECRET || (process.env.NODE_ENV === 'production' ? '' : 'development-only-secret-change-me');
 const usersFile  = path.join(__dirname, 'users.json');
 const ordersFile = path.join(__dirname, 'orders.json');
 
 // In-memory OTP store: email -> { otp, expiresAt, userData }
 const pendingOtps = new Map();
+const adminLoginFailures = new Map();
 
 // ── Auth middleware ───────────────────────────────────────────────────────────
 function authMiddleware(req, res, next) {
@@ -26,6 +27,21 @@ function authMiddleware(req, res, next) {
   } catch {
     res.status(401).json({ success: false, error: 'Invalid or expired token' });
   }
+}
+
+function adminMiddleware(req, res, next) {
+  authMiddleware(req, res, () => {
+    if (req.user?.role !== 'admin') return res.status(403).json({ success: false, error: 'Admin access required' });
+    next();
+  });
+}
+
+function escapeHtml(value = '') {
+  return String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
+}
+
+if (process.env.NODE_ENV === 'production' && !JWT_SECRET) {
+  throw new Error('JWT_SECRET must be configured in production');
 }
 
 const app = express();
@@ -51,6 +67,30 @@ app.use(cors({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.post('/api/admin/login', async (req, res) => {
+  const { username, password } = req.body || {};
+  if (!process.env.ADMIN_USERNAME || !process.env.ADMIN_PASSWORD) {
+    return res.status(503).json({ success: false, error: 'Admin credentials are not configured' });
+  }
+  const clientKey = req.ip;
+  const attempts = adminLoginFailures.get(clientKey);
+  if (attempts && attempts.blockedUntil > Date.now()) {
+    return res.status(429).json({ success: false, error: 'Too many attempts. Try again later.' });
+  }
+  if (username !== process.env.ADMIN_USERNAME || password !== process.env.ADMIN_PASSWORD) {
+    const failures = attempts && attempts.blockedUntil <= Date.now() ? 0 : (attempts?.failures || 0);
+    const nextFailures = failures + 1;
+    adminLoginFailures.set(clientKey, {
+      failures: nextFailures,
+      blockedUntil: nextFailures >= 5 ? Date.now() + 15 * 60 * 1000 : 0,
+    });
+    return res.status(401).json({ success: false, error: 'Invalid admin credentials' });
+  }
+  adminLoginFailures.delete(clientKey);
+  const token = jwt.sign({ role: 'admin', username }, JWT_SECRET, { expiresIn: '8h' });
+  res.json({ success: true, token });
+});
 
 // Create uploads directory
 const uploadsDir = path.join(__dirname, 'uploads');
@@ -165,11 +205,11 @@ app.post('/api/contact', upload.array('files', 5), async (req, res) => {
       try {
         const emailHtml = `
           <h2>New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Mobile:</strong> ${mobile}</p>
-          <p><strong>Service:</strong> ${service}</p>
-          <p><strong>Message:</strong> ${message}</p>
+          <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+          <p><strong>Mobile:</strong> ${escapeHtml(mobile)}</p>
+          <p><strong>Service:</strong> ${escapeHtml(service)}</p>
+          <p><strong>Message:</strong> ${escapeHtml(message)}</p>
           <p><strong>Files:</strong> ${files.length} file(s)</p>
         `;
 
@@ -198,7 +238,7 @@ app.post('/api/contact', upload.array('files', 5), async (req, res) => {
 });
 
 // Get submissions
-app.get('/api/submissions', async (req, res) => {
+app.get('/api/submissions', adminMiddleware, async (req, res) => {
   try {
     const submissionsFile = path.join(__dirname, 'submissions.json');
     if (await fs.pathExists(submissionsFile)) {
@@ -223,7 +263,7 @@ app.get('/api/admin', (req, res) => {
 });
 
 // Download file endpoint
-app.get('/api/download/:date/:filename', (req, res) => {
+app.get('/api/download/:date/:filename', adminMiddleware, (req, res) => {
   try {
     const { date, filename } = req.params;
     const filePath = path.join(uploadsDir, date, filename);
@@ -240,7 +280,8 @@ app.get('/api/download/:date/:filename', (req, res) => {
     const resolvedPath = path.resolve(filePath);
     const uploadsPath = path.resolve(uploadsDir);
     
-    if (!resolvedPath.startsWith(uploadsPath)) {
+    const relativePath = path.relative(uploadsPath, resolvedPath);
+    if (relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
       return res.status(403).json({
         success: false,
         message: 'Access denied'
@@ -277,7 +318,7 @@ app.get('/api/download/:date/:filename', (req, res) => {
 });
 
 // Bulk download endpoint - download all files from a submission as ZIP
-app.get('/api/download-submission/:submissionId', async (req, res) => {
+app.get('/api/download-submission/:submissionId', adminMiddleware, async (req, res) => {
   try {
     const submissionId = req.params.submissionId;
     const submissionsFile = path.join(__dirname, 'submissions.json');
@@ -321,7 +362,7 @@ const productsFile = path.join(__dirname, 'products.json');
 
 app.use('/product-images', express.static(path.join(__dirname, 'uploads', 'products')));
 
-app.get('/api/products', async (req, res) => {
+app.get('/api/products', (req, res, next) => req.query.admin === 'true' ? adminMiddleware(req, res, next) : next(), async (req, res) => {
   try {
     let products = [];
     if (await fs.pathExists(productsFile)) products = await fs.readJson(productsFile);
@@ -331,7 +372,7 @@ app.get('/api/products', async (req, res) => {
   } catch (error) { res.status(500).json({ success: false, error: error.message }); }
 });
 
-app.post('/api/products', async (req, res) => {
+app.post('/api/products', adminMiddleware, async (req, res) => {
   try {
     let products = [];
     if (await fs.pathExists(productsFile)) products = await fs.readJson(productsFile);
@@ -361,7 +402,7 @@ app.post('/api/products', async (req, res) => {
   } catch (error) { res.status(500).json({ success: false, error: error.message }); }
 });
 
-app.put('/api/products/:id', async (req, res) => {
+app.put('/api/products/:id', adminMiddleware, async (req, res) => {
   try {
     let products = [];
     if (await fs.pathExists(productsFile)) products = await fs.readJson(productsFile);
@@ -392,7 +433,7 @@ app.put('/api/products/:id', async (req, res) => {
   } catch (error) { res.status(500).json({ success: false, error: error.message }); }
 });
 
-app.delete('/api/products/:id', async (req, res) => {
+app.delete('/api/products/:id', adminMiddleware, async (req, res) => {
   try {
     let products = [];
     if (await fs.pathExists(productsFile)) products = await fs.readJson(productsFile);
@@ -410,14 +451,14 @@ const productImgStorage = multer.diskStorage({
 const productUpload = multer({ storage: productImgStorage, limits: { fileSize: 10 * 1024 * 1024 } });
 
 // Single-image upload (legacy)
-app.post('/api/products/upload-image', productUpload.single('image'), (req, res) => {
+app.post('/api/products/upload-image', adminMiddleware, productUpload.single('image'), (req, res) => {
   if (!req.file) return res.status(400).json({ success: false, error: 'No file uploaded' });
   res.json({ success: true, url: `/product-images/${req.file.filename}` });
 });
 
 // Multi-image upload for product views (front/back/left/right/top/bottom/isometric)
 const allowedViews = ['front', 'back', 'left', 'right', 'top', 'bottom', 'isometric'];
-app.post('/api/products/upload-images', productUpload.fields(allowedViews.map(v => ({ name: v, maxCount: 1 }))), (req, res) => {
+app.post('/api/products/upload-images', adminMiddleware, productUpload.fields(allowedViews.map(v => ({ name: v, maxCount: 1 }))), (req, res) => {
   try {
     const files = req.files || {};
     const images = {};
@@ -441,7 +482,7 @@ const portfolioFile = path.join(__dirname, 'portfolio.json');
 app.use('/portfolio-images', express.static(path.join(__dirname, 'uploads', 'portfolio')));
 
 // GET all projects (active only by default, all for admin)
-app.get('/api/portfolio', async (req, res) => {
+app.get('/api/portfolio', (req, res, next) => req.query.admin === 'true' ? adminMiddleware(req, res, next) : next(), async (req, res) => {
   try {
     let projects = [];
     if (await fs.pathExists(portfolioFile)) {
@@ -456,7 +497,7 @@ app.get('/api/portfolio', async (req, res) => {
 });
 
 // POST create project
-app.post('/api/portfolio', async (req, res) => {
+app.post('/api/portfolio', adminMiddleware, async (req, res) => {
   try {
     let projects = [];
     if (await fs.pathExists(portfolioFile)) {
@@ -489,7 +530,7 @@ app.post('/api/portfolio', async (req, res) => {
 });
 
 // PUT update project
-app.put('/api/portfolio/:id', async (req, res) => {
+app.put('/api/portfolio/:id', adminMiddleware, async (req, res) => {
   try {
     let projects = [];
     if (await fs.pathExists(portfolioFile)) {
@@ -521,7 +562,7 @@ app.put('/api/portfolio/:id', async (req, res) => {
 });
 
 // DELETE project
-app.delete('/api/portfolio/:id', async (req, res) => {
+app.delete('/api/portfolio/:id', adminMiddleware, async (req, res) => {
   try {
     let projects = [];
     if (await fs.pathExists(portfolioFile)) {
@@ -552,7 +593,7 @@ const portfolioImgStorage = multer.diskStorage({
 });
 const portfolioUpload = multer({ storage: portfolioImgStorage, limits: { fileSize: 10 * 1024 * 1024 } });
 
-app.post('/api/portfolio/upload-image', portfolioUpload.single('image'), (req, res) => {
+app.post('/api/portfolio/upload-image', adminMiddleware, portfolioUpload.single('image'), (req, res) => {
   if (!req.file) return res.status(400).json({ success: false, error: 'No file uploaded' });
   const url = `/portfolio-images/${req.file.filename}`;
   res.json({ success: true, url });
@@ -568,7 +609,7 @@ const servicesFile = path.join(__dirname, 'services.json');
 app.use('/service-images', express.static(path.join(__dirname, 'uploads', 'services')));
 
 // GET all services (public — active only by default, all for admin)
-app.get('/api/services', async (req, res) => {
+app.get('/api/services', (req, res, next) => req.query.admin === 'true' ? adminMiddleware(req, res, next) : next(), async (req, res) => {
   try {
     let services = [];
     if (await fs.pathExists(servicesFile)) {
@@ -583,7 +624,7 @@ app.get('/api/services', async (req, res) => {
 });
 
 // POST create service
-app.post('/api/services', async (req, res) => {
+app.post('/api/services', adminMiddleware, async (req, res) => {
   try {
     let services = [];
     if (await fs.pathExists(servicesFile)) {
@@ -614,7 +655,7 @@ app.post('/api/services', async (req, res) => {
 });
 
 // PUT update service
-app.put('/api/services/:id', async (req, res) => {
+app.put('/api/services/:id', adminMiddleware, async (req, res) => {
   try {
     let services = [];
     if (await fs.pathExists(servicesFile)) {
@@ -645,7 +686,7 @@ app.put('/api/services/:id', async (req, res) => {
 });
 
 // DELETE service
-app.delete('/api/services/:id', async (req, res) => {
+app.delete('/api/services/:id', adminMiddleware, async (req, res) => {
   try {
     let services = [];
     if (await fs.pathExists(servicesFile)) {
@@ -676,7 +717,7 @@ const serviceImgStorage = multer.diskStorage({
 });
 const serviceUpload = multer({ storage: serviceImgStorage, limits: { fileSize: 10 * 1024 * 1024 } });
 
-app.post('/api/services/upload-image', serviceUpload.single('image'), (req, res) => {
+app.post('/api/services/upload-image', adminMiddleware, serviceUpload.single('image'), (req, res) => {
   if (!req.file) return res.status(400).json({ success: false, error: 'No file uploaded' });
   const url = `/service-images/${req.file.filename}`;
   res.json({ success: true, url });
@@ -954,9 +995,12 @@ app.get('/api/orders', authMiddleware, async (req, res) => {
 // POST /api/orders  — place an order
 app.post('/api/orders', authMiddleware, async (req, res) => {
   try {
-    const { productId, productName, productImage, category, price, quantity, note, shippingAddress } = req.body;
-    if (!productId || !productName || !price)
-      return res.status(400).json({ success: false, error: 'productId, productName and price are required' });
+    const { productId, quantity, note, shippingAddress } = req.body;
+    const productList = await fs.pathExists(productsFile) ? await fs.readJson(productsFile) : [];
+    const product = productList.find(p => String(p.id) === String(productId) && p.active !== false);
+    const qty = Number(quantity);
+    if (!product) return res.status(404).json({ success: false, error: 'Product is unavailable' });
+    if (!Number.isInteger(qty) || qty < 1 || qty > 100) return res.status(400).json({ success: false, error: 'Quantity must be between 1 and 100' });
 
     const orders = await fs.pathExists(ordersFile) ? await fs.readJson(ordersFile) : [];
     const order  = {
@@ -964,11 +1008,11 @@ app.post('/api/orders', authMiddleware, async (req, res) => {
       userId: req.user.id,
       userName: req.user.name,
       userEmail: req.user.email,
-      productId, productName, productImage: productImage || '',
-      category: category || '',
-      price: Number(price),
-      quantity: Number(quantity) || 1,
-      total: Number(price) * (Number(quantity) || 1),
+      productId: String(product.id), productName: product.name, productImage: product.image || '',
+      category: product.category || '',
+      price: Number(product.price),
+      quantity: qty,
+      total: Number(product.price) * qty,
       note: note || '',
       shippingAddress: shippingAddress || null,
       status: 'Pending',
@@ -995,7 +1039,7 @@ app.delete('/api/orders/:id', authMiddleware, async (req, res) => {
 });
 
 // GET /api/admin/orders  — all orders for admin
-app.get('/api/admin/orders', async (req, res) => {
+app.get('/api/admin/orders', adminMiddleware, async (req, res) => {
   try {
     const orders = await fs.pathExists(ordersFile) ? await fs.readJson(ordersFile) : [];
     res.json({ success: true, orders: orders.reverse() });
@@ -1003,11 +1047,13 @@ app.get('/api/admin/orders', async (req, res) => {
 });
 
 // PUT /api/admin/orders/:id/status  — update order status
-app.put('/api/admin/orders/:id/status', async (req, res) => {
+app.put('/api/admin/orders/:id/status', adminMiddleware, async (req, res) => {
   try {
     let orders = await fs.pathExists(ordersFile) ? await fs.readJson(ordersFile) : [];
     const idx  = orders.findIndex(o => o.id === req.params.id);
     if (idx === -1) return res.status(404).json({ success: false, error: 'Order not found' });
+    const allowedStatuses = ['Pending', 'Confirmed', 'Processing', 'In Production', 'Shipped', 'Delivered', 'Completed', 'Cancelled'];
+    if (!allowedStatuses.includes(req.body.status)) return res.status(400).json({ success: false, error: 'Invalid order status' });
     orders[idx].status = req.body.status;
     orders[idx].updatedAt = new Date().toISOString();
     await fs.writeJson(ordersFile, orders, { spaces: 2 });
@@ -1018,15 +1064,15 @@ app.put('/api/admin/orders/:id/status', async (req, res) => {
 // ─── Admin Users API ─────────────────────────────────────────────────────────
 
 // GET /api/admin/users  — all users for admin
-app.get('/api/admin/users', async (req, res) => {
+app.get('/api/admin/users', adminMiddleware, async (req, res) => {
   try {
     const users = await fs.pathExists(usersFile) ? await fs.readJson(usersFile) : [];
-    res.json({ success: true, users: users });
+    res.json({ success: true, users: users.map(({ password, ...user }) => user) });
   } catch (e) { res.status(500).json({ success: false, error: e.message }); }
 });
 
 // DELETE /api/admin/users/:id  — delete a user (admin only)
-app.delete('/api/admin/users/:id', async (req, res) => {
+app.delete('/api/admin/users/:id', adminMiddleware, async (req, res) => {
   try {
     let users = await fs.pathExists(usersFile) ? await fs.readJson(usersFile) : [];
     const filtered = users.filter(u => u.id !== req.params.id);

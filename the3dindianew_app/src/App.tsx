@@ -20,6 +20,7 @@ import { MyOrders } from './pages/MyOrders';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { GitHubCallback } from './pages/GitHubCallback';
 import { VerifyOTP } from './pages/VerifyOTP';
+import { AIStudio } from './pages/AIStudio';
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -30,11 +31,15 @@ function RequireAuth({ children }: { children: React.ReactNode }) {
 }
 
 function AppRoutes() {
+  const location = useLocation();
+  const isStudioRoute = location.pathname.startsWith('/studio');
+
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <Navigation />
+    <div className={`min-h-screen flex flex-col ${isStudioRoute ? 'bg-[#f7f8fa]' : 'bg-white'}`}>
+      {!isStudioRoute && <Navigation />}
       <main className="flex-1">
         <Routes>
+          <Route path="/studio/*" element={<AIStudio />} />
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/:serviceId" element={<ServiceDetail />} />
@@ -55,7 +60,7 @@ function AppRoutes() {
           <Route path="/verify-otp" element={<VerifyOTP />} />
         </Routes>
       </main>
-      <Footer />
+      {!isStudioRoute && <Footer />}
     </div>
   );
 }

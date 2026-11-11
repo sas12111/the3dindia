@@ -33,6 +33,7 @@ export function Navigation() {
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/services', label: 'Services' },
+    { path: '/studio', label: '3D Studio' },
     // { path: '/products', label: 'Products' },
     { path: '/portfolio', label: 'Portfolio' },
     { path: '/about', label: 'About Us' },
@@ -67,7 +68,7 @@ export function Navigation() {
           </Link>
 
           {/* Desktop nav links */}
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-4">
             {navLinks.map((link) => (
               <Link key={link.path} to={link.path}
                 className={`text-sm transition-colors ${isActive(link.path) ? 'text-[#f78e00] font-semibold' : 'text-gray-700 hover:text-[#f78e00]'}`}>

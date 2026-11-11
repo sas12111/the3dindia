@@ -76,6 +76,12 @@ Health check endpoint
 - Email notifications
 - Auto-reply to customers
 
+### Admin access
+
+The dashboard and its API require `ADMIN_USERNAME`, `ADMIN_PASSWORD`, and `JWT_SECRET` to be set in the backend environment. Configure these in the deployment provider's secret settings; do not commit a populated `.env` file. The dashboard prompts for the credentials when opened, and the session token expires after eight hours. Customer JWTs use the same `JWT_SECRET`; production startup fails when it is missing.
+
+The JSON files and uploaded files in this project are local filesystem storage. They are suitable only when the backend runs on a host with a persistent disk attached. Serverless and ephemeral container filesystems can lose or split data across instances. Before production use, attach durable storage or migrate these records and uploads to a database/object store.
+
 ## 📱 Frontend Integration
 
 Update your Contact.tsx handleSubmit:

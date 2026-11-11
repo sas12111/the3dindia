@@ -747,6 +747,46 @@
 
 <script>
 const API = (typeof window !== 'undefined' && (window.REACT_APP_API_URL || '')) || '';
+const baseFetch = window.fetch.bind(window);
+window.fetch = (input, init = {}) => {
+  const headers = new Headers(init.headers || {});
+  const token = localStorage.getItem('the3dindia-admin-token');
+  if (token) headers.set('Authorization', `Bearer ${token}`);
+  return baseFetch(input, { ...init, headers });
+};
+
+async function adminLogin() {
+  let username = prompt('Admin username');
+  if (!username) return;
+  const password = prompt('Admin password');
+  if (!password) return;
+  const response = await baseFetch(`${API}/api/admin/login`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password })
+  });
+  const data = await response.json();
+  if (!data.success) { alert(data.error || 'Admin login failed'); return; }
+  localStorage.setItem('the3dindia-admin-token', data.token);
+  loadServices();
+}
+
+async function downloadPrivateFile(event, url, filename) {
+  event.preventDefault();
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Download failed. Please sign in again.');
+    const blobUrl = URL.createObjectURL(await response.blob());
+    const anchor = document.createElement('a');
+    anchor.href = blobUrl;
+    anchor.download = filename;
+    anchor.click();
+    URL.revokeObjectURL(blobUrl);
+  } catch (error) { alert(error.message); }
+}
+
+function escapeHTML(value) {
+  return String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
+}
 
 // ── Tab switching ─────────────────────────────────────────────────────────
 function switchTab(name) {
@@ -1134,26 +1174,27 @@ function renderSubmissions(list) {
     <div class="sub-card">
       <div class="sub-card-header">
         <div>
-          <div class="sub-name">${s.name}</div>
-          <div style="font-size:.75rem;color:#94a3b8;margin-top:.1rem">${s.service}</div>
+          <div class="sub-name">${escapeHTML(s.name)}</div>
+          <div style="font-size:.75rem;color:#94a3b8;margin-top:.1rem">${escapeHTML(s.service)}</div>
         </div>
         <div class="sub-date">${new Date(s.timestamp).toLocaleString()}</div>
       </div>
       <div class="sub-body">
         <div class="sub-meta">
-          <div class="sub-meta-item"><label>Email</label><span>${s.email}</span></div>
-          <div class="sub-meta-item"><label>Mobile</label><span>${s.mobile}</span></div>
-          <div class="sub-meta-item"><label>Service</label><span>${s.service}</span></div>
+          <div class="sub-meta-item"><label>Email</label><span>${escapeHTML(s.email)}</span></div>
+          <div class="sub-meta-item"><label>Mobile</label><span>${escapeHTML(s.mobile)}</span></div>
+          <div class="sub-meta-item"><label>Service</label><span>${escapeHTML(s.service)}</span></div>
         </div>
-        <div class="sub-message">${s.message}</div>
+        <div class="sub-message">${escapeHTML(s.message)}</div>
         ${s.files?.length ? `
           <div class="sub-files">
             <label>Attachments (${s.files.length})</label>
             ${s.files.map(f => `
               <div class="file-row">
-                <div class="file-info">📎 ${f.originalName} <span style="color:#94a3b8">(${(f.size/1024/1024).toFixed(2)} MB)</span></div>
-                <a href="${API}/api/download/${f.date||new Date(s.timestamp).toISOString().split('T')[0]}/${f.filename}"
-                   class="btn btn-success" style="font-size:.75rem;padding:.35rem .75rem" download="${f.originalName}">⬇ Download</a>
+                <div class="file-info">📎 ${escapeHTML(f.originalName)} <span style="color:#94a3b8">(${(f.size/1024/1024).toFixed(2)} MB)</span></div>
+                <a href="#" data-download-url="${escapeHTML(`${API}/api/download/${encodeURIComponent(f.date||new Date(s.timestamp).toISOString().split('T')[0])}/${encodeURIComponent(f.filename)}`)}"
+                   data-filename="${escapeHTML(f.originalName)}" class="private-download btn btn-success"
+                   style="font-size:.75rem;padding:.35rem .75rem">⬇ Download</a>
               </div>
             `).join('')}
           </div>
@@ -1161,6 +1202,8 @@ function renderSubmissions(list) {
       </div>
     </div>
   `).join('') + '</div>';
+  document.querySelectorAll('.private-download').forEach(link => link.addEventListener('click', event =>
+    downloadPrivateFile(event, link.dataset.downloadUrl, link.dataset.filename)));
 }
 
 // ══════════════════════════════════════════════════════════════ PRODUCTS ══
@@ -1687,7 +1730,8 @@ function viewOrderDetails(o) {
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────
-loadServices();
+if (localStorage.getItem('the3dindia-admin-token')) loadServices();
+else adminLogin();
 </script>
 </body>
 </html>
