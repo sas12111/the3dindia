@@ -1,23 +1,56 @@
 import { BookOpen, Layers, Zap, Package, CheckCircle, Lightbulb } from 'lucide-react';
+import { HowItWorks, TechComparison, DesignGuidelines, CostFactors } from '../components/LearnSections';
 
 export function Learn3DPrinting() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-cyan-50 to-[#fff3e0] py-20">
-        <div className="container01 mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#f78e00]/10 rounded-full mb-6">
-              <BookOpen className="w-5 h-5 text-[#f78e00]" />
-              <span className="text-[#f78e00]">Educational Guide</span>
+      <section className="relative isolate overflow-hidden bg-gradient-to-br from-white via-[#fff8f0] to-[#fff1e0]">
+        <div className="pointer-events-none absolute -right-20 -top-24 h-80 w-80 rounded-full bg-[#f78e00]/10 blur-3xl" aria-hidden="true" />
+        <div className="pointer-events-none absolute -bottom-28 left-10 h-72 w-72 rounded-full bg-orange-200/30 blur-3xl" aria-hidden="true" />
+
+        <div className="container01 relative mx-auto px-4 py-16 lg:py-20">
+          <div className="grid items-center gap-10 lg:grid-cols-2">
+            {/* copy */}
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#f78e00]/10 px-4 py-2">
+                <BookOpen className="h-4 w-4 text-[#f78e00]" />
+                <span className="text-sm font-semibold tracking-wide text-[#e07e00]">Educational Guide</span>
+              </div>
+              <h1 className="mt-6 text-4xl font-semibold leading-[1.08] tracking-tight text-gray-900 sm:text-5xl">
+                Everything You Need to Know About <span className="text-[#f78e00]">3D Printing</span>
+              </h1>
+              <p className="mt-5 max-w-xl text-lg text-gray-600">
+                Discover the revolutionary technology that's transforming manufacturing, prototyping and creative design.
+              </p>
+              <ul className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 sm:flex sm:flex-wrap sm:gap-x-8">
+                {[
+                  { icon: BookOpen, label: 'Easy to Understand' },
+                  { icon: Lightbulb, label: 'Practical Insights' },
+                  { icon: Package, label: 'Real-World Applications' },
+                  { icon: CheckCircle, label: 'Guidance for Your Projects' },
+                ].map((b) => (
+                  <li key={b.label} className="flex items-center gap-3">
+                    <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-[#fff3e0]">
+                      <b.icon className="h-5 w-5 text-[#f78e00]" />
+                    </span>
+                    <span className="text-sm font-medium leading-tight text-gray-800">{b.label}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <h1 className="text-5xl lg:text-6xl text-gray-900 mb-6">
-              Everything You Need to Know About{' '}
-              <span className="text-[#f78e00]">3D Printing</span>
-            </h1>
-            <p className="text-xl text-gray-600">
-              Discover the revolutionary technology that's transforming manufacturing, prototyping, and creative design
-            </p>
+
+            {/* image */}
+            <div className="relative">
+              <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center" aria-hidden="true">
+                <div className="h-64 w-64 rounded-full bg-gradient-to-tr from-[#f78e00]/15 to-orange-300/20 blur-2xl lg:h-80 lg:w-80" />
+              </div>
+              <img
+                src="/images/learn-3d-printing/hero-products.jpg"
+                alt="Colorful 3D printed lattice vases and decorative products"
+                className="mx-auto w-full max-w-xl rounded-2xl object-cover shadow-xl"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -75,6 +108,9 @@ export function Learn3DPrinting() {
           </div>
         </div>
       </section>
+
+      {/* How 3D Printing Works (added) */}
+      <HowItWorks />
 
       {/* 3D Printing Technologies */}
       <section className="py-20 bg-gray-50">
@@ -183,6 +219,9 @@ export function Learn3DPrinting() {
         </div>
       </section>
 
+      {/* Technology Comparison (added) */}
+      <TechComparison />
+
       {/* Materials */}
       <section className="py-20">
         <div className="container01 mx-auto px-4">
@@ -245,96 +284,39 @@ export function Learn3DPrinting() {
         </div>
       </section>
 
-      {/* Applications */}
+      {/* Design Guidelines (added) */}
+      <DesignGuidelines />
+
+      {/* Applications & Cost — two balanced columns (matches reference) */}
       <section className="py-20 bg-gray-50">
         <div className="container01 mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl text-gray-900 mb-4">Applications & Industries</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              3D printing is revolutionizing multiple industries
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-[#fff3e0] rounded-lg flex items-center justify-center mb-4">
-                <Lightbulb className="w-6 h-6 text-[#f78e00]" />
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-12">
+            {/* Applications & Industries */}
+            <div>
+              <h2 className="text-3xl text-gray-900 mb-2">Applications &amp; Industries</h2>
+              <p className="text-gray-600 mb-8">3D printing is used across many industries and purposes.</p>
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { icon: Lightbulb, title: 'Prototyping', desc: 'Rapidly test and iterate designs before production.', bg: 'bg-[#fff3e0]', fg: 'text-[#f78e00]' },
+                  { icon: Package, title: 'Manufacturing', desc: 'Custom parts, tooling, jigs and fixtures.', bg: 'bg-orange-100', fg: 'text-orange-500' },
+                  { icon: Zap, title: 'Healthcare', desc: 'Educational and anatomical models.', bg: 'bg-purple-100', fg: 'text-purple-600' },
+                  { icon: Layers, title: 'Education', desc: 'Teaching aids and hands-on learning tools.', bg: 'bg-green-100', fg: 'text-green-600' },
+                  { icon: BookOpen, title: 'Art & Design', desc: 'Sculptures, custom gifts and installations.', bg: 'bg-red-100', fg: 'text-red-600' },
+                  { icon: Package, title: 'Consumer Goods', desc: 'Custom products and replacement parts.', bg: 'bg-indigo-100', fg: 'text-indigo-600' },
+                ].map((a) => (
+                  <div key={a.title} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div className={`w-11 h-11 ${a.bg} rounded-lg flex items-center justify-center mb-3`}>
+                      <a.icon className={`w-5 h-5 ${a.fg}`} />
+                    </div>
+                    <h3 className="text-base font-semibold text-gray-900 mb-1">{a.title}</h3>
+                    <p className="text-sm text-gray-600">{a.desc}</p>
+                  </div>
+                ))}
               </div>
-              <h3 className="text-xl text-gray-900 mb-2">Prototyping</h3>
-              <p className="text-gray-600">
-                Rapidly test and iterate product designs before mass production
-              </p>
             </div>
 
-            <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
-                <Package className="w-6 h-6 text-orange-500" />
-              </div>
-              <h3 className="text-xl text-gray-900 mb-2">Manufacturing</h3>
-              <p className="text-gray-600">
-                Custom parts, tooling, jigs, and fixtures for production lines
-              </p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                <Zap className="w-6 h-6 text-purple-600" />
-              </div>
-              <h3 className="text-xl text-gray-900 mb-2">Healthcare</h3>
-              <p className="text-gray-600">
-                Prosthetics, dental models, surgical guides, and medical devices
-              </p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                <Layers className="w-6 h-6 text-green-600" />
-              </div>
-              <h3 className="text-xl text-gray-900 mb-2">Education</h3>
-              <p className="text-gray-600">
-                Teaching aids, architectural models, and hands-on learning tools
-              </p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
-                <BookOpen className="w-6 h-6 text-red-600" />
-              </div>
-              <h3 className="text-xl text-gray-900 mb-2">Art & Design</h3>
-              <p className="text-gray-600">
-                Sculptures, jewelry, custom gifts, and creative installations
-              </p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
-                <Lightbulb className="w-6 h-6 text-yellow-600" />
-              </div>
-              <h3 className="text-xl text-gray-900 mb-2">Automotive</h3>
-              <p className="text-gray-600">
-                Custom parts, performance upgrades, and restoration components
-              </p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
-                <Package className="w-6 h-6 text-indigo-600" />
-              </div>
-              <h3 className="text-xl text-gray-900 mb-2">Aerospace</h3>
-              <p className="text-gray-600">
-                Lightweight components, complex geometries, and rapid tooling
-              </p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mb-4">
-                <Zap className="w-6 h-6 text-pink-600" />
-              </div>
-              <h3 className="text-xl text-gray-900 mb-2">Consumer Goods</h3>
-              <p className="text-gray-600">
-                Custom products, personalized items, and replacement parts
-              </p>
-            </div>
+            {/* What Affects the Cost */}
+            <CostFactors embedded />
           </div>
         </div>
       </section>
