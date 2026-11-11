@@ -39,6 +39,14 @@ npm start
 
 ## 🔗 API Endpoints
 
+### POST /api/ai-studio/generate
+Creates an asynchronous Meshy Multi-Image to 3D task. Requires a customer JWT and multipart form data with repeated `images` fields, a matching JSON `views` field, and optional `outputType` (`textured` or `printable`). Use `front` as the first image; send one to four JPG, PNG, or WebP images, each at most 20 MB. The user generation limit is three attempts per hour.
+
+### GET /api/ai-studio/tasks/:taskId
+Polls a task owned by the authenticated customer. Returns task status, real provider progress, thumbnail and GLB URLs when available, and task error details.
+
+Set `MESHY_API_KEY` in the backend environment. For Vercel deployments, set the frontend build variable `VITE_API_URL` to the Express backend origin so large multipart uploads go directly to Express instead of the Vercel serverless function. `VITE_API_URL` is a public API origin, never a secret. The backend converts private temporary uploads to bounded Meshy-supported data URIs and deletes the temporary files after task creation.
+
 ### POST /api/contact
 Submit contact form with files
 - **Body:** FormData with name, email, mobile, service, message

@@ -4,6 +4,8 @@ const multer = require('multer');
 const nodemailer = require('nodemailer');
 const fs = require('fs-extra');
 const path = require('path');
+const os = require('os');
+const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -11,6 +13,14 @@ require('dotenv').config();
 const JWT_SECRET = process.env.JWT_SECRET || (process.env.NODE_ENV === 'production' ? '' : 'development-only-secret-change-me');
 const usersFile  = path.join(__dirname, 'users.json');
 const ordersFile = path.join(__dirname, 'orders.json');
+const aiStudioTasksFile = process.env.AI_STUDIO_TASKS_FILE || path.join(__dirname, 'ai-studio-tasks.json');
+const aiStudioTempDir = process.env.AI_STUDIO_TEMP_DIR || path.join(os.tmpdir(), 'the3dindia-ai-studio');
+const aiStudioRateLimits = new Map();
+let aiStudioTaskWriteQueue = Promise.resolve();
+const AI_STUDIO_MAX_IMAGE_BYTES = 20 * 1024 * 1024;
+const AI_STUDIO_MAX_TOTAL_BYTES = 80 * 1024 * 1024;
+const AI_STUDIO_ALLOWED_MIMES = new Set(['image/jpeg', 'image/png', 'image/webp']);
+const AI_STUDIO_ALLOWED_VIEWS = ['front', 'left', 'back', 'right'];
 
 // In-memory OTP store: email -> { otp, expiresAt, userData }
 const pendingOtps = new Map();
@@ -36,8 +46,129 @@ function adminMiddleware(req, res, next) {
   });
 }
 
+function aiStudioUserMiddleware(req, res, next) {
+  authMiddleware(req, res, () => {
+    if (!req.user?.id) return res.status(401).json({ success: false, error: 'A customer account is required.' });
+    next();
+  });
+}
+
 function escapeHtml(value = '') {
   return String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
+}
+
+function inspectImage(buffer) {
+  const isPng = buffer.length >= 24 && buffer.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
+  if (isPng && buffer.toString('ascii', 12, 16) === 'IHDR') {
+    return { mime: 'image/png', width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
+  }
+
+  const isJpeg = buffer.length >= 4 && buffer[0] === 0xff && buffer[1] === 0xd8;
+  if (isJpeg) {
+    let offset = 2;
+    const frameMarkers = new Set([0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7, 0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf]);
+    while (offset + 4 < buffer.length) {
+      if (buffer[offset] !== 0xff) { offset += 1; continue; }
+      while (buffer[offset] === 0xff) offset += 1;
+      const marker = buffer[offset++];
+      if (marker === 0xd9 || marker === 0xda) break;
+      if (marker === 0x01 || (marker >= 0xd0 && marker <= 0xd7)) continue;
+      if (offset + 2 > buffer.length) break;
+      const segmentLength = buffer.readUInt16BE(offset);
+      if (segmentLength < 2 || offset + segmentLength > buffer.length) break;
+      if (frameMarkers.has(marker) && segmentLength >= 7) {
+        return { mime: 'image/jpeg', height: buffer.readUInt16BE(offset + 3), width: buffer.readUInt16BE(offset + 5) };
+      }
+      offset += segmentLength;
+    }
+  }
+
+  const isWebp = buffer.length >= 30 && buffer.toString('ascii', 0, 4) === 'RIFF' && buffer.toString('ascii', 8, 12) === 'WEBP';
+  if (isWebp) {
+    const chunk = buffer.toString('ascii', 12, 16);
+    if (chunk === 'VP8X') {
+      return {
+        mime: 'image/webp',
+        width: 1 + buffer.readUIntLE(24, 3),
+        height: 1 + buffer.readUIntLE(27, 3),
+      };
+    }
+    if (chunk === 'VP8L' && buffer[20] === 0x2f) {
+      return {
+        mime: 'image/webp',
+        width: 1 + buffer[21] + ((buffer[22] & 0x3f) << 8),
+        height: 1 + ((buffer[22] >> 6) & 0x03) + (buffer[23] << 2) + ((buffer[24] & 0x0f) << 10),
+      };
+    }
+    if (chunk === 'VP8 ' && buffer.length >= 30 && buffer[23] === 0x9d && buffer[24] === 0x01 && buffer[25] === 0x2a) {
+      return { mime: 'image/webp', width: buffer.readUInt16LE(26) & 0x3fff, height: buffer.readUInt16LE(28) & 0x3fff };
+    }
+  }
+  return null;
+}
+
+async function readAiStudioTasks() {
+  if (!await fs.pathExists(aiStudioTasksFile)) return [];
+  return fs.readJson(aiStudioTasksFile);
+}
+
+function saveAiStudioTask(task) {
+  const writeTask = async () => {
+    const tasks = await readAiStudioTasks();
+    const index = tasks.findIndex(entry => entry.id === task.id);
+    if (index < 0) tasks.push(task);
+    else tasks[index] = task;
+    await fs.ensureDir(path.dirname(aiStudioTasksFile));
+    await fs.writeJson(aiStudioTasksFile, tasks, { spaces: 2 });
+  };
+  const write = aiStudioTaskWriteQueue.then(writeTask, writeTask);
+  aiStudioTaskWriteQueue = write.catch(() => {});
+  return write;
+}
+
+function aiStudioRateLimit(req, res, next) {
+  const now = Date.now();
+  const userId = String(req.user.id);
+  for (const [id, timestamps] of aiStudioRateLimits) {
+    if (!timestamps.length || now - timestamps[timestamps.length - 1] >= 60 * 60 * 1000) aiStudioRateLimits.delete(id);
+  }
+  const previous = (aiStudioRateLimits.get(userId) || []).filter(timestamp => now - timestamp < 60 * 60 * 1000);
+  if (previous.length >= 3) {
+    return res.status(429).json({ success: false, code: 'rate_limited', error: 'You have reached the model generation limit. Try again in an hour.' });
+  }
+  previous.push(now);
+  aiStudioRateLimits.set(userId, previous);
+  next();
+}
+
+const aiStudioUpload = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, callback) => fs.ensureDir(aiStudioTempDir).then(() => callback(null, aiStudioTempDir), callback),
+    filename: (req, file, callback) => callback(null, `${crypto.randomUUID()}.upload`),
+  }),
+  limits: { fileSize: AI_STUDIO_MAX_IMAGE_BYTES, files: 4, fields: 2, fieldSize: 1024, parts: 8 },
+  fileFilter: (req, file, callback) => {
+    if (!AI_STUDIO_ALLOWED_MIMES.has(file.mimetype)) {
+      const error = new Error('Upload JPG, PNG, or WebP images only.');
+      error.code = 'INVALID_IMAGE_TYPE';
+      return callback(error);
+    }
+    callback(null, true);
+  },
+});
+
+function receiveAiStudioImages(req, res, next) {
+  aiStudioUpload.array('images', 4)(req, res, async error => {
+    if (!error) return next();
+    await Promise.all((req.files || []).map(file => fs.remove(file.path).catch(() => {})));
+    const tooLarge = error.code === 'LIMIT_FILE_SIZE';
+    const tooMany = error.code === 'LIMIT_FILE_COUNT' || error.code === 'LIMIT_UNEXPECTED_FILE';
+    res.status(tooLarge ? 413 : 400).json({
+      success: false,
+      code: tooLarge ? 'file_too_large' : tooMany ? 'too_many_files' : 'invalid_upload',
+      error: tooLarge ? 'Each image must be 20 MB or smaller.' : tooMany ? 'Upload no more than four images.' : error.code === 'INVALID_IMAGE_TYPE' ? error.message : (error.message || 'Could not process the uploaded images.').slice(0, 200),
+    });
+  });
 }
 
 if (process.env.NODE_ENV === 'production' && !JWT_SECRET) {
@@ -168,7 +299,7 @@ async function initEmail() {
     }
   }
 }
-initEmail();
+if (process.env.NODE_ENV !== 'test') initEmail();
 
 // Contact form endpoint
 app.post('/api/contact', upload.array('files', 5), async (req, res) => {
@@ -234,6 +365,157 @@ app.post('/api/contact', upload.array('files', 5), async (req, res) => {
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+// Create an asynchronous Meshy Multi-Image to 3D task from private temporary uploads.
+app.post('/api/ai-studio/generate', aiStudioUserMiddleware, aiStudioRateLimit, (req, res, next) => {
+  if (!process.env.MESHY_API_KEY) {
+    return res.status(503).json({ success: false, code: 'provider_not_configured', error: '3D generation is not configured yet.' });
+  }
+  next();
+}, receiveAiStudioImages, async (req, res) => {
+  const files = req.files || [];
+  try {
+    if (files.length < 1) return res.status(400).json({ success: false, code: 'missing_front_image', error: 'Add a front-view image to continue.' });
+    let views;
+    try { views = JSON.parse(req.body.views || '[]'); }
+    catch { return res.status(400).json({ success: false, code: 'invalid_views', error: 'The selected image views are invalid.' }); }
+    if (!Array.isArray(views) || views.length !== files.length || views.some(view => !AI_STUDIO_ALLOWED_VIEWS.includes(view)) || new Set(views).size !== views.length) {
+      return res.status(400).json({ success: false, code: 'invalid_views', error: 'Provide one unique view label for each image.' });
+    }
+    if (views[0] !== 'front') return res.status(400).json({ success: false, code: 'missing_front_image', error: 'The first image must be the front view.' });
+
+    const totalBytes = files.reduce((total, file) => total + file.size, 0);
+    if (totalBytes > AI_STUDIO_MAX_TOTAL_BYTES) return res.status(413).json({ success: false, code: 'request_too_large', error: 'The combined images must be 80 MB or smaller.' });
+
+    const imageUrls = [];
+    for (const file of files) {
+      const buffer = await fs.readFile(file.path);
+      const image = inspectImage(buffer);
+      if (!image || !AI_STUDIO_ALLOWED_MIMES.has(image.mime) || image.mime !== file.mimetype) {
+        return res.status(400).json({ success: false, code: 'invalid_image', error: 'An uploaded file is not a valid JPG, PNG, or WebP image.' });
+      }
+      if (!Number.isInteger(image.width) || !Number.isInteger(image.height) || image.width < 32 || image.height < 32 || image.width * image.height > 178956970) {
+        return res.status(400).json({ success: false, code: 'invalid_dimensions', error: 'Each image must be at least 32 × 32 pixels and no larger than Meshy’s supported image dimensions.' });
+      }
+      imageUrls.push(`data:${image.mime};base64,${buffer.toString('base64')}`);
+    }
+
+    const outputType = req.body.outputType || 'textured';
+    if (!['textured', 'printable'].includes(outputType)) {
+      return res.status(400).json({ success: false, code: 'invalid_output_type', error: 'Choose a supported output type.' });
+    }
+
+    let meshyResponse;
+    try {
+      meshyResponse = await fetch('https://api.meshy.ai/openapi/v1/multi-image-to-3d', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${process.env.MESHY_API_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          image_urls: imageUrls,
+          ai_model: 'meshy-7.1',
+          geometry_resolution: '2k',
+          should_texture: true,
+          enable_pbr: true,
+          target_formats: ['glb'],
+        }),
+        signal: AbortSignal.timeout(120000),
+      });
+    } catch {
+      return res.status(502).json({ success: false, code: 'provider_unavailable', error: 'Could not reach the 3D generation service. Please try again.' });
+    }
+
+    let providerData = {};
+    try { providerData = await meshyResponse.json(); } catch { /* Provider may return an empty or non-JSON error. */ }
+    if (!meshyResponse.ok) {
+      const providerMessage = providerData.message || providerData.error || providerData.detail;
+      const insufficientCredits = meshyResponse.status === 402;
+      const providerRateLimited = meshyResponse.status === 429;
+      return res.status(insufficientCredits ? 402 : providerRateLimited ? 429 : 502).json({
+        success: false,
+        code: insufficientCredits ? 'insufficient_credits' : providerRateLimited ? 'provider_rate_limited' : 'provider_error',
+        error: insufficientCredits ? 'The generation service has insufficient credits. Please contact support.' : typeof providerMessage === 'string' ? providerMessage.slice(0, 500) : 'The generation service could not start this task.',
+      });
+    }
+
+    if (typeof providerData.result !== 'string' || !providerData.result) {
+      return res.status(502).json({ success: false, code: 'invalid_provider_response', error: 'The generation service returned an invalid task response.' });
+    }
+
+    const task = {
+      id: crypto.randomUUID(),
+      userId: String(req.user.id),
+      meshyTaskId: providerData.result,
+      outputType,
+      status: 'PENDING',
+      progress: 0,
+      createdAt: new Date().toISOString(),
+      thumbnailUrl: null,
+      modelUrl: null,
+      error: null,
+    };
+    await saveAiStudioTask(task);
+    return res.status(202).json({ success: true, task: {
+      taskId: task.id, status: task.status, progress: task.progress,
+      thumbnailUrl: task.thumbnailUrl, modelUrl: task.modelUrl,
+      outputType: task.outputType, createdAt: task.createdAt, error: task.error,
+    } });
+  } catch {
+    return res.status(500).json({ success: false, code: 'generation_error', error: 'Could not create the generation task. Please try again.' });
+  } finally {
+    await Promise.all(files.map(file => fs.remove(file.path).catch(() => {})));
+  }
+});
+
+// The internal task ID is opaque; ownership is checked before contacting Meshy.
+app.get('/api/ai-studio/tasks/:taskId', aiStudioUserMiddleware, async (req, res) => {
+  const taskId = req.params.taskId;
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(taskId)) {
+    return res.status(400).json({ success: false, code: 'invalid_task_id', error: 'Task ID is invalid.' });
+  }
+  if (!process.env.MESHY_API_KEY) return res.status(503).json({ success: false, code: 'provider_not_configured', error: '3D generation is not configured yet.' });
+
+  try {
+    const tasks = await readAiStudioTasks();
+    const task = tasks.find(entry => entry.id === taskId && entry.userId === String(req.user.id));
+    if (!task) return res.status(404).json({ success: false, code: 'task_not_found', error: 'Task not found.' });
+
+    let providerResponse;
+    try {
+      providerResponse = await fetch(`https://api.meshy.ai/openapi/v1/multi-image-to-3d/${encodeURIComponent(task.meshyTaskId)}`, {
+        headers: { Authorization: `Bearer ${process.env.MESHY_API_KEY}` },
+        signal: AbortSignal.timeout(30000),
+      });
+    } catch {
+      return res.status(502).json({ success: false, code: 'provider_unavailable', error: 'Could not check generation status. Please retry.' });
+    }
+
+    let providerData = {};
+    try { providerData = await providerResponse.json(); } catch { /* Handled as a provider error below. */ }
+    if (!providerResponse.ok) {
+      return res.status(providerResponse.status === 429 ? 429 : 502).json({ success: false, code: 'provider_error', error: 'Could not retrieve generation status.' });
+    }
+
+    const statuses = new Set(['PENDING', 'IN_PROGRESS', 'SUCCEEDED', 'FAILED', 'CANCELED']);
+    if (!statuses.has(providerData.status)) return res.status(502).json({ success: false, code: 'invalid_provider_response', error: 'The generation service returned an unknown task status.' });
+    task.status = providerData.status;
+    task.progress = Number.isFinite(providerData.progress) ? Math.max(0, Math.min(100, providerData.progress)) : task.progress;
+    task.thumbnailUrl = typeof providerData.thumbnail_url === 'string' ? providerData.thumbnail_url : task.thumbnailUrl;
+    task.modelUrl = typeof providerData.model_urls?.glb === 'string' ? providerData.model_urls.glb : task.modelUrl;
+    task.error = task.status === 'FAILED' || task.status === 'CANCELED'
+      ? (typeof providerData.task_error?.message === 'string' ? providerData.task_error.message.slice(0, 500) : typeof providerData.task_error === 'string' ? providerData.task_error.slice(0, 500) : task.status === 'CANCELED' ? 'Generation was canceled.' : 'Generation failed.')
+      : null;
+    task.updatedAt = new Date().toISOString();
+    await saveAiStudioTask(task);
+
+    return res.json({ success: true, task: {
+      taskId: task.id, status: task.status, progress: task.progress,
+      thumbnailUrl: task.thumbnailUrl, modelUrl: task.modelUrl,
+      outputType: task.outputType, createdAt: task.createdAt, error: task.error,
+    } });
+  } catch {
+    return res.status(500).json({ success: false, code: 'task_status_error', error: 'Could not retrieve task status.' });
   }
 });
 

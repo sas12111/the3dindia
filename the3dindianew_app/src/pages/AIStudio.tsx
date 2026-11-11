@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Route, Routes } from 'react-router-dom';
 import {
   ArrowLeft, ArrowUpRight, Box, Check, ChevronRight, CircleHelp, Cuboid,
-  Download, FileBox, FolderOpen, Gauge, Layers3, Maximize2, Move3D, Plus,
-  Rotate3D, ScanLine, Settings2, ShieldCheck, Sparkles, WandSparkles,
+  Download, FileBox, FolderOpen, Gauge, Layers3, LoaderCircle, Maximize2,
+  Move3D, Plus, Rotate3D, ScanLine, Settings2, ShieldCheck, Sparkles,
+  WandSparkles, X,
   type LucideIcon,
 } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import { API, apiUrl } from '../utils/api';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
@@ -92,15 +95,53 @@ function StudioHeader() {
 }
 
 const photoViews = [
-  { title: 'Front', hint: 'Required', required: true },
-  { title: 'Back', hint: 'Required', required: true },
-  { title: 'Left', hint: 'Required', required: true },
-  { title: 'Right', hint: 'Required', required: true },
-  { title: 'Top', hint: 'Optional', required: false },
-  { title: 'Bottom', hint: 'Optional', required: false },
+  { view: 'front', title: 'Front', hint: 'Required', required: true },
+  { view: 'back', title: 'Back', hint: 'Recommended', required: true },
+  { view: 'left', title: 'Left', hint: 'Recommended', required: true },
+  { view: 'right', title: 'Right', hint: 'Recommended', required: true },
+  { view: 'top', title: 'Top', hint: 'Coming later', required: false },
+  { view: 'bottom', title: 'Bottom', hint: 'Coming later', required: false },
 ];
 
-function PhotoReferences() {
+type ImageView = 'front' | 'left' | 'back' | 'right';
+type SelectedImage = { file: File; preview: string; width: number; height: number };
+type SelectedImages = Partial<Record<ImageView, SelectedImage>>;
+type StudioTask = {
+  taskId: string;
+  status: 'PENDING' | 'IN_PROGRESS' | 'SUCCEEDED' | 'FAILED' | 'CANCELED';
+  progress: number;
+  thumbnailUrl: string | null;
+  modelUrl: string | null;
+  outputType: 'textured' | 'printable';
+  createdAt: string;
+  error: string | null;
+};
+
+const imageMimeByExtension: Record<string, string> = {
+  jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp',
+};
+
+function readImageDimensions(preview: string) {
+  return new Promise<{ width: number; height: number }>((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => resolve({ width: image.naturalWidth, height: image.naturalHeight });
+    image.onerror = () => reject(new Error('This file could not be decoded as an image.'));
+    image.src = preview;
+  });
+}
+
+function PhotoReferences({
+  images,
+  errors,
+  onSelect,
+  onRemove,
+}: {
+  images: SelectedImages;
+  errors: Partial<Record<ImageView, string>>;
+  onSelect: (view: ImageView, file?: File) => void;
+  onRemove: (view: ImageView) => void;
+}) {
+  const selectedCount = Object.keys(images).length;
   return (
     <Card className="gap-0 overflow-hidden rounded-2xl border-slate-200 bg-white shadow-sm shadow-slate-200/40">
       <div className="flex items-start justify-between gap-3 border-b border-slate-100 px-5 py-4">
@@ -108,22 +149,45 @@ function PhotoReferences() {
           <h2 className="text-sm font-bold text-slate-900">Photo references</h2>
           <p className="mt-1 text-xs text-slate-500">Capture the object from each side.</p>
         </div>
-        <Badge variant="outline" className="shrink-0 rounded-full border-slate-200 text-[10px] font-semibold text-slate-500">0 / 4 added</Badge>
+        <Badge variant="outline" className="shrink-0 rounded-full border-slate-200 text-[10px] font-semibold text-slate-500">{selectedCount} / 4 added</Badge>
       </div>
       <div className="grid grid-cols-2 gap-2.5 p-4">
-        {photoViews.map(({ title, hint, required }) => (
-          <div key={title} className={`group relative flex min-h-[88px] flex-col items-center justify-center rounded-xl border border-dashed ${required ? 'border-slate-300 bg-slate-50/70' : 'border-slate-200 bg-white'} px-2 py-3 text-center`}>
-            <div className="mb-1.5 flex size-7 items-center justify-center rounded-lg bg-white text-slate-400 shadow-sm ring-1 ring-slate-100">
-              <Plus size={15} />
+        {photoViews.map(({ view, title, hint, required }) => {
+          if (!required) return (
+            <div key={view} className="flex min-h-[88px] flex-col items-center justify-center rounded-xl border border-dashed border-slate-200 bg-white px-2 py-3 text-center opacity-60">
+              <div className="mb-1.5 flex size-7 items-center justify-center rounded-lg bg-slate-50 text-slate-400"><Plus size={15} /></div>
+              <span className="text-xs font-semibold text-slate-500">{title}</span>
+              <span className="mt-0.5 text-[10px] text-slate-400">{hint}</span>
             </div>
-            <span className="text-xs font-semibold text-slate-700">{title}</span>
-            <span className="mt-0.5 text-[10px] text-slate-400">{hint}</span>
-          </div>
-        ))}
+          );
+          const typedView = view as ImageView;
+          const image = images[typedView];
+          return (
+            <div key={view} className="min-w-0">
+              <div className={`group relative h-[112px] overflow-hidden rounded-xl border ${image ? 'border-slate-200 bg-slate-900' : errors[typedView] ? 'border-red-300 bg-red-50' : 'border-dashed border-slate-300 bg-slate-50/70'}`}>
+                {image ? <>
+                  <img src={image.preview} alt={`${title} reference`} className="h-full w-full object-cover" />
+                  <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-black/75 to-transparent px-2.5 pb-2 pt-6 text-white">
+                    <span className="text-[11px] font-semibold">{title}</span>
+                    <button type="button" aria-label={`Remove ${title.toLowerCase()} image`} onClick={() => onRemove(typedView)} className="flex size-6 items-center justify-center rounded-md bg-white/20 transition hover:bg-white/35"><X size={14} /></button>
+                  </div>
+                  <label className="absolute inset-x-0 top-0 flex cursor-pointer justify-center bg-black/45 py-1.5 text-[10px] font-semibold text-white opacity-0 transition group-hover:opacity-100 focus-within:opacity-100">Replace image<input type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" className="sr-only" onChange={event => { onSelect(typedView, event.target.files?.[0]); event.currentTarget.value = ''; }} /></label>
+                </> : <label className="flex h-full cursor-pointer flex-col items-center justify-center px-2 text-center">
+                  <input type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" className="sr-only" onChange={event => { onSelect(typedView, event.target.files?.[0]); event.currentTarget.value = ''; }} />
+                  <span className="mb-1.5 flex size-7 items-center justify-center rounded-lg bg-white text-slate-400 shadow-sm ring-1 ring-slate-100"><Plus size={15} /></span>
+                  <span className="text-xs font-semibold text-slate-700">{title} view</span>
+                  <span className="mt-0.5 text-[10px] text-slate-400">{hint} · Add photo</span>
+                </label>}
+              </div>
+              {image && <p className="mt-1 truncate text-[10px] text-slate-400">{image.width} × {image.height}px · {image.file.name}</p>}
+              {errors[typedView] && <p role="alert" className="mt-1 text-[10px] leading-snug text-red-600">{errors[typedView]}</p>}
+            </div>
+          );
+        })}
       </div>
       <div className="mx-4 mb-4 flex items-start gap-2.5 rounded-xl bg-orange-50/70 px-3 py-3">
         <ShieldCheck size={16} className="mt-0.5 shrink-0 text-[#dd7900]" />
-        <p className="text-[11px] leading-relaxed text-slate-600">Use a plain background and even lighting. Photo upload will be enabled in the next build phase.</p>
+        <p className="text-[11px] leading-relaxed text-slate-600">JPG, PNG or WebP, up to 20 MB each. One front image is enough; all four views are recommended.</p>
       </div>
     </Card>
   );
@@ -156,8 +220,21 @@ function ModelViewport() {
   );
 }
 
-function GenerationSettings() {
-  const [output, setOutput] = useState<'textured' | 'printable'>('textured');
+function GenerationSettings({
+  output,
+  setOutput,
+  onGenerate,
+  generating,
+  canGenerate,
+  signedIn,
+}: {
+  output: 'textured' | 'printable';
+  setOutput: (value: 'textured' | 'printable') => void;
+  onGenerate: () => void;
+  generating: boolean;
+  canGenerate: boolean;
+  signedIn: boolean;
+}) {
 
   return (
     <Card className="gap-0 overflow-hidden rounded-2xl border-slate-200 bg-white shadow-sm shadow-slate-200/40">
@@ -186,16 +263,141 @@ function GenerationSettings() {
           <p className="text-[10px] leading-relaxed text-slate-400">Available exports depend on the generated model type.</p>
         </div>
 
-        <Button disabled className="h-10 w-full rounded-xl bg-[#f78e00] text-xs font-bold text-white hover:bg-[#e07e00]">
-          <Sparkles size={15} /> Generate 3D model
+        <Button disabled={!canGenerate || generating} onClick={onGenerate} className="h-10 w-full rounded-xl bg-[#f78e00] text-xs font-bold text-white hover:bg-[#e07e00]">
+          {generating ? <LoaderCircle size={15} className="animate-spin" /> : <Sparkles size={15} />}
+          {generating ? 'Starting generation…' : 'Generate 3D model'}
         </Button>
-        <p className="text-center text-[10px] text-slate-400">Generation will be connected in a later phase.</p>
+        {!signedIn ? <p className="text-center text-[11px] text-slate-500"><Link to="/login" state={{ from: '/studio' }} className="font-semibold text-[#c76b00] hover:underline">Sign in</Link> to generate a model.</p> : !canGenerate && <p className="text-center text-[10px] text-slate-400">Add a front-view photo to continue.</p>}
       </div>
     </Card>
   );
 }
 
 function CreateModelPage() {
+  const { token, user, loading: authLoading } = useAuth();
+  const [images, setImages] = useState<SelectedImages>({});
+  const [imageErrors, setImageErrors] = useState<Partial<Record<ImageView, string>>>({});
+  const [output, setOutput] = useState<'textured' | 'printable'>('textured');
+  const [generating, setGenerating] = useState(false);
+  const [generationError, setGenerationError] = useState('');
+  const [activeTask, setActiveTask] = useState<StudioTask | null>(null);
+  const [pollingError, setPollingError] = useState('');
+  const [pollingTimedOut, setPollingTimedOut] = useState(false);
+  const [pollVersion, setPollVersion] = useState(0);
+  const objectUrls = useRef(new Set<string>());
+  const signedIn = Boolean(token && user);
+
+  useEffect(() => () => {
+    objectUrls.current.forEach(url => URL.revokeObjectURL(url));
+    objectUrls.current.clear();
+  }, []);
+
+  const handleImageSelect = async (view: ImageView, file?: File) => {
+    if (!file) return;
+    const extension = file.name.split('.').pop()?.toLowerCase() || '';
+    if (!imageMimeByExtension[extension] || file.type !== imageMimeByExtension[extension]) {
+      setImageErrors(previous => ({ ...previous, [view]: 'Choose a JPG, JPEG, PNG or WebP image.' }));
+      return;
+    }
+    if (file.size > 20 * 1024 * 1024) {
+      setImageErrors(previous => ({ ...previous, [view]: 'Each image must be 20 MB or smaller.' }));
+      return;
+    }
+
+    const preview = URL.createObjectURL(file);
+    try {
+      const { width, height } = await readImageDimensions(preview);
+      if (width < 32 || height < 32) throw new Error('Images must be at least 32 × 32 pixels.');
+      if (width * height > 178956970) throw new Error('This image exceeds the supported pixel dimensions.');
+      const previousUrl = images[view]?.preview;
+      if (previousUrl) { URL.revokeObjectURL(previousUrl); objectUrls.current.delete(previousUrl); }
+      objectUrls.current.add(preview);
+      setImages(previous => ({ ...previous, [view]: { file, preview, width, height } }));
+      setImageErrors(previous => ({ ...previous, [view]: '' }));
+    } catch (error) {
+      URL.revokeObjectURL(preview);
+      const message = error instanceof Error ? error.message : 'This image could not be validated.';
+      setImageErrors(previous => ({ ...previous, [view]: message }));
+    }
+  };
+
+  const handleImageRemove = (view: ImageView) => {
+    const preview = images[view]?.preview;
+    if (preview) { URL.revokeObjectURL(preview); objectUrls.current.delete(preview); }
+    setImages(previous => { const next = { ...previous }; delete next[view]; return next; });
+    setImageErrors(previous => ({ ...previous, [view]: '' }));
+  };
+
+  const handleGenerate = async () => {
+    if (!token || !images.front || generating) return;
+    if (!API && !['localhost', '127.0.0.1'].includes(window.location.hostname)) {
+      setGenerationError('Configure VITE_API_URL to point to the Express backend before uploading images from production.');
+      return;
+    }
+    setGenerating(true);
+    setGenerationError('');
+    setPollingError('');
+    setPollingTimedOut(false);
+    const selectedViews = (['front', 'back', 'left', 'right'] as const).filter(view => images[view]);
+    const payload = new FormData();
+    selectedViews.forEach(view => payload.append('images', images[view]!.file, images[view]!.file.name));
+    payload.append('views', JSON.stringify(selectedViews));
+    payload.append('outputType', output);
+    try {
+      const response = await fetch(apiUrl('/api/ai-studio/generate'), {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: payload,
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        const message = data.code === 'insufficient_credits'
+          ? 'The generation service has insufficient credits. Please contact support.'
+          : data.error || 'Could not start generation. Please try again.';
+        throw new Error(message);
+      }
+      setActiveTask(data.task as StudioTask);
+    } catch (error) {
+      setGenerationError(error instanceof Error ? error.message : 'Could not start generation. Please try again.');
+    } finally {
+      setGenerating(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!activeTask || !token || ['SUCCEEDED', 'FAILED', 'CANCELED'].includes(activeTask.status)) return;
+    let stopped = false;
+    let timer: number | undefined;
+    const startedAt = Date.now();
+
+    const poll = async () => {
+      if (stopped) return;
+      if (Date.now() - startedAt >= 30 * 60 * 1000) {
+        setPollingTimedOut(true);
+        return;
+      }
+      try {
+        const response = await fetch(apiUrl(`/api/ai-studio/tasks/${encodeURIComponent(activeTask.taskId)}`), {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await response.json();
+        if (!response.ok || !data.success) throw new Error(data.error || 'Status check failed.');
+        if (stopped) return;
+        setActiveTask(data.task as StudioTask);
+        setPollingError('');
+        if (['SUCCEEDED', 'FAILED', 'CANCELED'].includes(data.task.status)) return;
+      } catch (error) {
+        if (!stopped) setPollingError(error instanceof Error ? error.message : 'Could not check task status.');
+      }
+      if (!stopped) timer = window.setTimeout(poll, 5000);
+    };
+
+    timer = window.setTimeout(poll, 5000);
+    return () => { stopped = true; if (timer) window.clearTimeout(timer); };
+  }, [activeTask?.taskId, activeTask?.status, token, pollVersion]);
+
+  const canGenerate = Boolean(images.front && signedIn && !generating && (!activeTask || ['SUCCEEDED', 'FAILED', 'CANCELED'].includes(activeTask.status)));
+
   return (
     <div className="mx-auto max-w-[1600px] px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
       <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
@@ -208,15 +410,32 @@ function CreateModelPage() {
       </div>
 
       <div className="grid items-stretch gap-4 xl:grid-cols-[310px_minmax(300px,1fr)_300px] 2xl:gap-5">
-        <div className="space-y-4"><PhotoReferences />
+        <div className="space-y-4"><PhotoReferences images={images} errors={imageErrors} onSelect={handleImageSelect} onRemove={handleImageRemove} />
           <div className="hidden items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 xl:flex">
             <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-500"><Settings2 size={16} /></div>
             <div><p className="text-xs font-semibold text-slate-700">Better results</p><p className="mt-0.5 text-[10px] text-slate-400">Keep the camera at object height.</p></div>
           </div>
         </div>
         <ModelViewport />
-        <GenerationSettings />
+        <GenerationSettings output={output} setOutput={setOutput} onGenerate={handleGenerate} generating={generating || authLoading} canGenerate={canGenerate} signedIn={signedIn} />
       </div>
+
+      {generationError && <div role="alert" className="mt-4 flex items-start justify-between gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-700"><span>{generationError}</span><button type="button" onClick={() => setGenerationError('')} aria-label="Dismiss error"><X size={15} /></button></div>}
+
+      {activeTask && <Card className="mt-4 gap-0 rounded-2xl border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+          {activeTask.thumbnailUrl ? <img src={activeTask.thumbnailUrl} alt="Generated model thumbnail" className="size-20 rounded-xl border border-slate-200 bg-slate-50 object-cover" /> : <div className="flex size-20 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-400"><Box size={28} /></div>}
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-2"><h2 className="text-sm font-bold text-slate-800">{activeTask.status === 'SUCCEEDED' ? 'Your model is ready' : activeTask.status === 'FAILED' ? 'Generation failed' : activeTask.status === 'CANCELED' ? 'Generation canceled' : 'Generating your model'}</h2><Badge variant="outline" className="rounded-full border-slate-200 text-[10px] font-semibold text-slate-500">{activeTask.status.replace('_', ' ')}</Badge></div>
+            {['PENDING', 'IN_PROGRESS'].includes(activeTask.status) && <><p className="mt-1 text-xs text-slate-500">Meshy is processing your photos. This can take a few minutes.</p><div className="mt-3 flex items-center gap-3"><div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100"><div className="h-full rounded-full bg-[#f78e00] transition-[width] duration-500" style={{ width: `${activeTask.progress}%` }} /></div><span className="w-9 text-right text-[11px] font-semibold tabular-nums text-slate-500">{activeTask.progress}%</span></div></>}
+            {activeTask.error && <p role="alert" className="mt-1 text-xs text-red-600">{activeTask.error}</p>}
+            {pollingError && <p role="alert" className="mt-1 text-xs text-amber-700">{pollingError}</p>}
+            {pollingTimedOut && <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-amber-700"><span>Status polling reached its 30-minute limit.</span><button type="button" className="font-semibold underline" onClick={() => { setPollingTimedOut(false); setPollVersion(value => value + 1); }}>Check again</button></div>}
+          </div>
+          {activeTask.status === 'SUCCEEDED' && activeTask.modelUrl && <Button asChild className="h-9 shrink-0 rounded-lg bg-[#f78e00] px-4 text-xs font-bold text-white hover:bg-[#e07e00]"><a href={activeTask.modelUrl} target="_blank" rel="noreferrer"><Download size={14} /> Download GLB</a></Button>}
+          {['FAILED', 'CANCELED'].includes(activeTask.status) && <Button onClick={handleGenerate} disabled={!canGenerate} variant="outline" className="h-9 shrink-0 rounded-lg border-slate-200 text-xs">Try again</Button>}
+        </div>
+      </Card>}
 
       <div className="mt-5 grid gap-3 sm:grid-cols-3">
         {[
